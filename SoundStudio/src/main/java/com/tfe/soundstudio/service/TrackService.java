@@ -3,6 +3,7 @@
  */
 package com.tfe.soundstudio.service;
 
+import org.neo4j.ogm.exception.core.NotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,17 +28,32 @@ public class TrackService {
 		this.trackObjectRepo = trackObjectRepo;
 	}
 	
+	
+	//for Track
+	
 	@Transactional (readOnly=true)
-	public Track findByNumber(Integer number) {
-		Track result = trackRepo.findByNumber(number);
+	public Track findByID(Long id) {
+		Track result = trackRepo.findById(id).orElseThrow(() -> new NotFoundException());
 		
 		return result;
-	}
+	} 
 	
 	@Transactional(readOnly=true)
 	public TrackObject findByWave (String wave) {
 		TrackObject result = trackObjectRepo.findByWave(wave);
-		
+	
 		return result;
+	}
+	
+	@Transactional
+	public void saveTrack(Track track) {
+		trackRepo.save(track);
+	}
+	
+	//for TrackObject
+	
+	@Transactional
+	public void saveTrackObject(TrackObject trackObject) {
+		trackObjectRepo.save(trackObject);
 	}
 }

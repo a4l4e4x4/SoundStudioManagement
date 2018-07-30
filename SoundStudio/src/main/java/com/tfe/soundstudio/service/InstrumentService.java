@@ -29,6 +29,13 @@ public class InstrumentService {
 		this.instFamilyRepo = instFamilyRepo;
 	}
 	
+	//for instrument
+	
+	/**
+	 * @param instName
+	 * @return
+	 */
+	
 	 @Transactional(readOnly = true)
 	 public Instrument findByInstName(String instName) {
 		 Instrument result = instrumentRepo.findByInstName(instName);
@@ -39,6 +46,19 @@ public class InstrumentService {
 	 public void saveInstrument (Instrument instrument) {
 		 instrumentRepo.save(instrument);
 	 }
+	 
+	 @Transactional
+	 public void deleteAllInstruments () {
+		 instrumentRepo.deleteAll();
+	 }
+	 
+	 
+	 //for InstFamily
+	 
+	 /**
+	  * @param family
+	  * @return
+	  */
 	 
 	 @Transactional(readOnly=true)
 		public InstFamily findByFamily(String family) {
@@ -53,5 +73,10 @@ public class InstrumentService {
 			
 			return result;
 		}
+	 
+	 @Transactional
+	 public void deleteAllInstFamily () {
+		 instFamilyRepo.deleteAll();
+	 }
 
 }

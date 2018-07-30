@@ -3,6 +3,8 @@
  */
 package com.tfe.soundstudio.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -13,7 +15,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.tfe.soundstudio.model.InstFamily;
 import com.tfe.soundstudio.model.Instrument;
+import com.tfe.soundstudio.model.Track;
+import com.tfe.soundstudio.model.TrackObject;
 import com.tfe.soundstudio.service.InstrumentService;
+import com.tfe.soundstudio.service.TrackService;
 
 /**
  * @author alex tolkmitt
@@ -24,8 +29,10 @@ public class HomeController {
 	
 	
 	private final InstrumentService instService;
-	public HomeController(InstrumentService instService) {
+	private final TrackService trackService;
+	public HomeController(InstrumentService instService, TrackService trackService) {
 		this.instService = instService;
+		this.trackService = trackService;
 	}
 	
 	// Inject via application.properties
@@ -70,6 +77,47 @@ public class HomeController {
     public String read() {
     	Optional<InstFamily> instFamily = instService.readByID(1L);
     	System.out.println(instFamily.get().getFamily());
+    	return "home";
+    }
+    
+    @RequestMapping(value="/deleteInstruments")
+    public String deleteInstruments() {
+    	instService.deleteAllInstruments();
+    	
+    	return "home";
+    }
+    
+    @RequestMapping(value="/deleteInstFamily")
+    public String deleteInstFamily() {
+    	instService.deleteAllInstFamily();
+    	
+    	return "home";
+    }
+    
+    @RequestMapping(value="addTracks")
+    public String addTracks() {
+    	Track track01 = new Track();
+    	track01.setNumber(1);
+    	track01.setName("new_track");
+    	
+    	trackService.saveTrack(track01);
+    	
+    	//System.out.println(track01.getName());
+    	
+    	return "home";
+    }
+    
+    @RequestMapping(value="addTrackObjects")
+    public String addTrackObjects() {
+    	TrackObject tobj01 = new TrackObject();
+    	tobj01.setName("new_object");
+    	List<Track> trackList = new ArrayList<Track>();
+    	Track track01 = trackService.findByID(39L);
+    	trackList.add(track01);
+    	System.out.println(track01.getName());
+    	tobj01.setTrackList(trackList);
+    	trackService.saveTrackObject(tobj01); 
+    	
     	return "home";
     }
 
