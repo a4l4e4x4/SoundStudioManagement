@@ -112,11 +112,19 @@ public class HomeController {
     	TrackObject tobj01 = new TrackObject();
     	tobj01.setName("new_object");
     	List<Track> trackList = new ArrayList<Track>();
-    	Track track01 = trackService.findByID(39L);
+    	Track track01 = trackService.findByName("new_track");
     	trackList.add(track01);
     	System.out.println(track01.getName());
     	tobj01.setTrackList(trackList);
     	trackService.saveTrackObject(tobj01); 
+    	
+    	return "home";
+    }
+    
+    @RequestMapping(value="deleteTandTob")
+    public String deleteTandTob() {
+    	trackService.deleteAll();
+    	
     	
     	return "home";
     }

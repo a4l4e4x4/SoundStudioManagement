@@ -38,6 +38,13 @@ public class TrackService {
 		return result;
 	} 
 	
+	@Transactional (readOnly=true)
+	public Track findByName(String name) {
+		Track result = trackRepo.findByName(name);
+		
+		return result;
+	} 
+	
 	@Transactional(readOnly=true)
 	public TrackObject findByWave (String wave) {
 		TrackObject result = trackObjectRepo.findByWave(wave);
@@ -55,5 +62,13 @@ public class TrackService {
 	@Transactional
 	public void saveTrackObject(TrackObject trackObject) {
 		trackObjectRepo.save(trackObject);
+	}
+
+
+	@Transactional
+	public void deleteAll() {
+		trackRepo.deleteAll();
+		trackObjectRepo.deleteAll();
+		
 	}
 }

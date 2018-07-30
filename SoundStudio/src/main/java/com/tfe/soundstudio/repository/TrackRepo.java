@@ -15,6 +15,6 @@ import com.tfe.soundstudio.model.Track;
 public interface TrackRepo extends Neo4jRepository<Track, Long> {
 	
 	Track findByNumber(@Param("number") Integer number);
-	//Track findById(Long id);
+	Track findByName(@Param("name")String name);
 
 }
