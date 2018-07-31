@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.tfe.soundstudio.model.InstFamily;
 import com.tfe.soundstudio.model.Instrument;
+import com.tfe.soundstudio.model.ReadFile;
 import com.tfe.soundstudio.model.Track;
 import com.tfe.soundstudio.model.TrackObject;
 import com.tfe.soundstudio.service.InstrumentService;
@@ -125,6 +126,13 @@ public class HomeController {
     public String deleteTandTob() {
     	trackService.deleteAll();
     	
+    	
+    	return "home";
+    }
+    
+    @RequestMapping(value="scanner")
+    public String scanner() {
+    	ReadFile.ScanIt("/home/a4l4e4x4/TFE_ISFCE/TFE_Project_Spring/tracktest.txt");
     	
     	return "home";
     }
