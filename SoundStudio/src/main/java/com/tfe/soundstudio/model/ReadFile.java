@@ -16,6 +16,8 @@ public class ReadFile {
 		try {
 			File file = new File(fileName);
 			Scanner sc = new Scanner(file);
+			
+			
 			sc.nextLine();
 			sc.findInLine("Project: ");
 			String line = sc.nextLine();
@@ -28,22 +30,15 @@ public class ReadFile {
 			}
 			//String project = line.replaceAll("\"", "");
 			System.out.print(project + "\n");
-			//System.out.print(project);
-			//System.out.println(sc.next());
-			//sc.nextLine();
-			//sc.nextLine();
-			//sc.nextLine();
-			//sc.nextLine();
-			//sc.findInLine("Track ");
-			//sc.next("Track ");
-			//System.out.println(sc.nextInt());
 			
-			while (sc.hasNext()) {
+			
+			 while (sc.hasNext()) {
 				
 				//System.out.print(sc.nextLine() + "\n");
 				if (sc.hasNext("Track")) {
-					sc.next();
-					System.out.println(sc.next());
+					sc.next(); //space
+					Integer trackNumber = sc.nextInt();
+					System.out.println(trackNumber);
 					String line2 = sc.nextLine();
 					String trackName = null;
 					if (line2.startsWith("  [") && line2.endsWith("]")) {
@@ -53,9 +48,26 @@ public class ReadFile {
 						trackName = line2;
 					}
 					System.out.println(trackName);
+					sc.nextLine(); //line with ******
+					
+						
+						String line3 = sc.nextLine();
+						String[] lineSplit= line3.split("\\t");
+						String objectPosition = lineSplit[0];
+						System.out.println(objectPosition);
+						String objectName = lineSplit[1];
+						System.out.println(objectName);
+						String objectAddress = lineSplit[2];
+						System.out.println(objectAddress);
+					
 				}
-				sc.next();
+				
+				
+				//System.out.println(sc.nextLine());
+				//sc.nextLine();
+				
 				//System.out.println(sc.next());
+				sc.nextLine();
 				
 			}
 
