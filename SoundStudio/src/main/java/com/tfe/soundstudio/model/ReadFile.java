@@ -29,18 +29,35 @@ public class ReadFile {
 			//String project = line.replaceAll("\"", "");
 			System.out.print(project + "\n");
 			//System.out.print(project);
-			sc.nextLine();
-			sc.nextLine();
-			sc.nextLine();
-			sc.nextLine();
-			sc.nextLine();
-			sc.findInLine("Track ");
-			System.out.println(sc.nextInt());
+			//System.out.println(sc.next());
+			//sc.nextLine();
+			//sc.nextLine();
+			//sc.nextLine();
+			//sc.nextLine();
+			//sc.findInLine("Track ");
+			//sc.next("Track ");
+			//System.out.println(sc.nextInt());
 			
-			/*while (sc.hasNext()) {
+			while (sc.hasNext()) {
 				
-				System.out.print(sc.nextLine() + "\n");
-			} */
+				//System.out.print(sc.nextLine() + "\n");
+				if (sc.hasNext("Track")) {
+					sc.next();
+					System.out.println(sc.next());
+					String line2 = sc.nextLine();
+					String trackName = null;
+					if (line2.startsWith("  [") && line2.endsWith("]")) {
+
+						trackName = line2.substring(3, line2.length() - 1);
+					}else {
+						trackName = line2;
+					}
+					System.out.println(trackName);
+				}
+				sc.next();
+				//System.out.println(sc.next());
+				
+			}
 
 			sc.close();
 		} catch (FileNotFoundException e) {
