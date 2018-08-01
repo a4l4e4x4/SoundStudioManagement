@@ -31,7 +31,10 @@ public class ReadFile {
 			}
 			//String project = line.replaceAll("\"", "");
 			System.out.print(project + "\n");
-			
+			sc.nextLine(); //empty line
+			sc.nextLine(); //line with *****
+			sc.nextLine(); //line with Start Time Object Name Wave Project
+			sc.nextLine(); //line with *****
 			
 			 while (sc.hasNext()) {
 				
@@ -50,12 +53,6 @@ public class ReadFile {
 					}
 					System.out.println(trackName);
 					sc.nextLine(); //line with ******
-					
-					/*String objectPosition = sc.next();
-						System.out.println(objectPosition);
-						String objectName = sc.next();
-						System.out.println(objectName); */
-						
 						
 						String line3 = sc.nextLine();
 						//String next = file.next("[\\S ]+");
@@ -73,14 +70,26 @@ public class ReadFile {
 						}
 						
 				}
-				
-				
-				
+
 				//System.out.println(sc.nextLine());
 				//sc.nextLine();
-				
 				//System.out.println(sc.next());
-				sc.nextLine();
+				String line4 = sc.nextLine();
+				if (!(line4.isEmpty()) && !(line4.startsWith("*"))) {
+					//System.out.println(line4);
+					String[] lineSplit2= line4.split("\\t");
+					String objectPosition = lineSplit2[0];
+					System.out.println(objectPosition);
+					String objectName = lineSplit2[1];
+					System.out.println(objectName);
+					if (!(lineSplit2[2].isEmpty())) {
+					String objectAddress = lineSplit2[2].substring(1, lineSplit2[2].length() -1);
+					System.out.println(objectAddress);
+					}else {
+						String objectAddress = lineSplit2[3].substring(1, lineSplit2[3].length() -1);
+						System.out.println(objectAddress);
+					}
+				}
 				
 			}
 
