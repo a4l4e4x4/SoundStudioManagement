@@ -15,6 +15,7 @@ public class ReadFile {
 	public static void ScanIt(String fileName) {
 		try {
 			File file = new File(fileName);
+			
 			Scanner sc = new Scanner(file);
 			
 			
@@ -50,17 +51,29 @@ public class ReadFile {
 					System.out.println(trackName);
 					sc.nextLine(); //line with ******
 					
+					/*String objectPosition = sc.next();
+						System.out.println(objectPosition);
+						String objectName = sc.next();
+						System.out.println(objectName); */
+						
 						
 						String line3 = sc.nextLine();
+						//String next = file.next("[\\S ]+");
 						String[] lineSplit= line3.split("\\t");
 						String objectPosition = lineSplit[0];
 						System.out.println(objectPosition);
 						String objectName = lineSplit[1];
 						System.out.println(objectName);
-						String objectAddress = lineSplit[2];
+						if (!(lineSplit[2].isEmpty())) {
+						String objectAddress = lineSplit[2].substring(1, lineSplit[2].length() -1);
 						System.out.println(objectAddress);
-					
+						}else {
+							String objectAddress = lineSplit[3].substring(1, lineSplit[3].length() -1);
+							System.out.println(objectAddress);
+						}
+						
 				}
+				
 				
 				
 				//System.out.println(sc.nextLine());
