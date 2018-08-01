@@ -132,7 +132,12 @@ public class HomeController {
     
     @RequestMapping(value="scanner")
     public String scanner() {
-    	ReadFile.ScanIt("/home/a4l4e4x4/TFE_ISFCE/TFE_Project_Spring/tracktest.txt");
+    	ReadFile newImport = new ReadFile();
+    	newImport.ScanIt("/home/a4l4e4x4/TFE_ISFCE/TFE_Project_Spring/tracktest.txt");
+    	
+    	System.out.println(newImport.getTrackObjects().get(0).getName());
+    	System.out.println(newImport.getTrackObjects().get(1).getName());
+    	System.out.println(newImport.getTrackObjects().get(2).getName());
     	
     	return "home";
     }
