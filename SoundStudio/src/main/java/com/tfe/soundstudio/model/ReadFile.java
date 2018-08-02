@@ -75,40 +75,51 @@ public class ReadFile {
 		this.newTrackObject = newTrackObject;
 	}
 
+	
+	/**
+	 * Scan standard txt file from Samplitude and save Tracks and Track Objects.
+	 * @param fileName
+	 */
 	public void ScanIt(String fileName) {
 		try {
 			File file = new File(fileName);
 
 			Scanner sc = new Scanner(file);
-			
+			//new list of tracks and track objects
 			tracks = new ArrayList<>();
 			trackObjects = new ArrayList<>();
 
-			sc.nextLine();
-			sc.findInLine("Project: ");
+			sc.nextLine(); //skip line that says "Samplitude - Object List
+			sc.findInLine("Project: "); //find project unique name with address
 			String line = sc.nextLine();
 			projectName = null;
+			/*
+			 * remove quotes from project address if inside quotes
+			 */
 			if (line.startsWith("\"") && line.endsWith("\"")) {
 
 				projectName = line.substring(1, line.length() - 1);
 			} else {
 				projectName = line;
 			}
-			// String project = line.replaceAll("\"", "");
+			// console print project name
 			System.out.print(projectName + "\n");
-			sc.nextLine(); // empty line
+			
+			sc.nextLine(); // empty line after project address
 			sc.nextLine(); // line with *****
 			sc.nextLine(); // line with Start Time Object Name Wave Project
 			sc.nextLine(); // line with *****
-
+			
+			//scan track list with their objects
 			while (sc.hasNext()) {
-
-				// System.out.print(sc.nextLine() + "\n");
 				
-				
-				
-				if (sc.hasNext("Track")) {
-					sc.next(); // space
+				if (sc.hasNext("Track")) { //if it is a new track
+					sc.next(); // space between "Track" and its number
+					
+					/*
+					 * if it is a new track, save previous track with its object list
+					 * and prepare new track, new track-object and new object list
+					 */
 					if (newTrack != null) {
 					newTrack.setObjectList(trackObjects);
 					tracks.add(newTrack);
@@ -117,10 +128,17 @@ public class ReadFile {
 					newTrackObject = new TrackObject();
 					trackObjects = new ArrayList<>();
 					
-					
+					//populate track object
+					//track number
 					Integer trackNumber = sc.nextInt();
 					newTrack.setNumber(trackNumber);
-					System.out.println(trackNumber);
+					//System.out.println(trackNumber);
+					
+					/*
+					 * track names are inside []
+					 * sometimes with empty spaces before
+					 * remove [] and empty space if they exist
+					 */
 					String line2 = sc.nextLine();
 					String trackName = null;
 					if (line2.startsWith("  [") && line2.endsWith("]")) {
@@ -131,59 +149,78 @@ public class ReadFile {
 						trackName = line2;
 						newTrack.setName(trackName);
 					}
-					System.out.println(trackName);
+					//System.out.println(trackName);
 					sc.nextLine(); // line with ******
-
+					
+					/*
+					 * next line has object position, object name and object address
+					 * split line and save each element
+					 */
 					String line3 = sc.nextLine();
 					// String next = file.next("[\\S ]+");
 					String[] lineSplit = line3.split("\\t");
 					String objectPosition = lineSplit[0];
 
 					newTrackObject.setStarttime(objectPosition);
-					System.out.println(objectPosition);
+					//System.out.println(objectPosition);
 
 					String objectName = lineSplit[1];
 					newTrackObject.setName(objectName);
-					System.out.println(objectName);
+					//System.out.println(objectName);
+					
+					/*
+					 * sometimes there is a LF (line feed) in line
+					 * if so, remove it to read the object address
+					 * remove also quotes ("") from object address
+					 */
 					if (!(lineSplit[2].isEmpty())) {
 						String objectAddress = lineSplit[2].substring(1, lineSplit[2].length() - 1);
 						newTrackObject.setWave(objectAddress);
-						System.out.println(objectAddress);
+						//System.out.println(objectAddress);
 					} else {
 						String objectAddress = lineSplit[3].substring(1, lineSplit[3].length() - 1);
 						newTrackObject.setWave(objectAddress);
-						System.out.println(objectAddress);
+						//System.out.println(objectAddress);
 					}
+					//add first object from track to track object list
 					trackObjects.add(newTrackObject);
 				}
-
+				
+				/*
+				 * if line is not empty or has **** as delimiter
+				 * than track has more objects
+				 */
 				String line4 = sc.nextLine();
 				if (!(line4.isEmpty()) && !(line4.startsWith("*"))) {
 					// System.out.println(line4);
 					
+					/*
+					 * next line has object position, object name and object address
+					 * split line and save each element as above
+					 */
 					String[] lineSplit2 = line4.split("\\t");
 					String objectPosition2 = lineSplit2[0];
 					newTrackObject.setStarttime(objectPosition2);
-					System.out.println(objectPosition2);
+					//System.out.println(objectPosition2);
 					String objectName2 = lineSplit2[1];
 					newTrackObject.setName(objectName2);
-					System.out.println(objectName2);
+					//System.out.println(objectName2);
 					if (!(lineSplit2[2].isEmpty())) {
 						String objectAddress2 = lineSplit2[2].substring(1, lineSplit2[2].length() - 1);
 						newTrackObject.setWave(objectAddress2);
-						System.out.println(objectAddress2);
+						//System.out.println(objectAddress2);
 					} else {
 						String objectAddress2 = lineSplit2[3].substring(1, lineSplit2[3].length() - 1);
 						newTrackObject.setWave(objectAddress2);
-						System.out.println(objectAddress2);
+						//System.out.println(objectAddress2);
 					}
+					//save subsequent track object to track object list
 					trackObjects.add(newTrackObject);
 				}
-			} 
-
+			}
+			//close scan
 			sc.close();
-			
-			
+
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}

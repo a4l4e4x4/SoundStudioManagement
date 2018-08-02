@@ -141,7 +141,7 @@ public class HomeController {
     	List<Track> tracks = new ArrayList<>();
     	tracks = newImport.getTracks();
     	for (Track onetrack: tracks){
-    		System.out.println(onetrack.getName());
+    		//System.out.println(onetrack.getName());
     		for (TrackObject tobj : onetrack.getObjectList()) {
     			System.out.println(tobj.getWave());
     		}
