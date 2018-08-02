@@ -16,21 +16,22 @@ import java.util.Scanner;
 public class ReadFile {
 
 	private String projectName;
-	private List<Track> tracks = new ArrayList<>();
-	private List<TrackObject> trackObjects = new ArrayList<>();
+	private List<Track> tracks;
+	private List<TrackObject> trackObjects;
+	private Track newTrack;
+	private TrackObject newTrackObject;
 	
 	public ReadFile () {};
-	
-	
 
-	public ReadFile(String projectName, List<Track> tracks, List<TrackObject> trackObjects) {
+	public ReadFile(String projectName, List<Track> tracks, List<TrackObject> trackObjects, Track newTrack,
+			TrackObject newTrackObject) {
 		super();
 		this.projectName = projectName;
 		this.tracks = tracks;
 		this.trackObjects = trackObjects;
+		this.newTrack = newTrack;
+		this.newTrackObject = newTrackObject;
 	}
-	
-	
 
 
 
@@ -38,43 +39,50 @@ public class ReadFile {
 		return projectName;
 	}
 
-
-
 	public void setProjectName(String projectName) {
 		this.projectName = projectName;
 	}
-
-
 
 	public List<Track> getTracks() {
 		return tracks;
 	}
 
-
-
 	public void setTracks(List<Track> tracks) {
 		this.tracks = tracks;
 	}
-
-
 
 	public List<TrackObject> getTrackObjects() {
 		return trackObjects;
 	}
 
-
-
 	public void setTrackObjects(List<TrackObject> trackObjects) {
 		this.trackObjects = trackObjects;
 	}
 
+	public Track getNewTrack() {
+		return newTrack;
+	}
 
+	public void setNewTrack(Track newTrack) {
+		this.newTrack = newTrack;
+	}
+
+	public TrackObject getNewTrackObject() {
+		return newTrackObject;
+	}
+
+	public void setNewTrackObject(TrackObject newTrackObject) {
+		this.newTrackObject = newTrackObject;
+	}
 
 	public void ScanIt(String fileName) {
 		try {
 			File file = new File(fileName);
 
 			Scanner sc = new Scanner(file);
+			
+			tracks = new ArrayList<>();
+			trackObjects = new ArrayList<>();
 
 			sc.nextLine();
 			sc.findInLine("Project: ");
@@ -97,10 +105,18 @@ public class ReadFile {
 
 				// System.out.print(sc.nextLine() + "\n");
 				
-				Track newTrack = new Track();
+				
 				
 				if (sc.hasNext("Track")) {
 					sc.next(); // space
+					if (newTrack != null) {
+					newTrack.setObjectList(trackObjects);
+					tracks.add(newTrack);
+					}
+					newTrack = new Track();
+					newTrackObject = new TrackObject();
+					trackObjects = new ArrayList<>();
+					
 					
 					Integer trackNumber = sc.nextInt();
 					newTrack.setNumber(trackNumber);
@@ -122,7 +138,7 @@ public class ReadFile {
 					// String next = file.next("[\\S ]+");
 					String[] lineSplit = line3.split("\\t");
 					String objectPosition = lineSplit[0];
-					TrackObject newTrackObject = new TrackObject();
+
 					newTrackObject.setStarttime(objectPosition);
 					System.out.println(objectPosition);
 
@@ -138,44 +154,32 @@ public class ReadFile {
 						newTrackObject.setWave(objectAddress);
 						System.out.println(objectAddress);
 					}
-					if (newTrackObject != null) {
-						trackObjects.add(newTrackObject);
-					//	System.out.println(newTrackObject.getName());
-					}
-					//tracks.add(newTrack);
-
+					trackObjects.add(newTrackObject);
 				}
 
-				// System.out.println(sc.nextLine());
-				// sc.nextLine();
-				// System.out.println(sc.next());
 				String line4 = sc.nextLine();
 				if (!(line4.isEmpty()) && !(line4.startsWith("*"))) {
 					// System.out.println(line4);
 					
-					TrackObject newTrackObject = new TrackObject();
 					String[] lineSplit2 = line4.split("\\t");
-					String objectPosition = lineSplit2[0];
-					newTrackObject.setStarttime(objectPosition);
-					System.out.println(objectPosition);
-					String objectName = lineSplit2[1];
-					newTrackObject.setName(objectName);
-					System.out.println(objectName);
+					String objectPosition2 = lineSplit2[0];
+					newTrackObject.setStarttime(objectPosition2);
+					System.out.println(objectPosition2);
+					String objectName2 = lineSplit2[1];
+					newTrackObject.setName(objectName2);
+					System.out.println(objectName2);
 					if (!(lineSplit2[2].isEmpty())) {
-						String objectAddress = lineSplit2[2].substring(1, lineSplit2[2].length() - 1);
-						newTrackObject.setWave(objectAddress);
-						System.out.println(objectAddress);
+						String objectAddress2 = lineSplit2[2].substring(1, lineSplit2[2].length() - 1);
+						newTrackObject.setWave(objectAddress2);
+						System.out.println(objectAddress2);
 					} else {
-						String objectAddress = lineSplit2[3].substring(1, lineSplit2[3].length() - 1);
-						newTrackObject.setWave(objectAddress);
-						System.out.println(objectAddress);
+						String objectAddress2 = lineSplit2[3].substring(1, lineSplit2[3].length() - 1);
+						newTrackObject.setWave(objectAddress2);
+						System.out.println(objectAddress2);
 					}
 					trackObjects.add(newTrackObject);
 				}
-				newTrack.setObjectList(trackObjects);
-				tracks.add(newTrack);
-				//System.out.println(tracks.get(0).name);
-			}
+			} 
 
 			sc.close();
 			

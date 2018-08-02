@@ -135,9 +135,18 @@ public class HomeController {
     	ReadFile newImport = new ReadFile();
     	newImport.ScanIt("/home/a4l4e4x4/TFE_ISFCE/TFE_Project_Spring/tracktest.txt");
     	
-    	System.out.println(newImport.getTrackObjects().get(0).getName());
+    	/*System.out.println(newImport.getTrackObjects().get(0).getName());
     	System.out.println(newImport.getTrackObjects().get(1).getName());
-    	System.out.println(newImport.getTrackObjects().get(2).getName());
+    	System.out.println(newImport.getTrackObjects().get(2).getName()); */
+    	List<Track> tracks = new ArrayList<>();
+    	tracks = newImport.getTracks();
+    	for (Track onetrack: tracks){
+    		System.out.println(onetrack.getName());
+    		for (TrackObject tobj : onetrack.getObjectList()) {
+    			System.out.println(tobj.getWave());
+    		}
+    		
+    	}
     	
     	return "home";
     }
