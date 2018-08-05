@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/header.html :: header"></head>
+<body>
+	<div th:fragment="import">
+		<!--  <div th:replace="fragments/sidebar.html :: sidebar"></div> -->
+		<!-- DataTable -->
+		<div class="card mb-3">
+			<div class="card-header">
+				<i class="fas fa-table"></i> Tracks to Import
+			</div>
+			<div class="card-body">
+				<div class="table-responsive">
+					<table class="table table-bordered" id="dataTable" width="100%"
+						cellspacing="0">
+						<thead>
+							<tr>
+								<th>Track Number</th>
+								<th>Track Name</th>
+								<th>Object Position</th>
+								<th>Object Name</th>
+								<th>Object Address</th>
+
+							</tr>
+						</thead>
+						<tfoot>
+							<tr>
+								<th>Track Number</th>
+								<th>Track Name</th>
+								<th>Object Position</th>
+								<th>Object Name</th>
+								<th>Object Address</th>
+
+							</tr>
+						</tfoot>
+						<tbody>
+							<th:block th:each="track : ${newtracks}">
+								<tr>
+									<td th:text="${track.number}"></td>
+									<td th:text="${track.name}"></td>
+								</tr>
+
+								<th:block th:each="object : ${track.objectList}">
+									<tr>
+										<td></td>
+										<td></td>
+										<td th:text="${object.starttime}"></td>
+										<td th:text="${object.name}"></td>
+										<td th:text="${object.wave}"></td>
+									</tr>
+								</th:block>
+							</th:block>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer th:replace="fragments/footer.html :: footer"></footer>
+</body>
+</html>
