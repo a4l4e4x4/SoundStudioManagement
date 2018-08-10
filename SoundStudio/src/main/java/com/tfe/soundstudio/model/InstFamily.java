@@ -3,6 +3,7 @@
  */
 package com.tfe.soundstudio.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import org.neo4j.ogm.annotation.GeneratedValue;
@@ -22,8 +23,9 @@ public class InstFamily {
 	private Long id;
 	
 	private String family;
+	
 	@Relationship(type = "BELONGS_TO", direction=Relationship.INCOMING)
-	private Set<Instrument> instruments;
+	private Set<Instrument> instruments = new HashSet<>();
 	
 	public InstFamily() {}
 

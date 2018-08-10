@@ -15,68 +15,102 @@ import java.util.Scanner;
  */
 public class ReadFile {
 
-	private String projectName;
+	private String sessionfile_address;
+	private SessionFile sessionFile = new SessionFile();
 	private List<Track> tracks;
 	private List<TrackObject> trackObjects;
 	private Track newTrack;
 	private TrackObject newTrackObject;
 	private TrackObject newTrackObject2;
 	
+	
 	public ReadFile () {};
 
-	public ReadFile(String projectName, List<Track> tracks, List<TrackObject> trackObjects, Track newTrack,
-			TrackObject newTrackObject) {
+
+	public ReadFile(String sessionfile_address, SessionFile sessionFile, List<Track> tracks,
+			List<TrackObject> trackObjects, Track newTrack, TrackObject newTrackObject, TrackObject newTrackObject2) {
 		super();
-		this.projectName = projectName;
+		this.sessionfile_address = sessionfile_address;
+		this.sessionFile = sessionFile;
 		this.tracks = tracks;
 		this.trackObjects = trackObjects;
 		this.newTrack = newTrack;
 		this.newTrackObject = newTrackObject;
+		this.newTrackObject2 = newTrackObject2;
 	}
 
 
 
-	public String getProjectName() {
-		return projectName;
+	public String getSessionfile_address() {
+		return sessionfile_address;
 	}
 
-	public void setProjectName(String projectName) {
-		this.projectName = projectName;
+
+	public void setSessionfile_address(String sessionfile_address) {
+		this.sessionfile_address = sessionfile_address;
 	}
+
+
+	public SessionFile getSessionFile() {
+		return sessionFile;
+	}
+
+
+	public void setSessionFile(SessionFile sessionFile) {
+		this.sessionFile = sessionFile;
+	}
+
 
 	public List<Track> getTracks() {
 		return tracks;
 	}
 
+
 	public void setTracks(List<Track> tracks) {
 		this.tracks = tracks;
 	}
+
 
 	public List<TrackObject> getTrackObjects() {
 		return trackObjects;
 	}
 
+
 	public void setTrackObjects(List<TrackObject> trackObjects) {
 		this.trackObjects = trackObjects;
 	}
+
 
 	public Track getNewTrack() {
 		return newTrack;
 	}
 
+
 	public void setNewTrack(Track newTrack) {
 		this.newTrack = newTrack;
 	}
+
 
 	public TrackObject getNewTrackObject() {
 		return newTrackObject;
 	}
 
+
 	public void setNewTrackObject(TrackObject newTrackObject) {
 		this.newTrackObject = newTrackObject;
 	}
 
-	
+
+	public TrackObject getNewTrackObject2() {
+		return newTrackObject2;
+	}
+
+
+	public void setNewTrackObject2(TrackObject newTrackObject2) {
+		this.newTrackObject2 = newTrackObject2;
+	}
+
+
 	/**
 	 * Scan standard txt file from Samplitude and save Tracks and Track Objects.
 	 * @param fileName
@@ -93,18 +127,19 @@ public class ReadFile {
 			sc.nextLine(); //skip line that says "Samplitude - Object List
 			sc.findInLine("Project: "); //find project unique name with address
 			String line = sc.nextLine();
-			projectName = null;
+			sessionfile_address = null;
 			/*
 			 * remove quotes from project address if inside quotes
 			 */
 			if (line.startsWith("\"") && line.endsWith("\"")) {
 
-				projectName = line.substring(1, line.length() - 1);
+				sessionfile_address = line.substring(1, line.length() - 1);
 			} else {
-				projectName = line;
+				sessionfile_address = line;
 			}
-			// console print project name
-			System.out.print(projectName + "\n");
+			sessionFile.setDiskaddress(sessionfile_address);
+			// console print project session file
+			System.out.print(sessionfile_address + "\n");
 			
 			sc.nextLine(); // empty line after project address
 			sc.nextLine(); // line with *****
@@ -130,10 +165,16 @@ public class ReadFile {
 					trackObjects = new ArrayList<>();
 					
 					//populate track object
+					
 					//track number
 					Integer trackNumber = sc.nextInt();
 					newTrack.setNumber(trackNumber);
 					//System.out.println(trackNumber);
+					
+					//Session File for Track
+					
+					
+					newTrack.setSessionFile(sessionFile);
 					
 					/*
 					 * track names are inside []

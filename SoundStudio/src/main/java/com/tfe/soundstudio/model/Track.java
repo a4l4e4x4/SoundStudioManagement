@@ -26,14 +26,18 @@ public class Track {
 	@Relationship (type = "IS_IN", direction=Relationship.INCOMING)
 	private List<TrackObject> objectList;
 	
+	@Relationship(type="HAS_TRACK", direction=Relationship.INCOMING)
+	private SessionFile sessionFile;
+	
 	public Track() {}
 
-	public Track(Long id, Integer number, String name, List<TrackObject> objectList) {
+	public Track(Long id, Integer number, String name, List<TrackObject> objectList, SessionFile sessionFile) {
 		super();
 		this.id = id;
 		this.number = number;
 		this.name = name;
 		this.objectList = objectList;
+		this.sessionFile = sessionFile;
 	}
 
 	public Long getId() {
@@ -63,14 +67,20 @@ public class Track {
 	public List<TrackObject> getObjectList() {
 		return objectList;
 	}
-	
-	public void addToObjectList(TrackObject tobj) {
-		objectList.add(tobj);
-	}
 
 	public void setObjectList(List<TrackObject> objectList) {
 		this.objectList = objectList;
-	};
+	}
+
+	public SessionFile getSessionFile() {
+		return sessionFile;
+	}
+
+	public void setSessionFile(SessionFile sessionFile) {
+		this.sessionFile = sessionFile;
+	}
+
+	
 	
 	
 

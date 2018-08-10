@@ -3,6 +3,7 @@
  */
 package com.tfe.soundstudio.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.neo4j.ogm.annotation.GeneratedValue;
@@ -24,18 +25,23 @@ public class TrackObject {
 	private String name;
 	private String wave;
 	
-	@Relationship (type = "IS_IN")
-	private List<Track> trackList;
+	@Relationship (type = "IS_IN", direction=Relationship.OUTGOING)
+	private List<Track> trackList = new ArrayList<>();
+	
+	@Relationship (type= "RECORDED_BY", direction=Relationship.OUTGOING)
+	private List<Musician> musicians = new ArrayList<>();
 	
 	public TrackObject() {}
 
-	public TrackObject(Long id, String starttime, String name, String wave, List<Track> trackList) {
+	public TrackObject(Long id, String starttime, String name, String wave, List<Track> trackList,
+			List<Musician> musicians) {
 		super();
 		this.id = id;
 		this.starttime = starttime;
 		this.name = name;
 		this.wave = wave;
 		this.trackList = trackList;
+		this.musicians = musicians;
 	}
 
 	public Long getId() {
@@ -76,8 +82,15 @@ public class TrackObject {
 
 	public void setTrackList(List<Track> trackList) {
 		this.trackList = trackList;
+	}
+
+	public List<Musician> getMusicians() {
+		return musicians;
+	}
+
+	public void setMusicians(List<Musician> musicians) {
+		this.musicians = musicians;
 	};
-	
-	
+
 
 }
