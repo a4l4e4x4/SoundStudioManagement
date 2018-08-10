@@ -20,6 +20,7 @@ public class ReadFile {
 	private List<TrackObject> trackObjects;
 	private Track newTrack;
 	private TrackObject newTrackObject;
+	private TrackObject newTrackObject2;
 	
 	public ReadFile () {};
 
@@ -183,7 +184,11 @@ public class ReadFile {
 						//System.out.println(objectAddress);
 					}
 					//add first object from track to track object list
+					/*if (newTrack != null && newTrackObject != null) {
+					newTrackObject.getTrackList().add(newTrack);
+					} */
 					trackObjects.add(newTrackObject);
+					
 				}
 				
 				/*
@@ -198,24 +203,26 @@ public class ReadFile {
 					 * next line has object position, object name and object address
 					 * split line and save each element as above
 					 */
+					newTrackObject2 = new TrackObject();
 					String[] lineSplit2 = line4.split("\\t");
 					String objectPosition2 = lineSplit2[0];
-					newTrackObject.setStarttime(objectPosition2);
+					newTrackObject2.setStarttime(objectPosition2);
 					//System.out.println(objectPosition2);
 					String objectName2 = lineSplit2[1];
-					newTrackObject.setName(objectName2);
+					newTrackObject2.setName(objectName2);
 					//System.out.println(objectName2);
 					if (!(lineSplit2[2].isEmpty())) {
 						String objectAddress2 = lineSplit2[2].substring(1, lineSplit2[2].length() - 1);
-						newTrackObject.setWave(objectAddress2);
+						newTrackObject2.setWave(objectAddress2);
 						//System.out.println(objectAddress2);
 					} else {
 						String objectAddress2 = lineSplit2[3].substring(1, lineSplit2[3].length() - 1);
-						newTrackObject.setWave(objectAddress2);
+						newTrackObject2.setWave(objectAddress2);
 						//System.out.println(objectAddress2);
 					}
 					//save subsequent track object to track object list
-					trackObjects.add(newTrackObject);
+					//newTrackObject.getTrackList().add(newTrack);
+					trackObjects.add(newTrackObject2);
 				}
 			}
 			//close scan

@@ -143,7 +143,7 @@ public class HomeController {
     	for (Track onetrack: tracks){
     		//System.out.println(onetrack.getName());
     		for (TrackObject tobj : onetrack.getObjectList()) {
-    			System.out.println(tobj.getWave());
+    			System.out.println(tobj.getStarttime());
     		}
     		
     	}

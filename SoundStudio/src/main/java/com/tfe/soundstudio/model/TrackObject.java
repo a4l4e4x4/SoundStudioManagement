@@ -20,12 +20,12 @@ public class TrackObject {
 	@Id
 	@GeneratedValue
 	private Long id;
-	String starttime;
-	String name;
-	String wave;
+	private String starttime;
+	private String name;
+	private String wave;
 	
 	@Relationship (type = "IS_IN")
-	List<Track> trackList;
+	private List<Track> trackList;
 	
 	public TrackObject() {}
 

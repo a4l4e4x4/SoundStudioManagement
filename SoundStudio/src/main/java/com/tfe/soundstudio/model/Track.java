@@ -20,11 +20,11 @@ public class Track {
 	@Id
 	@GeneratedValue
 	private Long id;
-	Integer number;
-	String name;
+	private Integer number;
+	private String name;
 	
 	@Relationship (type = "IS_IN", direction=Relationship.INCOMING)
-	List<TrackObject> objectList;
+	private List<TrackObject> objectList;
 	
 	public Track() {}
 
@@ -62,6 +62,10 @@ public class Track {
 
 	public List<TrackObject> getObjectList() {
 		return objectList;
+	}
+	
+	public void addToObjectList(TrackObject tobj) {
+		objectList.add(tobj);
 	}
 
 	public void setObjectList(List<TrackObject> objectList) {

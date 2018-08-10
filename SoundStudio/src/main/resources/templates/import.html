@@ -3,63 +3,76 @@
 
 <head th:replace="fragments/header.html :: header"></head>
 <body id="page-top">
-	<div th:fragment="import">
-		<nav class="navbar navbar-expand navbar-dark bg-dark static-top" th:include="fragments/sidebar.html :: navbar"></nav>
-	<div id="wrapper">
-	<ul class="sidebar navbar-nav" th:replace="fragments/sidebar :: sidebar"></ul>
-		<!-- DataTable -->
-		<div class="card mb-3">
-			<div class="card-header">
-				<i class="fas fa-table"></i> Tracks to Import
-			</div>
-			<div class="card-body">
-				<div class="table-responsive">
-					<table class="table table-bordered" id="dataTable" width="100%"
-						cellspacing="0">
-						<thead>
-							<tr>
-								<th>Track Number</th>
-								<th>Track Name</th>
-								<th>Object Position</th>
-								<th>Object Name</th>
-								<th>Object Address</th>
-
-							</tr>
-						</thead>
-						<tfoot>
-							<tr>
-								<th>Track Number</th>
-								<th>Track Name</th>
-								<th>Object Position</th>
-								<th>Object Name</th>
-								<th>Object Address</th>
-
-							</tr>
-						</tfoot>
-						<tbody>
-							<th:block th:each="track : ${newtracks}">
-								<tr>
-									<td th:text="${track.number}"></td>
-									<td th:text="${track.name}"></td>
-								</tr>
-
-								<th:block th:each="object : ${track.objectList}">
-									<tr>
-										<td></td>
-										<td></td>
-										<td th:text="${object.starttime}"></td>
-										<td th:text="${object.name}"></td>
-										<td th:text="${object.wave}"></td>
-									</tr>
-								</th:block>
-							</th:block>
-						</tbody>
-					</table>
+	<div>
+		<nav class="navbar navbar-expand navbar-dark bg-dark static-top"
+			th:include="fragments/sidebar.html :: navbar"></nav>
+		<div id="wrapper">
+			<ul class="sidebar navbar-nav"
+				th:replace="fragments/sidebar :: sidebar"></ul>
+			<!-- DataTable -->
+			<div class="card mb-3">
+				<div class="card-header">
+					<i class="fas fa-table"></i> Tracks to Import
 				</div>
+
+				<form
+					class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0"
+					method="POST" action="/savetracks" enctype="multipart/form-data">
+
+					<input class="form-control" type="submit" value="Submit" />
+					
+					<div class="card-body">
+						<div class="table-responsive">
+							<table class="table table-bordered" id="dataTable" width="100%"
+								cellspacing="0">
+								<thead>
+									<tr>
+										<th>Track Number</th>
+										<th>Track Name</th>
+										<th>Object Position</th>
+										<th>Object Name</th>
+										<th>Object Address</th>
+
+									</tr>
+								</thead>
+								<tfoot>
+									<tr>
+										<th>Track Number</th>
+										<th>Track Name</th>
+										<th>Object Position</th>
+										<th>Object Name</th>
+										<th>Object Address</th>
+
+									</tr>
+								</tfoot>
+								<tbody>
+									<th:block th:each="track : ${newtracks}">
+										<tr>
+											<!-- <td th:text="${track.number}"><input th:value="${track.number}"/></td>  -->
+											<td><input th:value="${track.number}" /></td>
+											<td><input th:value="${track.name}" /></td>
+										</tr>
+
+										<th:block th:each="object : ${track.objectList}">
+											<tr>
+												<td></td>
+												<td></td>
+												<td><input th:value="${object.starttime}" /></td>
+												<td><input th:value="${object.name}" /></td>
+												<td><input th:value="${object.wave}" /></td>
+											</tr>
+										</th:block>
+									</th:block>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<input class="form-control" type="submit" value="Submit" />
+				</form>
 			</div>
 		</div>
 	</div>
-</div>
-	<footer th:replace="fragments/footer.html :: footer"></footer>
+	<!-- <footer th:replace="fragments/footer.html :: footer"></footer> -->
 </body>
+<footer th:replace="fragments/footer.html :: footer"></footer>
 </html>

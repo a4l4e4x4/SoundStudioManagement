@@ -3,14 +3,10 @@
  */
 package com.tfe.soundstudio.controller;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +17,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.tfe.soundstudio.model.ReadFile;
 import com.tfe.soundstudio.model.Track;
-import com.tfe.soundstudio.service.InstrumentService;
 import com.tfe.soundstudio.service.TrackService;
 
 /**
@@ -33,11 +28,11 @@ public class ImportController {
 	
 	private static String UPLOADED_FOLDER = "/tmp/";
 
-	private final InstrumentService instService;
+	
 	private final TrackService trackService;
 
-	public ImportController(InstrumentService instService, TrackService trackService) {
-		this.instService = instService;
+	public ImportController( TrackService trackService) {
+		
 		this.trackService = trackService;
 	}
 	
@@ -60,13 +55,29 @@ public class ImportController {
 		String filepath = path.toString();
 		newImport.ScanIt(filepath);
 
-		List<Track> tracks = new ArrayList<>();
-		tracks = newImport.getTracks();
-		/*
-		 * for (Track onetrack: tracks){ //System.out.println(onetrack.getName());
-		 * trackService.saveTrack(onetrack); for (TrackObject tobj :
-		 * onetrack.getObjectList()) { System.out.println(tobj.getWave()); } }
-		 */
+		/*List<Track> tracks = new ArrayList<>();
+		tracks = newImport.getTracks(); */
+		Iterable<Track> tracks = newImport.getTracks();
+		trackService.saveTracks(tracks);
+		/*List<Track> tracks = newImport.getTracks();
+		for (Track track : tracks) {
+			Track newtrack = new Track();
+			List<TrackObject> tobjToSave = new ArrayList<>();
+			for (TrackObject tobj : track.getObjectList()) {
+				
+					tobjToSave.add(tobj);
+					trackService.saveTrackObject(tobj);
+					System.out.println(tobj.getStarttime());
+			} 
+			
+			newtrack.setObjectList(tobjToSave);
+			newtrack.setName(track.getName());
+			newtrack.setNumber(track.getNumber());
+			trackService.saveTrack(newtrack);
+		} */
+		
+		//tracks.forEach(track -> track.getObjectList().forEach(tobj -> trackService.saveTrackObject(tobj)));
+		
 		model.addAttribute("newtracks", tracks);
 		} catch (IOException e) {
             e.printStackTrace();

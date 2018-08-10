@@ -53,15 +53,31 @@ public class TrackService {
 	}
 	
 	@Transactional
+	public void saveTracks(Iterable<Track> tracks) {
+		//trackRepo.saveAll(tracks);
+		trackRepo.save(tracks, 20);
+		//trackRepo.save(tracks, 200);
+
+	}
+	
+	@Transactional
 	public void saveTrack(Track track) {
 		trackRepo.save(track);
 	}
+	
+	
+	
 	
 	//for TrackObject
 	
 	@Transactional
 	public void saveTrackObject(TrackObject trackObject) {
 		trackObjectRepo.save(trackObject);
+	}
+	
+	@Transactional
+	public void saveTrackObjects(Iterable<TrackObject> trackObjects) {
+		trackObjectRepo.saveAll(trackObjects);
 	}
 
 
