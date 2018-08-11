@@ -3,6 +3,7 @@
  */
 package com.tfe.soundstudio.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.neo4j.ogm.annotation.GeneratedValue;
@@ -24,7 +25,7 @@ public class Track {
 	private String name;
 	
 	@Relationship (type = "IS_IN", direction=Relationship.INCOMING)
-	private List<TrackObject> objectList;
+	private List<TrackObject> objectList = new ArrayList<>();
 	
 	@Relationship(type="HAS_TRACK", direction=Relationship.INCOMING)
 	private SessionFile sessionFile;
