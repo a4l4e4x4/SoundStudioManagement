@@ -150,5 +150,172 @@ public class HomeController {
     	
     	return "index";
     }
+    
+    @RequestMapping(value="addAllInstruments")
+    public String addAllInstruments() {
+    	
+    	List<Instrument> instruments = new ArrayList<>();
+    	
+    	//Instrument Families
+    	
+    	InstFamily woodwinds = new InstFamily();
+    	woodwinds.setFamily("woodwinds");
+    	
+    	InstFamily strings = new InstFamily();
+    	strings.setFamily("strings");
+    	
+    	InstFamily brass = new InstFamily();
+    	brass.setFamily("brass");
+    	
+    	InstFamily percussion = new InstFamily();
+    	percussion.setFamily("percussion");
+
+    	InstFamily keyboards = new InstFamily();
+    	keyboards.setFamily("keyboards");
+    	
+    	
+    	//Woodwinds
+    	
+    	Instrument flute = new Instrument();
+    	flute.setInstName("flute");
+    	flute.setInstFamily(woodwinds);
+    	instruments.add(flute);
+    	
+    	Instrument piccolo = new Instrument();
+    	piccolo.setInstName("piccolo");
+    	piccolo.setInstFamily(woodwinds);
+    	instruments.add(piccolo);
+    	
+    	Instrument oboe = new Instrument();
+    	oboe.setInstName("oboe");
+    	oboe.setInstFamily(woodwinds);
+    	instruments.add(oboe);
+    	
+    	Instrument bassoon = new Instrument();
+    	bassoon.setInstName("bassoon");
+    	bassoon.setInstFamily(woodwinds);
+    	instruments.add(bassoon);
+    	
+    	Instrument clarinet = new Instrument();
+    	clarinet.setInstName("clarinet");
+    	clarinet.setInstFamily(woodwinds);
+    	instruments.add(clarinet);
+
+    	//Brass
+    	
+    	Instrument trumpet = new Instrument();
+    	trumpet.setInstName("trumpet");
+    	trumpet.setInstFamily(brass);
+    	instruments.add(trumpet);
+    	
+    	Instrument french_horn = new Instrument();
+    	french_horn.setInstName("french horn");
+    	french_horn.setInstFamily(brass);
+    	instruments.add(french_horn);
+    	
+    	Instrument trombone = new Instrument();
+    	trombone.setInstName("trombone");
+    	trombone.setInstFamily(brass);
+    	instruments.add(trombone);
+    	
+    	Instrument tuba = new Instrument();
+    	tuba.setInstName("tuba");
+    	tuba.setInstFamily(brass);
+    	instruments.add(tuba);
+    	
+    	//Strings
+    	
+    	Instrument violin = new Instrument();
+    	violin.setInstName("violin");
+    	violin.setInstFamily(strings);
+    	instruments.add(violin);
+    	
+    	Instrument viola = new Instrument();
+    	viola.setInstName("viola");
+    	viola.setInstFamily(strings);
+    	instruments.add(viola);
+    	
+    	Instrument cello = new Instrument();
+    	cello.setInstName("cello");
+    	cello.setInstFamily(strings);
+    	instruments.add(cello);
+    	
+    	Instrument double_bass = new Instrument();
+    	double_bass.setInstName("double bass");
+    	double_bass.setInstFamily(strings);
+    	instruments.add(double_bass);
+    	
+    	Instrument ac_guitar = new Instrument();
+    	ac_guitar.setInstName("acoustic guitar");
+    	ac_guitar.setInstFamily(strings);
+    	instruments.add(ac_guitar);
+    	
+    	Instrument el_guitar = new Instrument();
+    	el_guitar.setInstName("electric guitar");
+    	el_guitar.setInstFamily(strings);
+    	instruments.add(el_guitar);
+    	
+    	Instrument harp = new Instrument();
+    	harp.setInstName("harp");
+    	harp.setInstFamily(strings);
+    	instruments.add(harp);
+    	
+    	
+    	//Keyboards
+    	
+    	Instrument piano = new Instrument();
+    	piano.setInstName("piano");
+    	piano.setInstFamily(keyboards);
+    	instruments.add(piano);
+    	
+    	Instrument celesta = new Instrument();
+    	celesta.setInstName("piano");
+    	celesta.setInstFamily(keyboards);
+    	instruments.add(celesta);
+    	
+    	Instrument clavichord = new Instrument();
+    	clavichord.setInstName("clavichord");
+    	clavichord.setInstFamily(keyboards);
+    	instruments.add(clavichord);
+    	
+    	Instrument accordion = new Instrument();
+    	accordion.setInstName("accordion");
+    	accordion.setInstFamily(keyboards);
+    	instruments.add(accordion);
+    	
+    	//Percussion
+    	
+    	Instrument timpani = new Instrument();
+    	timpani.setInstName("timpani");
+    	timpani.setInstFamily(percussion);
+    	instruments.add(timpani);
+    	
+    	Instrument cymbals = new Instrument();
+    	cymbals.setInstName("cymbals");
+    	cymbals.setInstFamily(percussion);
+    	instruments.add(cymbals);
+    	
+    	Instrument snare = new Instrument();
+    	snare.setInstName("snare");
+    	snare.setInstFamily(percussion);
+    	instruments.add(snare);
+    	
+    	Instrument xylophone = new Instrument();
+    	xylophone.setInstName("xylophone");
+    	xylophone.setInstFamily(percussion);
+    	instruments.add(xylophone);
+    	
+    	Instrument drums = new Instrument();
+    	drums.setInstName("drums");
+    	drums.setInstFamily(percussion);
+    	instruments.add(drums);
+    	
+    	
+    	
+    	Iterable<Instrument> instsToSave = instruments;
+    	instService.saveInstruments(instsToSave);
+    	
+    	return "home";
+    }
 
 }

@@ -48,6 +48,12 @@ public class InstrumentService {
 	 }
 	 
 	 @Transactional
+	 public void saveInstruments(Iterable<Instrument> instruments) {
+		 //instrumentRepo.saveAll(instruments);
+		 instrumentRepo.save(instruments, 4);
+	 }
+	 
+	 @Transactional
 	 public void deleteAllInstruments () {
 		 instrumentRepo.deleteAll();
 	 }
