@@ -11,7 +11,7 @@
 	<nav th:fragment="navbar"
 		class="navbar navbar-expand navbar-dark bg-dark static-top">
 
-		<a class="navbar-brand mr-1" href="home">Start SoundStudio
+		<a class="navbar-brand mr-1" th:href="@{/home}">Start SoundStudio
 			Management</a>
 
 		<button class="btn btn-link btn-sm text-white order-1 order-sm-0"
@@ -82,7 +82,7 @@
 
 		<!-- Sidebar -->
 		<ul class="sidebar navbar-nav" th:fragment="sidebar">
-			<li class="nav-item"><a class="nav-link" href="home"> <i
+			<li class="nav-item"><a class="nav-link" th:href="@{/home}"> <i
 					class="fas fa-fw fa-tachometer-alt"></i> <span>Home</span>
 			</a></li>
 			<li class="nav-item dropdown"><a
@@ -92,13 +92,13 @@
 			</a>
 				<div class="dropdown-menu" aria-labelledby="pagesDropdown">
 					<h6 class="dropdown-header">Sessions:</h6>
-					<a class="dropdown-item" href="recsession">Recording Session</a> <a
-						class="dropdown-item" href="uploadfile">Tracks to Session</a> <a
-						class="dropdown-item" href="personal">Personal to Session</a>
+					<a class="dropdown-item" th:href="@{/recsession}">Recording Session</a> <a
+						class="dropdown-item" th:href="@{/uploadfile}">Tracks to Session</a> <a
+						class="dropdown-item" th:href="personal">Personal to Session</a>
 					<div class="dropdown-divider"></div>
 					<h6 class="dropdown-header">Other adds:</h6>
-					<a class="dropdown-item" href="404.html">Client</a> <a
-						class="dropdown-item" href="blank.html">Project</a>
+					<a class="dropdown-item" th:href="@{/add/addClient}">Client</a> <a
+						class="dropdown-item" th:href="@{/add/addProject}">Project</a>
 				</div></li>
 			<li class="nav-item"><a class="nav-link" href="charts.html">
 					<i class="fas fa-fw fa-chart-area"></i> <span>Charts</span>
