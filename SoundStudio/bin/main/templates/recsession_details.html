@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header.html :: header"></head>
+
+<body id="page-top">
+
+	<div>
+		<nav class="navbar navbar-expand navbar-dark bg-dark static-top"
+			th:include="fragments/sidebar.html :: navbar"></nav>
+		<div id="wrapper">
+			<ul class="sidebar navbar-nav"
+				th:replace="fragments/sidebar :: sidebar"></ul>
+
+			<div id="content-wrapper">
+
+				<div class="container-fluid">
+					<!-- Breadcrumbs-->
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="#">Sound Studio</a></li>
+						<li class="breadcrumb-item active">Recording Session Details</li>
+					</ol>
+					
+					<div class="card-body">
+						<div class="table-responsive">
+							<table class="table table-bordered" id="dataTable" width="100%"
+								cellspacing="0">
+								<thead>
+									<tr>
+										<th>Date</th>
+										<th>Duration</th>
+										<th>Project</th>
+										<th>Client</th>
+										<th>Engineer</th>
+
+									</tr>
+								</thead>
+								<tfoot>
+									<tr>
+										<th>Date</th>
+										<th>Duration</th>
+										<th>Project</th>
+										<th>Client</th>
+										<th>Engineer</th>
+
+									</tr>
+								</tfoot>
+								<tbody>
+								<tr>
+								<td th:text="${recsession.sessionDate}"></td>
+								<td th:text="${recsession.duration}"></td>
+								</tr>
+								
+								</tbody>
+								<!-- <tbody>
+									<th:block th:each="track : ${newtracks}">
+										<tr>
+											
+											<td><input th:value="${track.number}" /></td>
+											<td><input th:value="${track.name}" /></td>
+										</tr>
+
+										<th:block th:each="object : ${track.objectList}">
+											<tr>
+												<td></td>
+												<td></td>
+												<td><input th:value="${object.starttime}" /></td>
+												<td><input th:value="${object.name}" /></td>
+												<td><input th:value="${object.wave}" /></td>
+											</tr>
+										</th:block>
+									</th:block>
+								</tbody>  -->
+							</table>
+						</div>
+					</div>
+
+
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<footer th:replace="fragments/footer.html :: footer"></footer>
+</body>
+
+</html>
