@@ -39,11 +39,11 @@
 											<td>Project Name</td>
 											<td><input type="text" th:field="${project.name}"/></td>
 											<td class="col-md-4"><div class="dropdown">
-												<button class="btn dropdown-toggle" type="button"
+												<!-- <button class="btn dropdown-toggle" type="button"
 													data-toggle="dropdown">
 													Clients <span class="caret"></span>
-												</button>
-												<select class="selectpicker" th:name="clientID" title="Clients">
+												</button>  -->
+												<select class="selectpicker form-control" th:name="clientID" title="Clients">
 													<th:block th:each="client : ${clients}">
 														<option th:text="${client.name}" th:value="${client.id}"></option>
 													</th:block>

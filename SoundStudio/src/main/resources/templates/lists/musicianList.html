@@ -60,7 +60,9 @@
 									</tr>
 								</tfoot>
 								<tbody>
+								
 									<th:block th:each="musician : ${musicians}">
+									<tr>
 										<td th:text="${musician.name}"></td>
 										<td th:text="${musician.surname}"></td>
 										<td th:text="${musician.contacts[0].email}"></td>
@@ -80,8 +82,9 @@
 													</th:block>
 												</ul>
 											</div></td>
-										
+										</tr>
 									</th:block>
+									
 								</tbody>
 							</table>
 						</div>

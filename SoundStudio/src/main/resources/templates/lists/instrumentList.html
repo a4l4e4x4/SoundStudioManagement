@@ -15,21 +15,18 @@
 					<i class="fas fa-table"></i> Instruments List
 					<p></p>
 				</div>
-				
 
-				
-					<!-- Breadcrumbs-->
-					<ol class="breadcrumb">
-						<li class="breadcrumb-item"><a href="#">Sound Studio</a></li>
-						<li class="breadcrumb-item active">Instruments List</li>
-					</ol>
+
+
+				<!-- Breadcrumbs-->
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="#">Sound Studio</a></li>
+					<li class="breadcrumb-item active">Instruments List</li>
+				</ol>
 
 				<form
 					class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0"
 					method="POST" action="/addMusician" enctype="multipart/form-data">
-
-					<input class="form-control" type="submit" value="Submit" />
-
 					<div class="card-body">
 						<div class="table-responsive">
 							<table class="table table-bordered" id="dataTable">
@@ -49,20 +46,21 @@
 								</tfoot>
 								<tbody>
 									<th:block th:each="instrument : ${instruments}">
-									<tr>
-										<td th:text="${instrument.instName}"></td>
-										<td th:text="${instrument.instFamily.family}"></td>
-										<td class="col-md-4"><div class="dropdown">
-												<button class="btn dropdown-toggle" type="button"
-													data-toggle="dropdown">
-													Musicians <span class="caret"></span>
-												</button>
-												<ul class="dropdown-menu">
-													<th:block th:each="musician : ${instrument.musicians}">
-														<li><a th:text="${musician.name} + ${musician.surname}"></a>
-													</th:block>
-												</ul>
-											</div></td>
+										<tr>
+											<td th:text="${instrument.instName}"></td>
+											<td th:text="${instrument.instFamily.family}"></td>
+											<td class="col-md-4"><div class="dropdown">
+													<button class="btn dropdown-toggle" type="button"
+														data-toggle="dropdown">
+														Musicians <span class="caret"></span>
+													</button>
+													<ul class="dropdown-menu">
+														<th:block th:each="musician : ${instrument.musicians}">
+															<li><a
+																th:text="${musician.name} + ${musician.surname}"></a>
+														</th:block>
+													</ul>
+												</div></td>
 										</tr>
 									</th:block>
 								</tbody>
@@ -72,9 +70,9 @@
 					<input class="form-control" type="submit" value="Submit" />
 				</form>
 			</div>
-			
-			
-			
+
+
+
 		</div>
 	</div>
 	<!-- <footer th:replace="fragments/footer.html :: footer"></footer> -->

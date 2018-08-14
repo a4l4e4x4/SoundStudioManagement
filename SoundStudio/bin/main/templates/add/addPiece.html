@@ -38,15 +38,16 @@
 										</tr>
 										<tr>
 											
-											<td><input type="text" th:field="${piece.name}"/></td>
-											<td><input type="text" th:field="${piece.composer}"/></td>
+											<td><input type="text" th:field="${piece.name}" placeholder="piece name"/></td>
+											<td><input type="text" th:field="${piece.composer}" placeholder="piece composer"/></td>
 											<td class="col-md-4"><div class="dropdown">
-												<button class="btn dropdown-toggle" type="button"
+												<!-- <button class="btn dropdown-toggle" type="button"
 													data-toggle="dropdown">
 													Projects <span class="caret"></span>
-												</button>
-												<select th:name="projectID">
-													<th:block th:each="project : ${projects}">
+												</button>  -->
+												<select class="selectpicker form-control" th:name="projectID" th:title="project">
+													<th:block class="form-control" th:each="project : ${projects}">
+													<!-- <option th:text="project" type="hidden"></option>  -->
 														<option th:text="${project.name}" th:value="${project.id}"></option>
 													</th:block>
 												</select>

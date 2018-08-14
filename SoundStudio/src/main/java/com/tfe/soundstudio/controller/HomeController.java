@@ -76,7 +76,7 @@ public class HomeController {
     
     @RequestMapping(value="/read", method = RequestMethod.GET)
     public String read() {
-    	Optional<InstFamily> instFamily = instService.readByID(1L);
+    	Optional<InstFamily> instFamily = instService.readById(1L);
     	System.out.println(instFamily.get().getFamily());
     	return "home";
     }

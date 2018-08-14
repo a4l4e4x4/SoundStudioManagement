@@ -101,7 +101,7 @@ public class AdditionsController {
 	}
 	
 	@PostMapping(value="add/addMusician")
-	public String addMusicianPost(@Valid Musician musician, BindingResult result, @Valid Contact contact, BindingResult result2, @RequestParam("instID") HashSet<String> instIDs, Model model) {
+	public String addMusicianPost(@Valid Musician musician, BindingResult result, @Valid Contact contact, BindingResult result2, @RequestParam(value="instID", required=false) HashSet<String> instIDs, Model model) {
 		
 		if(instIDs != null) {
 		for(String id : instIDs) {
