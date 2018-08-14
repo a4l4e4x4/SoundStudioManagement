@@ -95,8 +95,8 @@ public class InstrumentService {
 		}
 	 
 	 @Transactional(readOnly=true)
-		public Optional<InstFamily> readByID(Long id) {
-			Optional<InstFamily> result = instFamilyRepo.findById(id);
+		public Optional<InstFamily> readById(Long id) {
+			Optional<InstFamily> result = instFamilyRepo.findById(id, 3);
 			
 			return result;
 		}
@@ -115,5 +115,11 @@ public class InstrumentService {
 		 
 		 
 	 }
+
+	public Iterable<Instrument> findAll() {
+		Iterable<Instrument> instruments = instrumentRepo.findAll();
+		
+		return instruments;
+	}
 
 }

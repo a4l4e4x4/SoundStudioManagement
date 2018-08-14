@@ -24,9 +24,9 @@
 						th:method="POST" th:action="recsession" enctype="multipart/form-data" th:object="${recsession}">
 						
 							<!-- <td th:text="${track.number}"><input th:value="${track.number}"/></td>  -->
-							<p>duration <input type="number" name="duration" th:field="*{duration}"/> hours <input class="form-control" type="submit" value="Submit" /></p>
-							<input class="form-control" type="file" name="file" /><br />
-						<br /> <input class="form-control" type="submit" value="Submit" />
+							<p>duration <input type="number" name="duration" th:field="*{duration}"/> hours</p>
+							<p><input class="form-control" type="file" name="file" /><br /></p>
+						<br/> <input class="form-control" type="submit" value="Submit" />
 							<!-- <td><input th:value="${track.name}" /></td>
 											th:field="*{expenseDetail[0].product.id}"  -->
 						

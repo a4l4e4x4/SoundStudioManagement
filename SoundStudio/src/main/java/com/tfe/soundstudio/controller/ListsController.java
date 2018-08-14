@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.tfe.soundstudio.model.Client;
 import com.tfe.soundstudio.model.Engineer;
+import com.tfe.soundstudio.model.Instrument;
 import com.tfe.soundstudio.model.Musician;
+import com.tfe.soundstudio.model.Piece;
 import com.tfe.soundstudio.model.Project;
 import com.tfe.soundstudio.service.ClientService;
 import com.tfe.soundstudio.service.EngineerService;
@@ -87,5 +89,26 @@ public class ListsController {
 
 		return "lists/projectList";
 	}
+	
+	@GetMapping(value = "lists/pieceList")
+	public String listPiecesGet(Model model) {
+
+		Iterable<Piece> pieces = pieceService.findAll();
+		
+		model.addAttribute("pieces", pieces);
+
+		return "lists/pieceList";
+	}
+	
+	@GetMapping(value = "lists/instrumentList")
+	public String listInstrumentGet(Model model) {
+
+		Iterable<Instrument> instruments = instrumentService.findAll();
+		
+		model.addAttribute("instruments", instruments);
+
+		return "lists/instrumentList";
+	}
+
 
 }

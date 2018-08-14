@@ -24,7 +24,7 @@ public class Piece {
 	private String name;
 	private String composer;
 	
-	@Relationship(type="FOR_A")
+	@Relationship(type="FOR_A", direction=Relationship.INCOMING)
 	private List<SessionFile> sessionFiles = new ArrayList<>();
 	
 	@Relationship(type="FROM_PROJECT", direction=Relationship.OUTGOING)

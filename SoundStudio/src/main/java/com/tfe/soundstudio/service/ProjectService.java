@@ -3,6 +3,8 @@
  */
 package com.tfe.soundstudio.service;
 
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,6 +34,12 @@ public class ProjectService {
 	public Iterable<Project> findAll() {
 		Iterable<Project> result = projectRepo.findAll();
 		return result;
+	}
+
+	public Optional<Project> findById(Long id) {
+		Optional<Project> project = projectRepo.findById(id);
+				
+		return project;
 	}
 
 }

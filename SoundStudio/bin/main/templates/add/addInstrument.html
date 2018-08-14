@@ -1,10 +1,83 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="@{/fragments/header} :: header"></head>
 
+<body id="page-top">
+
+	<div>
+		<nav class="navbar navbar-expand navbar-dark bg-dark static-top"
+			th:include="@{/fragments/sidebar} :: navbar"></nav>
+		<div id="wrapper">
+			<ul class="sidebar navbar-nav"
+				th:replace="fragments/sidebar :: sidebar"></ul>
+
+			<div id="content-wrapper">
+
+				<div class="container-fluid">
+					<!-- Breadcrumbs-->
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="#">Sound Studio</a></li>
+						<li class="breadcrumb-item active">Add Instrument</li>
+					</ol>
+					<form
+						class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0"
+						th:method="POST" th:action="@{/add/addInstrument}"
+						enctype="multipart/form-data">
+						<!-- th:object="${client}" -->
+
+						<div class="card-body">
+							<div class="table-responsive">
+								<table class="table table-bordered" id="dataTable">
+									<thead>
+										<tr>
+											<th>Name</th>
+											<th>Instrument Family</th>
+										</tr>
+									</thead>
+									
+									<tbody>
+
+										<tr>
+
+											<td><input type="text" th:field="${instrument.instName}" /></td>
+
+											<td class="col-md-4"><div class="dropdown">
+													<!-- <button class="btn dropdown-toggle" type="button"
+														data-toggle="dropdown">
+														Instrument Family <span class="caret"></span>
+													</button>  -->
+													<select class="form-control" th:name="instFamilyID">
+														<th:block class="form-control"
+															th:each="instFamily : ${instFamilies}">
+															<option th:text="${instFamily.family}"
+																th:value="${instFamily.id}"></option>
+														</th:block>
+													</select>
+
+												</div></td>
+										</tr>
+
+										<tr>
+
+										</tr>
+
+									</tbody>
+								</table>
+								<input class="form-control" type="submit" value="Submit" />
+							</div>
+						</div>
+
+
+					</form>
+
+
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<footer th:replace="@{/fragments/footer} :: footer"></footer>
 </body>
+
 </html>

@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.tfe.soundstudio.model.Client;
 import com.tfe.soundstudio.model.Contact;
 import com.tfe.soundstudio.model.Engineer;
+import com.tfe.soundstudio.model.InstFamily;
 import com.tfe.soundstudio.model.Instrument;
 import com.tfe.soundstudio.model.Musician;
 import com.tfe.soundstudio.model.Piece;
@@ -70,13 +71,10 @@ public class AdditionsController {
 	
 	@PostMapping(value="add/addClient")
 	public String addClientPost(@Valid Client client, BindingResult result, @Valid Contact contact, BindingResult result2, Model model) {
-		/*List<Contact> contactList = new ArrayList<>();
-		contactList.add(contact);
-		client.setContacts(contactList);
-		System.out.println(contact.getContactname()); */
+		
 		client.getContacts().add(contact);
 		clientService.saveClient(client);
-		return "lists/clientList";
+		return "redirect:/lists/clientList";
 	}
 	
 	@GetMapping(value="add/addMusician")
@@ -117,10 +115,8 @@ public class AdditionsController {
 		}
 		musician.getContacts().add(contact);
 		musicianService.saveMusician(musician);
-		Iterable<Musician> musicians = musicianService.findAll();
-		model.addAttribute("musicians", musicians);
 		
-		return "lists/musicianList";
+		return "redirect:/lists/musicianList";
 	}
 	
 	@GetMapping(value="add/addEngineer")
@@ -129,14 +125,14 @@ public class AdditionsController {
 		model.addAttribute("engineer", new Engineer());
 		model.addAttribute("contact", new Contact());
 		
-		return "add/addClient";
+		return "add/addEngineer";
 	}
 	
 	@PostMapping(value="add/addEngineer")
 	public String addEngineerPost(@Valid Engineer engineer, BindingResult result, @Valid Contact contact, BindingResult result2, Model model) {
 		engineer.getContacts().add(contact);
 		engineerService.saveEngineer(engineer);
-		return "lists/engineerList";
+		return "redirect:/lists/engineerList";
 	}
 	
 	@GetMapping(value="add/addProject")
@@ -161,39 +157,48 @@ public class AdditionsController {
 		System.out.println(project.getName());
 		projectService.saveProject(project);
 		
-		Iterable<Project> projects = projectService.findAll();
 		
-		model.addAttribute("projects", projects);
 		}
-		return "lists/projectList";
+		return "redirect:/lists/projectList";
 	}
 	
 	@GetMapping(value="add/addPiece")
 	public String addPieceGet(Model model) {
+		Iterable<Project> projects = projectService.findAll();
 		
+		model.addAttribute("projects",  projects);
 		model.addAttribute("piece", new Piece());
 		
 		return "add/addPiece";
 	}
 	
 	@PostMapping(value="add/addPiece")
-	public String addPiecePost(@Valid Piece piece, BindingResult result, Model model) {
+	public String addPiecePost(@Valid Piece piece, BindingResult result, @RequestParam("projectID") String projectID, Model model) {
+		
+		Long realID = Long.parseLong(projectID);
+		Project project = projectService.findById(realID).orElseThrow(()->new RuntimeException("No such project"));
+		piece.getProjects().add(project);
 		pieceService.savePiece(piece);
-		return "lists/pieceList";
+		return "redirect:/lists/pieceList";
 	}
 	
 	@GetMapping(value="add/addInstrument")
 	public String addInstrumentGet(Model model) {
+		Iterable<InstFamily> instFamilies = instrumentService.findAllInstFamily();
 		
+		model.addAttribute("instFamilies", instFamilies);
 		model.addAttribute("instrument", new Instrument());
 		
 		return "add/addInstrument";
 	}
 	
 	@PostMapping(value="add/addInstrument")
-	public String addInstrumentPost(@Valid Instrument instrument, BindingResult result, Model model) {
+	public String addInstrumentPost(@Valid Instrument instrument, BindingResult result, @RequestParam("instFamilyID") String instFamilyID, Model model) {
+		Long realID = Long.parseLong(instFamilyID);
+		InstFamily instFamily = instrumentService.readById(realID).orElseThrow(()->new RuntimeException("No such Instrument Family"));
+		instrument.setInstFamily(instFamily);
 		instrumentService.saveInstrument(instrument);
-		return "lists/instrumentList";
+		return "redirect:/lists/instrumentList";
 	}
 
 }

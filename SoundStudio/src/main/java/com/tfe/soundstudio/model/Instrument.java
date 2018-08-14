@@ -24,7 +24,7 @@ public class Instrument {
 	private String instName;
 	
 	@Relationship(type = "BELONGS_TO", direction=Relationship.OUTGOING)
-	private InstFamily instFamily;
+	private InstFamily instFamily = new InstFamily();
 	
 	@Relationship(type="PLAYS_AN", direction=Relationship.INCOMING)
 	private Set<Musician> musicians = new HashSet<>();

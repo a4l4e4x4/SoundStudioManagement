@@ -43,7 +43,7 @@
 													data-toggle="dropdown">
 													Clients <span class="caret"></span>
 												</button>
-												<select th:name="clientID">
+												<select class="selectpicker" th:name="clientID" title="Clients">
 													<th:block th:each="client : ${clients}">
 														<option th:text="${client.name}" th:value="${client.id}"></option>
 													</th:block>
