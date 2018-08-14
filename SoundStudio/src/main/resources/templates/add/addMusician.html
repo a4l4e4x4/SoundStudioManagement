@@ -1,10 +1,84 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="@{/fragments/header} :: header"></head>
 
+<body id="page-top">
+
+	<div>
+		<nav class="navbar navbar-expand navbar-dark bg-dark static-top"
+			th:include="@{/fragments/sidebar} :: navbar"></nav>
+		<div id="wrapper">
+			<ul class="sidebar navbar-nav"
+				th:replace="fragments/sidebar :: sidebar"></ul>
+
+			<div id="content-wrapper">
+
+				<div class="container-fluid">
+					<!-- Breadcrumbs-->
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="#">Sound Studio</a></li>
+						<li class="breadcrumb-item active">Add Musician</li>
+					</ol>
+					<form
+						class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0"
+						th:method="POST" th:action="@{/add/addMusician}" enctype="multipart/form-data"> <!-- th:object="${client}" -->
+						
+						<div class="card-body">
+						<div class="table-responsive">
+						<table class="table table-bordered" id="dataTable" width="100%"
+								cellspacing="0">
+							<!-- <td th:text="${track.number}"><input th:value="${track.number}"/></td>
+							<p>Client Name <input type="text" name="name" th:field="${client.name}"/></p>  -->
+							<tbody>
+							<tr><th></th><th></th></tr>
+							<tr><td>Musician Name</td><td><input type="text" th:field="${musician.name}"/></td></tr>
+							<tr><td>Musician Surname</td><td> <input type="text" th:field="${musician.surname}"/></td></tr>
+							<tr><td>Contact Name</td><td> <input type="text" th:field="${contact.contactname}"/></td></tr>
+							<tr><td>Contact Surame</td><td> <input type="text" th:field="${contact.contactsurname}"/></td></tr>
+							
+							<tr><td>Contact Phone</td><td> <input type="text" th:field="${contact.phone}"/></td></tr>
+							<tr><td>Contact Email</td><td> <input type="text" th:field="${contact.email}"/></td></tr>
+							<tr><td>Contact Address</td><td> <input type="text" th:field="${contact.address}"/></td></tr>
+							<tr><td>Contact Postcode</td><td> <input type="text" th:field="${contact.postcode}"/></td></tr>
+							<tr><td>Contact City</td><td> <input type="text" th:field="${contact.city}"/></td></tr>
+							<tr><td>Contact Country</td><td> <input type="text" th:field="${contact.country}"/></td></tr>
+							<tr><td> <input class="form-control" type="submit" value="Submit" /></td></tr>
+							<!-- <td><input th:value="${track.name}" /></td>
+											th:field="*{expenseDetail[0].product.id}"  -->
+											</tbody>
+											</table>
+						</div>
+						</div>
+						
+						<div class="card-body">
+						<div class="table-responsive">
+						<table class="table table-bordered" id="dataTable" width="100%"
+								cellspacing="0" >
+							<!-- <td th:text="${track.number}"><input th:value="${track.number}"/></td>
+							<p>Client Name <input type="text" name="name" th:field="${client.name}"/></p>  -->
+							<tbody align="right">
+							<th:block th:each="instrument : ${instruments}">
+							<tr>
+							<td><input type="checkbox" th:name="instID" th:text="${instrument.instName}" th:value="${instrument.id}" /></td>
+							</tr>
+							
+							</th:block>
+							</tbody>
+							</table>
+							</div>
+							</div>
+							
+
+					</form>
+
+
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<footer th:replace="@{/fragments/footer} :: footer"></footer>
 </body>
+
 </html>

@@ -3,7 +3,9 @@
  */
 package com.tfe.soundstudio.service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,9 +38,29 @@ public class InstrumentService {
 	 * @return
 	 */
 	
+	@Transactional(readOnly = true)
+	 public Optional<Instrument> findById(Long id) {
+		 Optional<Instrument> result = instrumentRepo.findById(id, 2);
+		 return result;
+	 }
+	
+	
 	 @Transactional(readOnly = true)
 	 public Instrument findByInstName(String instName) {
 		 Instrument result = instrumentRepo.findByInstName(instName);
+		 return result;
+	 }
+	 
+	 @Transactional
+	 public Set<Instrument> findByInstFamily(InstFamily instFamily){
+		 Set<Instrument> instList = instrumentRepo.findByInstFamily(instFamily);
+		 
+		 return instList;
+	 }
+	 
+	 @Transactional
+	 public Iterable<Instrument> findAllInstruments(){
+		 Iterable<Instrument> result = instrumentRepo.findAll();
 		 return result;
 	 }
 	
@@ -83,6 +105,16 @@ public class InstrumentService {
 	 @Transactional
 	 public void deleteAllInstFamily () {
 		 instFamilyRepo.deleteAll();
+	 }
+	 
+	 @Transactional
+	 public Iterable<InstFamily> findAllInstFamily () {
+		 Iterable<InstFamily> result;
+		 result = instFamilyRepo.findAll();
+		 
+		 return result;
+		 
+		 
 	 }
 
 }

@@ -23,7 +23,8 @@ public class ClientService {
 	}
 	
 	public void saveClient(Client client) {
-		clientRepo.save(client);
+		
+		clientRepo.save(client, 5);
 	}
 
 }

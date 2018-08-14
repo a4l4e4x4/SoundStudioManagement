@@ -23,19 +23,21 @@ public class Engineer {
 	private Long id;
 	private String name;
 	private String surname;
-	private Contact contact;
+	
+	@Relationship(type="HAS_CONTACT", direction=Relationship.OUTGOING)
+	private List<Contact> contacts = new ArrayList<>();
 	
 	@Relationship(type="ENGINEERED_BY", direction=Relationship.INCOMING)
 	private List<EngineerFee> engineerFee = new ArrayList<>();
 
 	public Engineer() {}
 
-	public Engineer(Long id, String name, String surname, Contact contact, List<EngineerFee> engineerFee) {
+	public Engineer(Long id, String name, String surname, List<Contact> contacts, List<EngineerFee> engineerFee) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.surname = surname;
-		this.contact = contact;
+		this.contacts = contacts;
 		this.engineerFee = engineerFee;
 	}
 
@@ -63,12 +65,12 @@ public class Engineer {
 		this.surname = surname;
 	}
 
-	public Contact getContact() {
-		return contact;
+	public List<Contact> getContacts() {
+		return contacts;
 	}
 
-	public void setContact(Contact contact) {
-		this.contact = contact;
+	public void setContacts(List<Contact> contacts) {
+		this.contacts = contacts;
 	}
 
 	public List<EngineerFee> getEngineerFee() {
@@ -78,6 +80,7 @@ public class Engineer {
 	public void setEngineerFee(List<EngineerFee> engineerFee) {
 		this.engineerFee = engineerFee;
 	};
+
 	
 	
 }

@@ -3,6 +3,7 @@
  */
 package com.tfe.soundstudio.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.neo4j.ogm.annotation.GeneratedValue;
@@ -22,19 +23,21 @@ public class Client {
 	private Long id;
 	
 	private String name;
-	private String address;
-	private List<Contact> contacts;
+	private String description;
+	
+	@Relationship(type="HAS_CONTACT", direction=Relationship.OUTGOING)
+	private List<Contact> contacts = new ArrayList<>();
 	
 	@Relationship(type="HAS_A", direction=Relationship.OUTGOING)
-	private List<Project> projects;
+	private List<Project> projects = new ArrayList<>();
 	
 	public Client() {}
 
-	public Client(Long id, String name, String address, List<Contact> contacts, List<Project> projects) {
+	public Client(Long id, String name, String description, List<Contact> contacts, List<Project> projects) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.address = address;
+		this.description = description;
 		this.contacts = contacts;
 		this.projects = projects;
 	}
@@ -55,12 +58,12 @@ public class Client {
 		this.name = name;
 	}
 
-	public String getAddress() {
-		return address;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public List<Contact> getContacts() {
@@ -77,7 +80,9 @@ public class Client {
 
 	public void setProjects(List<Project> projects) {
 		this.projects = projects;
-	};
+	}
+
+	
 	
 	
 

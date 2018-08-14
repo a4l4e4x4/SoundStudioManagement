@@ -82,8 +82,8 @@
 
 		<!-- Sidebar -->
 		<ul class="sidebar navbar-nav" th:fragment="sidebar">
-			<li class="nav-item"><a class="nav-link" th:href="@{/home}">
-					<i class="fas fa-fw fa-tachometer-alt"></i> <span>Home</span>
+			<li class="nav-item"><a class="nav-link" th:href="@{/recsession}">
+					<i class="fas fa-fw fa-tachometer-alt"></i> <span>New Recording Session</span>
 			</a></li>
 			<li class="nav-item dropdown"><a
 				class="nav-link dropdown-toggle" href="#" id="pagesDropdown"
@@ -95,6 +95,7 @@
 					<a class="dropdown-item" th:href="@{/lists/recSessionList}">Recording
 						Sessions</a> <a class="dropdown-item" th:href="@{/lists/projectList}">Projects</a>
 					<a class="dropdown-item" th:href="@{/lists/pieceList}">Pieces</a>
+					<a class="dropdown-item" th:href="@{/lists/instrumentList}">Instruments</a>
 					
 					<div class="dropdown-divider"></div>
 					<h6 class="dropdown-header">People:</h6>
@@ -110,15 +111,16 @@
 				aria-expanded="false"> <i class="fas fa-fw fa-folder"></i> <span>Add:</span>
 			</a>
 				<div class="dropdown-menu" aria-labelledby="pagesDropdown">
-					<h6 class="dropdown-header">Sessions:</h6>
-					<a class="dropdown-item" th:href="@{/recsession}">Recording
-						Session</a> <a class="dropdown-item" th:href="@{/uploadfile}">Tracks
-						to Session</a> <a class="dropdown-item" th:href="personal">Personal
-						to Session</a>
+					<h6 class="dropdown-header">Projects:</h6>
+					<a class="dropdown-item" th:href="@{/add/addProject}">Project</a> 
+					<a class="dropdown-item" th:href="@{/add/addPiece}">Piece</a>
+					<a class="dropdown-item" th:href="@{/recsession}">Recording Session</a>
+					<a class="dropdown-item" th:href="@{/add/addInstrument}">Instrument</a>
 					<div class="dropdown-divider"></div>
-					<h6 class="dropdown-header">Other adds:</h6>
-					<a class="dropdown-item" th:href="@{/add/addClient}">Client</a> <a
-						class="dropdown-item" th:href="@{/add/addProject}">Project</a>
+					<h6 class="dropdown-header">People:</h6>
+					<a class="dropdown-item" th:href="@{/add/addClient}">Client</a> 
+					<a class="dropdown-item" th:href="@{/add/addMusician}">Musician</a>
+					<a class="dropdown-item" th:href="@{/add/addEngineer}">Sound Engineer</a>
 				</div></li>
 			<li class="nav-item"><a class="nav-link" href="charts.html">
 					<i class="fas fa-fw fa-chart-area"></i> <span>Charts</span>
