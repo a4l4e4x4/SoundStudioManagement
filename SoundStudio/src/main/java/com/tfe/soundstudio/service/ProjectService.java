@@ -28,4 +28,10 @@ public class ProjectService {
 		projectRepo.save(project, 10);
 	}
 
+	@Transactional
+	public Iterable<Project> findAll() {
+		Iterable<Project> result = projectRepo.findAll();
+		return result;
+	}
+
 }

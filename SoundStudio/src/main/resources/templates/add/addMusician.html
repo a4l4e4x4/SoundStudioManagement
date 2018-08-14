@@ -21,53 +21,136 @@
 					</ol>
 					<form
 						class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0"
-						th:method="POST" th:action="@{/add/addMusician}" enctype="multipart/form-data"> <!-- th:object="${client}" -->
-						
+						th:method="POST" th:action="@{/add/addMusician}"
+						enctype="multipart/form-data">
+						<!-- th:object="${client}" -->
+
 						<div class="card-body">
-						<div class="table-responsive">
-						<table class="table table-bordered" id="dataTable" width="100%"
-								cellspacing="0">
-							<!-- <td th:text="${track.number}"><input th:value="${track.number}"/></td>
+							<div class="table">
+								<table class="table table-bordered" id="dataTable">
+									<!-- <td th:text="${track.number}"><input th:value="${track.number}"/></td>
 							<p>Client Name <input type="text" name="name" th:field="${client.name}"/></p>  -->
-							<tbody>
-							<tr><th></th><th></th></tr>
-							<tr><td>Musician Name</td><td><input type="text" th:field="${musician.name}"/></td></tr>
-							<tr><td>Musician Surname</td><td> <input type="text" th:field="${musician.surname}"/></td></tr>
-							<tr><td>Contact Name</td><td> <input type="text" th:field="${contact.contactname}"/></td></tr>
-							<tr><td>Contact Surame</td><td> <input type="text" th:field="${contact.contactsurname}"/></td></tr>
-							
-							<tr><td>Contact Phone</td><td> <input type="text" th:field="${contact.phone}"/></td></tr>
-							<tr><td>Contact Email</td><td> <input type="text" th:field="${contact.email}"/></td></tr>
-							<tr><td>Contact Address</td><td> <input type="text" th:field="${contact.address}"/></td></tr>
-							<tr><td>Contact Postcode</td><td> <input type="text" th:field="${contact.postcode}"/></td></tr>
-							<tr><td>Contact City</td><td> <input type="text" th:field="${contact.city}"/></td></tr>
-							<tr><td>Contact Country</td><td> <input type="text" th:field="${contact.country}"/></td></tr>
-							<tr><td> <input class="form-control" type="submit" value="Submit" /></td></tr>
-							<!-- <td><input th:value="${track.name}" /></td>
+									<tbody>
+										
+										<tr>
+											<th>Musician Name</th>
+											<td><input type="text" th:field="${musician.name}" /></td>
+										</tr>
+										<tr>
+											<th>Musician Surname</th>
+											<td><input type="text" th:field="${musician.surname}" /></td>
+										</tr>
+										<tr>
+											<th>Contact Name</th>
+											<td><input type="text" th:field="${contact.contactname}" /></td>
+										</tr>
+										<tr>
+											<th>Contact Surame</th>
+											<td><input type="text"
+												th:field="${contact.contactsurname}" /></td>
+										</tr>
+
+										<tr>
+											<th>Contact Phone</th>
+											<td><input type="text" th:field="${contact.phone}" /></td>
+										</tr>
+										<tr>
+											<th>Contact Email</th>
+											<td><input type="text" th:field="${contact.email}" /></td>
+										</tr>
+										<tr>
+											<th>Contact Address</th>
+											<td><input type="text" th:field="${contact.address}" /></td>
+										</tr>
+										<tr>
+											<th>Contact Postcode</th>
+											<td><input type="text" th:field="${contact.postcode}" /></td>
+										</tr>
+										<tr>
+											<th>Contact City</th>
+											<td><input type="text" th:field="${contact.city}" /></td>
+										</tr>
+										<tr>
+											<th>Contact Country</th>
+											<td><input type="text" th:field="${contact.country}" /></td>
+										</tr>
+										<tr></tr>
+										
+										<!-- <td><input th:value="${track.name}" /></td>
 											th:field="*{expenseDetail[0].product.id}"  -->
-											</tbody>
-											</table>
-						</div>
+									</tbody>
+									
+								</table>
+							</div>
 						</div>
 						
+						
+											<input class="form-control" type="submit"
+												value="Submit" />
+										
+
+
 						<div class="card-body">
-						<div class="table-responsive">
-						<table class="table table-bordered" id="dataTable" width="100%"
-								cellspacing="0" >
-							<!-- <td th:text="${track.number}"><input th:value="${track.number}"/></td>
-							<p>Client Name <input type="text" name="name" th:field="${client.name}"/></p>  -->
-							<tbody align="right">
+							<div class="table-responsive">
+								<table class="table table-bordered table-hover table-dark" id="otherTable">
+
+									<thead>
+										<tr>
+											<th>Plays instruments:</th>
+										</tr>
+									</thead>
+
+									<tbody>
+										<tr>
+											<th>Strings</th>
+											<th:block th:each="string : ${strings}">
+												<td><input type="checkbox" th:name="instID"
+													th:text="${string.instName}" th:value="${string.id}" /></td>
+											</th:block>
+										</tr>
+
+										<tr>
+											<th>Woodwinds</th>
+											<th:block th:each="woodwind : ${woodwinds}">
+												<td><input type="checkbox" th:name="instID"
+													th:text="${woodwind.instName}" th:value="${woodwind.id}" /></td>
+											</th:block>
+										</tr>
+										<tr>
+											<th>Brass</th>
+											<th:block th:each="bras : ${brass}">
+												<td><input type="checkbox" th:name="instID"
+													th:text="${bras.instName}" th:value="${bras.id}" /></td>
+											</th:block>
+										</tr>
+										<tr>
+											<th>Keyboard</th>
+											<th:block th:each="keyboard : ${keyboards}">
+												<td><input type="checkbox" th:name="instID"
+													th:text="${keyboard.instName}" th:value="${keyboard.id}" /></td>
+											</th:block>
+										</tr>
+										<tr>
+											<th>Percussion</th>
+											<th:block th:each="percussion : ${percussions}">
+												<td><input type="checkbox" th:name="instID"
+													th:text="${percussion.instName}"
+													th:value="${percussion.id}" /></td>
+											</th:block>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<!-- <td th:text="${track.number}"><input th:value="${track.number}"/></td>
+							<p>Client Name <input type="text" name="name" th:field="${client.name}"/></p> 
 							<th:block th:each="instrument : ${instruments}">
 							<tr>
 							<td><input type="checkbox" th:name="instID" th:text="${instrument.instName}" th:value="${instrument.id}" /></td>
 							</tr>
-							
 							</th:block>
-							</tbody>
-							</table>
-							</div>
-							</div>
-							
+							 -->
+
 
 					</form>
 

@@ -23,6 +23,13 @@ public class MusicianService {
 		this.musicianRepo = musicianRepo;
 	}
 	
+	@Transactional(readOnly=true)
+	public Iterable<Musician> findAll(){
+		Iterable<Musician> result = musicianRepo.findAll();
+		
+		return result;
+	}
+	
 	@Transactional
 	public void saveMusician(Musician musician) {
 		musicianRepo.save(musician, 5);

@@ -1,10 +1,78 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="@{/fragments/header} :: header"></head>
 
+<body id="page-top">
+
+	<div>
+		<nav class="navbar navbar-expand navbar-dark bg-dark static-top"
+			th:include="@{/fragments/sidebar} :: navbar"></nav>
+		<div id="wrapper">
+			<ul class="sidebar navbar-nav"
+				th:replace="fragments/sidebar :: sidebar"></ul>
+
+			<div id="content-wrapper">
+
+				<div class="container-fluid">
+					<!-- Breadcrumbs-->
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="#">Sound Studio</a></li>
+						<li class="breadcrumb-item active">Add Project</li>
+					</ol>
+					<form
+						class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0"
+						th:method="POST" th:action="@{/add/addProject}"
+						enctype="multipart/form-data">
+						<!-- th:object="${client}" -->
+
+						<div class="card-body">
+							<div class="table-responsive">
+								<table class="table table-bordered" id="dataTable">
+									<!-- <td th:text="${track.number}"><input th:value="${track.number}"/></td>
+							<p>Client Name <input type="text" name="name" th:field="${client.name}"/></p>  -->
+									<tbody>
+										<tr>
+											<th></th>
+											<th></th>
+										</tr>
+										<tr>
+											<td>Project Name</td>
+											<td><input type="text" th:field="${project.name}"/></td>
+											<td class="col-md-4"><div class="dropdown">
+												<button class="btn dropdown-toggle" type="button"
+													data-toggle="dropdown">
+													Clients <span class="caret"></span>
+												</button>
+												<select th:name="clientID">
+													<th:block th:each="client : ${clients}">
+														<option th:text="${client.name}" th:value="${client.id}"></option>
+													</th:block>
+												</select>
+											</div></td>
+										</tr>
+
+										<tr>
+											<td><input class="form-control" type="submit"
+												value="Submit" /></td>
+										</tr>
+										<!-- <td><input th:value="${track.name}" /></td>
+											th:field="*{expenseDetail[0].product.id}"  -->
+									</tbody>
+								</table>
+							</div>
+						</div>
+
+
+					</form>
+
+
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<footer th:replace="@{/fragments/footer} :: footer"></footer>
 </body>
+
 </html>

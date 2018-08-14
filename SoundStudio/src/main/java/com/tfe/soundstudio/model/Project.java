@@ -24,7 +24,7 @@ public class Project {
 	private String name;
 	
 	@Relationship(type="HAS_A")
-	private Client client;
+	private Client client = new Client();
 	
 	@Relationship(type="FROM_PROJECT")
 	private List<Piece> pieces = new ArrayList<>();

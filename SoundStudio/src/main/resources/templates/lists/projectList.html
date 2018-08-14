@@ -1,10 +1,79 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
+<head th:replace="fragments/header.html :: header"></head>
+<body id="page-top">
+	<div>
+		<nav class="navbar navbar-expand navbar-dark bg-dark static-top"
+			th:include="fragments/sidebar.html :: navbar"></nav>
+		<div id="wrapper">
+			<ul class="sidebar navbar-nav"
+				th:replace="fragments/sidebar :: sidebar"></ul>
+			<!-- DataTable -->
+			<div class="card mb-3">
+				<div class="card-header">
+					<i class="fas fa-table"></i> Projects List
+					<p></p>
+				</div>
+				
+				<!-- Breadcrumbs-->
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="#">Sound Studio</a></li>
+						<li class="breadcrumb-item active">Projects List</li>
+					</ol>
+
+				<form
+					class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0"
+					method="POST" action="/addProject" enctype="multipart/form-data">
+
+					<input class="form-control" type="submit" value="Submit" />
+
+					<div class="card-body">
+						<div class="table-responsive">
+							<table class="table table-bordered" id="dataTable">
+								<thead>
+									<tr>
+										<th>Name</th>
+										<th>Client</th>
+										<th>Pieces</th>
+									</tr>
+								</thead>
+								<tfoot>
+									<tr>
+										<th>Name</th>
+										<th>Client</th>
+										<th>Pieces</th>
+									</tr>
+								</tfoot>
+								<tbody>
+									<th:block th:each="project : ${projects}">
+										 <td th:text="${project.name}"></td>  
+										 
+										 <td th:text="${project.client.name}"></td>
+										
+										<td class="col-md-4"><div class="dropdown">
+												<button class="btn dropdown-toggle" type="button"
+													data-toggle="dropdown">
+													Pieces <span class="caret"></span>
+												</button>
+												<!-- <ul class="dropdown-menu">
+													<th:block th:each="piece : ${project.pieces}">
+														<li><a th:text="${piece.name}"></a>
+													</th:block>
+												</ul>  -->
+											</div></td>
+										</tr>
+									</th:block>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<input class="form-control" type="submit" value="Submit" />
+				</form>
+			</div>
+		</div>
+	</div>
+	<!-- <footer th:replace="fragments/footer.html :: footer"></footer> -->
 </body>
+<footer th:replace="fragments/footer.html :: footer"></footer>
 </html>

@@ -26,4 +26,10 @@ public class EngineerService {
 	public void saveEngineer (Engineer engineer) {
 		engineerRepo.save(engineer, 5);
 	}
+
+
+	public Iterable<Engineer> findAll() {
+		Iterable<Engineer> result = engineerRepo.findAll();
+		return result;
+	}
 }

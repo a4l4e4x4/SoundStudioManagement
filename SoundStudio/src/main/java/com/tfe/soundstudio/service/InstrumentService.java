@@ -3,7 +3,6 @@
  */
 package com.tfe.soundstudio.service;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -52,8 +51,8 @@ public class InstrumentService {
 	 }
 	 
 	 @Transactional
-	 public Set<Instrument> findByInstFamily(InstFamily instFamily){
-		 Set<Instrument> instList = instrumentRepo.findByInstFamily(instFamily);
+	 public Set<Instrument> findByInstFamilyFamily(String instFamily){
+		 Set<Instrument> instList = instrumentRepo.findByInstFamilyFamily(instFamily);
 		 
 		 return instList;
 	 }

@@ -33,7 +33,7 @@ public class SessionFile {
 	@Relationship(type="FOR_A", direction=Relationship.OUTGOING)
 	private List<Piece> pieces = new ArrayList<>();
 	
-	@Relationship(type="WORKS_ON")
+	@Relationship(type="WORKS_ON", direction=Relationship.INCOMING)
 	private List<RecSession> recsessions = new ArrayList<>();
 	
 	public SessionFile() {}

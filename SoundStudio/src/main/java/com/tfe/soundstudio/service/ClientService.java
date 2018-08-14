@@ -3,9 +3,13 @@
  */
 package com.tfe.soundstudio.service;
 
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.tfe.soundstudio.model.Client;
+import com.tfe.soundstudio.model.Instrument;
 import com.tfe.soundstudio.repository.ClientRepo;
 
 /**
@@ -22,9 +26,24 @@ public class ClientService {
 		this.clientRepo = clientRepo;
 	}
 	
+	@Transactional
 	public void saveClient(Client client) {
 		
 		clientRepo.save(client, 5);
+	}
+
+	@Transactional
+	public Iterable<Client> findAll() {
+		Iterable<Client> result = clientRepo.findAll();
+		
+		return result;
+	}
+
+	public Optional<Client> findById(Long id) {
+		
+		Optional<Client> result = clientRepo.findById(id);
+	
+		return result;
 	}
 
 }

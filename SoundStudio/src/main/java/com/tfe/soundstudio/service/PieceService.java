@@ -28,4 +28,11 @@ public class PieceService {
 		pieceRepo.save(piece);
 	}
 
+	public Iterable<Piece> findAll() {
+
+		Iterable<Piece> result = pieceRepo.findAll();
+		
+		return result;
+	}
+
 }

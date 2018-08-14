@@ -3,6 +3,7 @@
  */
 package com.tfe.soundstudio.controller;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -80,10 +81,21 @@ public class AdditionsController {
 	
 	@GetMapping(value="add/addMusician")
 	public String addMusicianGet(Model model) {
-		Iterable<Instrument> instruments =instrumentService.findAllInstruments();
+		//Iterable<Instrument> instruments =instrumentService.findAllInstruments();
+		Set<Instrument> woodwinds = instrumentService.findByInstFamilyFamily("woodwinds");
+		Set<Instrument> strings = instrumentService.findByInstFamilyFamily("strings");
+		Set<Instrument> brass = instrumentService.findByInstFamilyFamily("brass");
+		Set<Instrument> keyboards = instrumentService.findByInstFamilyFamily("keyboards");
+		Set<Instrument> percussions = instrumentService.findByInstFamilyFamily("percussion");
+		
 		Set<Long> instID = new HashSet<>();
 		model.addAttribute("instID", instID);
-		model.addAttribute("instruments", instruments);
+		//model.addAttribute("instruments", instruments);
+		model.addAttribute("woodwinds", woodwinds);
+		model.addAttribute("strings", strings);
+		model.addAttribute("brass", brass);
+		model.addAttribute("keyboards", keyboards);
+		model.addAttribute("percussions", percussions);
 		model.addAttribute("musician", new Musician());
 		model.addAttribute("contact", new Contact());
 		
@@ -105,6 +117,9 @@ public class AdditionsController {
 		}
 		musician.getContacts().add(contact);
 		musicianService.saveMusician(musician);
+		Iterable<Musician> musicians = musicianService.findAll();
+		model.addAttribute("musicians", musicians);
+		
 		return "lists/musicianList";
 	}
 	
@@ -126,15 +141,30 @@ public class AdditionsController {
 	
 	@GetMapping(value="add/addProject")
 	public String addProjectGet(Model model) {
+		Iterable<Client> clients = clientService.findAll();
 		
 		model.addAttribute("project", new Project());
+		model.addAttribute("clients", clients);
 		
 		return "add/addProject";
 	}
 	
 	@PostMapping(value="add/addProject")
-	public String addProjectPost(@Valid Project project, BindingResult result, Model model) {
+	public String addProjectPost(@Valid Project project, BindingResult result, @RequestParam("clientID") String clientID, Model model) {
+		if (result.hasFieldErrors()) {
+			System.out.println("field errors");
+		}else {
+		
+		Long realID = Long.parseLong(clientID);
+		Client client = clientService.findById(realID).orElseThrow(() -> new RuntimeException("No such client!"));
+		project.setClient(client);
+		System.out.println(project.getName());
 		projectService.saveProject(project);
+		
+		Iterable<Project> projects = projectService.findAll();
+		
+		model.addAttribute("projects", projects);
+		}
 		return "lists/projectList";
 	}
 	
