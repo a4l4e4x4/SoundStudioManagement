@@ -13,12 +13,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.tfe.soundstudio.model.Client;
+import com.tfe.soundstudio.model.Contact;
 import com.tfe.soundstudio.model.InstFamily;
 import com.tfe.soundstudio.model.Instrument;
+import com.tfe.soundstudio.model.Musician;
 import com.tfe.soundstudio.model.ReadFile;
 import com.tfe.soundstudio.model.Track;
 import com.tfe.soundstudio.model.TrackObject;
+import com.tfe.soundstudio.service.ClientService;
 import com.tfe.soundstudio.service.InstrumentService;
+import com.tfe.soundstudio.service.MusicianService;
 import com.tfe.soundstudio.service.TrackService;
 
 /**
@@ -31,9 +36,14 @@ public class HomeController {
 	
 	private final InstrumentService instService;
 	private final TrackService trackService;
-	public HomeController(InstrumentService instService, TrackService trackService) {
+	private final ClientService clientService;
+	private final MusicianService musicianService;
+	
+	public HomeController(InstrumentService instService, TrackService trackService, ClientService clientService, MusicianService musicianService ) {
 		this.instService = instService;
 		this.trackService = trackService;
+		this.clientService = clientService;
+		this.musicianService = musicianService;
 	}
 	
 	// Inject via application.properties
@@ -315,6 +325,166 @@ public class HomeController {
     	Iterable<Instrument> instsToSave = instruments;
     	instService.saveInstruments(instsToSave);
     	
+    	return "home";
+    }
+    
+    @RequestMapping(value="addAllClients")
+    public String addAllClients() {
+    	List<Client> clients = new ArrayList<>();
+    	
+    	Client me = new Client();
+    	me.setName("me");
+    	me.setDescription("MyProjects");
+    	me.setWebsite("www.alex.com");
+    	Contact mec = new Contact();
+    	mec.setContactname("alex");
+    	mec.setContactsurname("tolkmitt");
+    	mec.setAddress("Rue Artan, 110");
+    	mec.setCity("Brussels");
+    	mec.setPostcode("1030");
+    	mec.setCity("Brussels");
+    	mec.setEmail("alex.tolkmitt@gmail.com");
+    	mec.setPhone("0484 919413");
+    	
+    	me.getContacts().add(mec);
+    	clients.add(me);
+    		
+    	Client laVita = new Client();
+    	laVita.setName("La Vita e Media");
+    	laVita.setDescription("Advertisement");
+    	laVita.setWebsite("www.lavitaemedia.be");
+    	Contact laVitacont = new Contact();
+    	laVitacont.setContactname("Christian");
+    	laVitacont.setContactsurname("Rodrigues");
+    	laVitacont.setAddress("Rue Neuve, 11");
+    	laVitacont.setCity("Brussels");
+    	laVitacont.setCountry("Belgium");
+    	laVitacont.setEmail("christian@lavitaemedia.be");
+    	laVitacont.setPhone("+32 475 707 369");
+    	
+    	laVita.getContacts().add(laVitacont);
+    	clients.add(laVita);
+    	
+    	Client fred = new Client();
+    	fred.setName("Frederic");
+    	fred.setDescription("Film");
+    	fred.setWebsite("www.inguz.be");
+    	Contact fredc = new Contact();
+    	fredc.setContactname("Frederic");
+    	fredc.setContactsurname("Fournelle");
+    	fredc.setAddress("Rue de la Paix, 21");
+    	fredc.setCity("Brussels");
+    	fredc.setPostcode("1030");
+    	fredc.setCountry("Belgium");
+    	fredc.setEmail("fred@inguz.be");
+    	fredc.setPhone("+32 487 455663");
+    	
+    	fred.getContacts().add(fredc);
+    	clients.add(fred);
+    	
+    	Client isfce = new Client();
+    	isfce.setName("ISFCE");
+    	isfce.setDescription("Institut Supérieur de Formation Continue d'Etterbeek");
+    	isfce.setWebsite("www.isfce.org");
+    	Contact isfc = new Contact();
+    	isfc.setContactname("Didier");
+    	isfc.setContactsurname("Van Oudenhove");
+    	isfc.setAddress("Rue Joseph Buedts 14");
+    	isfc.setPostcode("1040");
+    	isfc.setCity("Brussels");
+    	isfc.setPhone("02.647.25.69");
+    	isfc.setEmail("didier@isfce.org");
+    	
+    	isfce.getContacts().add(isfc);
+    	clients.add(isfce);
+    	
+    	
+    	Iterable<Client> clientsToSave = clients;
+    	clientService.saveAllClients(clientsToSave);
+    	return "home";
+    }
+    
+    @RequestMapping(value="addAllMusicians")
+    public String addAllMusicians() {
+    	
+    	List<Musician> musicians = new ArrayList<>();
+    	
+    	Musician a = new Musician();
+    	a.setName("Edmundo");
+    	a.setSurname("Carneiro");
+    	Contact b = new Contact();
+    	b.setContactname("Edmundo");
+    	b.setContactsurname("Carneiro");
+    	b.setCity("Paris");
+    	b.setCountry("France");
+    	
+    	a.getContacts().add(b);
+    	musicians.add(a);
+    	
+    	Musician c = new Musician();
+    	c.setName("Alex");
+    	c.setSurname("Tolkmitt");
+    	Contact d = new Contact();
+    	d.setContactname("Alex");
+    	d.setContactsurname("Tolkmitt");
+    	d.setCity("Brussels");
+    	d.setCountry("Belgium");
+    	
+    	c.getContacts().add(d);
+    	musicians.add(c);
+    	
+    	Musician e = new Musician();
+    	e.setName("Clovis");
+    	e.setSurname("Camargo");
+    	Contact f = new Contact();
+    	f.setContactname("Clovis");
+    	f.setContactsurname("Camargo");
+    	f.setCity("Sao Paulo");
+    	f.setCountry("Brazil");
+    	
+    	e.getContacts().add(f);
+    	musicians.add(e);
+    	
+    	Musician g = new Musician();
+    	g.setName("Cacau");
+    	g.setSurname("de Queiroz");
+    	Contact h = new Contact();
+    	h.setContactname("Cláudio");
+    	h.setContactsurname("de Queiroz");
+    	h.setCity("Paris");
+    	h.setCountry("France");
+    	
+    	g.getContacts().add(h);
+    	musicians.add(g);
+    	
+    	Musician i = new Musician();
+    	i.setName("Klaus");
+    	i.setSurname("Schmidt");
+    	Contact j = new Contact();
+    	j.setContactname("Klaus");
+    	j.setContactsurname("Schmidt");
+    	j.setCity("New York");
+    	j.setCountry("USA");
+    	
+    	i.getContacts().add(j);
+    	musicians.add(i);
+    	
+    	Musician k = new Musician();
+    	k.setName("Didier");
+    	k.setSurname("Van Oudenhove");
+    	Contact l = new Contact();
+    	l.setContactname("Didier");
+    	l.setContactsurname("Van Oudenhove");
+    	l.setCity("Brussels");
+    	l.setCountry("Belgium");
+    	
+    	k.getContacts().add(l);
+    	musicians.add(k);
+    	
+    	
+    	
+    	Iterable<Musician> musToSave = musicians;
+    	musicianService.saveAllMusicians(musToSave);
     	return "home";
     }
 

@@ -24,6 +24,7 @@ public class Client {
 	
 	private String name;
 	private String description;
+	private String website;
 	
 	@Relationship(type="HAS_CONTACT", direction=Relationship.OUTGOING)
 	private List<Contact> contacts = new ArrayList<>();
@@ -33,11 +34,13 @@ public class Client {
 	
 	public Client() {}
 
-	public Client(Long id, String name, String description, List<Contact> contacts, List<Project> projects) {
+	public Client(Long id, String name, String description, String website, List<Contact> contacts,
+			List<Project> projects) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.description = description;
+		this.website = website;
 		this.contacts = contacts;
 		this.projects = projects;
 	}
@@ -66,6 +69,14 @@ public class Client {
 		this.description = description;
 	}
 
+	public String getWebsite() {
+		return website;
+	}
+
+	public void setWebsite(String website) {
+		this.website = website;
+	}
+
 	public List<Contact> getContacts() {
 		return contacts;
 	}
@@ -82,8 +93,6 @@ public class Client {
 		this.projects = projects;
 	}
 
-	
-	
 	
 
 }

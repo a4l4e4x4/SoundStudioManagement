@@ -35,4 +35,9 @@ public class MusicianService {
 		musicianRepo.save(musician, 5);
 	}
 
+	public void saveAllMusicians(Iterable<Musician> musicians) {
+		musicianRepo.save(musicians,  5);
+		
+	}
+
 }

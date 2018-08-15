@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tfe.soundstudio.model.Client;
-import com.tfe.soundstudio.model.Instrument;
 import com.tfe.soundstudio.repository.ClientRepo;
 
 /**
@@ -32,6 +31,11 @@ public class ClientService {
 		clientRepo.save(client, 5);
 	}
 
+	@Transactional
+	public void saveAllClients(Iterable<Client> clients) {
+		clientRepo.save(clients, 10);
+	}
+	
 	@Transactional
 	public Iterable<Client> findAll() {
 		Iterable<Client> result = clientRepo.findAll();
