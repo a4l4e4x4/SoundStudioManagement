@@ -16,11 +16,13 @@ import org.neo4j.ogm.annotation.Relationship;
  *
  */
 @NodeEntity(label="Client")
+
 public class Client {
 	
 	@Id
 	@GeneratedValue
 	private Long id;
+	
 	
 	private String name;
 	private String description;

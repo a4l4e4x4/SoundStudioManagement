@@ -3,6 +3,8 @@
  */
 package com.tfe.soundstudio.service;
 
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,6 +40,16 @@ public class MusicianService {
 	public void saveAllMusicians(Iterable<Musician> musicians) {
 		musicianRepo.save(musicians,  5);
 		
+	}
+
+	public Optional<Musician> findById(Long id) {
+		Optional<Musician> result = musicianRepo.findById(id, 4);
+		return result;
+	}
+
+	public void deleteById(Long id) {
+		musicianRepo.deleteById(id);
+
 	}
 
 }

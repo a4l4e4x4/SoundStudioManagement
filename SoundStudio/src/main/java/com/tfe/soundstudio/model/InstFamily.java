@@ -8,6 +8,7 @@ import java.util.Set;
 
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
+import org.neo4j.ogm.annotation.Index;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 
@@ -21,7 +22,7 @@ public class InstFamily {
 	@Id
 	@GeneratedValue
 	private Long id;
-	
+	@Index(unique=true)
 	private String family;
 	
 	@Relationship(type = "BELONGS_TO", direction=Relationship.INCOMING)

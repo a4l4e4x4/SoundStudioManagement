@@ -3,10 +3,7 @@
  */
 package com.tfe.soundstudio.controller;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 import javax.validation.Valid;
@@ -15,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -71,6 +67,12 @@ public class AdditionsController {
 	
 	@PostMapping(value="add/addClient")
 	public String addClientPost(@Valid Client client, BindingResult result, @Valid Contact contact, BindingResult result2, Model model) {
+		Iterable<Client> allClients = clientService.findAll();
+		for (Client client2 : allClients) {
+			if(client.getName().equalsIgnoreCase(client2.getName())){
+				return "redirect:/lists/clientList";
+			}
+		}
 		
 		client.getContacts().add(contact);
 		clientService.saveClient(client);
@@ -78,17 +80,32 @@ public class AdditionsController {
 	}
 	
 	@GetMapping(value="add/addMusician")
-	public String addMusicianGet(Model model) {
-		//Iterable<Instrument> instruments =instrumentService.findAllInstruments();
+	public String addMusicianGet(@RequestParam(value="musID", required=false) String musID, Model model) {
+		Set<Long> instID = new HashSet<>();
+		/*
+		 * if its an update
+		 * musID get passed
+		 */
+		if (musID != null) {
+			//convert from String to Long
+			Long realID = Long.parseLong(musID);
+			//find the musician 
+			Musician musician = musicianService.findById(realID).orElseThrow(() -> new RuntimeException("No such musician!"));
+			//add the IDs of played instruments
+			musician.getInstruments().forEach(e->instID.add(e.getId()));
+			//add the musician to the model
+			model.addAttribute("existing_musician", musician);
+		}
+
 		Set<Instrument> woodwinds = instrumentService.findByInstFamilyFamily("woodwinds");
 		Set<Instrument> strings = instrumentService.findByInstFamilyFamily("strings");
 		Set<Instrument> brass = instrumentService.findByInstFamilyFamily("brass");
 		Set<Instrument> keyboards = instrumentService.findByInstFamilyFamily("keyboards");
 		Set<Instrument> percussions = instrumentService.findByInstFamilyFamily("percussion");
 		
-		Set<Long> instID = new HashSet<>();
+		
+		
 		model.addAttribute("instID", instID);
-		//model.addAttribute("instruments", instruments);
 		model.addAttribute("woodwinds", woodwinds);
 		model.addAttribute("strings", strings);
 		model.addAttribute("brass", brass);
@@ -101,12 +118,20 @@ public class AdditionsController {
 	}
 	
 	@PostMapping(value="add/addMusician")
-	public String addMusicianPost(@Valid Musician musician, BindingResult result, @Valid Contact contact, BindingResult result2, @RequestParam(value="instID", required=false) HashSet<String> instIDs, Model model) {
-		
+	public String addMusicianPost(@Valid Musician musician, BindingResult result, @Valid Contact contact, BindingResult result2, @RequestParam(value="instID", required=false) HashSet<String> instIDs, @RequestParam(value="musID", required=false) String musID, Model model) {
+		/*
+		 * if existing musicians ID is passed
+		 * update musician
+		 */
+		if(musID != null) {
+			Long realID = Long.parseLong(musID);
+			musicianService.deleteById(realID);
+			
+		}
 		if(instIDs != null) {
 		for(String id : instIDs) {
 			Long realID = Long.parseLong(id);
-			Instrument inst = instrumentService.findById(realID).orElseThrow(() -> new RuntimeException("No instrument!"));
+			Instrument inst = instrumentService.findById(realID).orElseThrow(() -> new RuntimeException("No such musician!"));
 			
 			musician.getInstruments().add(inst);
 			//System.out.println(id);
