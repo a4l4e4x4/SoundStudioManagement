@@ -24,9 +24,9 @@
 						<li class="breadcrumb-item active">Musicians List</li>
 					</ol>
 
-				<form
+				<!-- <form
 					class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0"
-					method="GET" th:action="@{/add/addMusician}" enctype="multipart/form-data" th:name="musID">
+					method="GET" enctype="multipart/form-data" th:name="musID">
 
 					<!-- <input class="form-control" type="submit" value="Submit" />  -->
 
@@ -82,7 +82,16 @@
 													</th:block>
 												</ul>
 											</div></td>
-											<td><button class="form-control" type="submit"  th:text="Edit" th:name="musID" th:value="${musician.id}" th:action="@{/add/addMusician}" >Edit</button></td>
+											<td>
+											 <form
+					class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0"
+					method="GET" th:action="@{/add/addMusician}" enctype="multipart/form-data" th:name="musID">
+					<button class="form-control" type="submit"  th:text="Edit" th:name="musID" th:value="${musician.id}" th:action="@{/add/addMusician}" >Edit</button>
+					</form></td>
+											<td><form method="POST" th:action="@{/deleteMusician}" enctype="multipart/form-data" th:name="musID">
+											<button class="form-control" type="submit"  th:text="Delete" th:name="musID" th:value="${musician.id}" th:action="@{/deleteMusician}" >Delete</button>
+											</form>
+											</td>
 										</tr>
 									</th:block>
 									
@@ -90,8 +99,8 @@
 							</table>
 						</div>
 					</div>
-					<!-- <input class="form-control" type="submit" value="Submit" />  -->
-				</form>
+					<!-- </form> <input class="form-control" type="submit" value="Submit" />  -->
+				
 			</div>
 			
 			
