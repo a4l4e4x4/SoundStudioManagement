@@ -63,12 +63,12 @@
 									<th:block th:each="engineer : ${engineers}">
 										<td th:text="${engineer.name}"></td>
 										<td th:text="${engineer.surname}"></td>
-										<td th:text="${engineer.contacts[0].email}"></td>
-										<td th:text="${engineer.contacts[0].phone}"></td>
-										<td th:text="${engineer.contacts[0].address}"></td>
-										<td th:text="${engineer.contacts[0].city}"></td>
-										<td th:text="${engineer.contacts[0].country}"></td>
-										<td th:text="${engineer.contacts[0].postcode}"></td>
+										<td th:text="${engineer.contact.email}"></td>
+										<td th:text="${engineer.contact.phone}"></td>
+										<td th:text="${engineer.contact.address}"></td>
+										<td th:text="${engineer.contact.city}"></td>
+										<td th:text="${engineer.contact.country}"></td>
+										<td th:text="${engineer.contact.postcode}"></td>
 										<td class="col-md-4"><div class="dropdown">
 												<button class="btn dropdown-toggle" type="button"
 													data-toggle="dropdown">

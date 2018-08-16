@@ -26,9 +26,9 @@
 
 				<form
 					class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0"
-					method="POST" action="/addMusician" enctype="multipart/form-data">
+					method="GET" th:action="@{/add/addMusician}" enctype="multipart/form-data" th:name="musID">
 
-					<input class="form-control" type="submit" value="Submit" />
+					<!-- <input class="form-control" type="submit" value="Submit" />  -->
 
 					<div class="card-body">
 						<div class="table-responsive">
@@ -65,12 +65,12 @@
 									<tr>
 										<td th:text="${musician.name}"></td>
 										<td th:text="${musician.surname}"></td>
-										<td th:text="${musician.contacts[0].email}"></td>
-										<td th:text="${musician.contacts[0].phone}"></td>
-										<td th:text="${musician.contacts[0].address}"></td>
-										<td th:text="${musician.contacts[0].city}"></td>
-										<td th:text="${musician.contacts[0].country}"></td>
-										<td th:text="${musician.contacts[0].postcode}"></td>
+										<td th:text="${musician.contact.email}"></td>
+										<td th:text="${musician.contact.phone}"></td>
+										<td th:text="${musician.contact.address}"></td>
+										<td th:text="${musician.contact.city}"></td>
+										<td th:text="${musician.contact.country}"></td>
+										<td th:text="${musician.contact.postcode}"></td>
 										<td class="col-md-4"><div class="dropdown">
 												<button class="btn dropdown-toggle" type="button"
 													data-toggle="dropdown">
@@ -82,6 +82,7 @@
 													</th:block>
 												</ul>
 											</div></td>
+											<td><button class="form-control" type="submit"  th:text="Edit" th:name="musID" th:value="${musician.id}" th:action="@{/add/addMusician}" >Edit</button></td>
 										</tr>
 									</th:block>
 									
@@ -89,7 +90,7 @@
 							</table>
 						</div>
 					</div>
-					<input class="form-control" type="submit" value="Submit" />
+					<!-- <input class="form-control" type="submit" value="Submit" />  -->
 				</form>
 			</div>
 			

@@ -74,7 +74,7 @@ public class AdditionsController {
 			}
 		}
 		
-		client.getContacts().add(contact);
+		client.setContact(contact);
 		clientService.saveClient(client);
 		return "redirect:/lists/clientList";
 	}
@@ -87,6 +87,7 @@ public class AdditionsController {
 		 * musID get passed
 		 */
 		if (musID != null) {
+			System.out.println(musID);
 			//convert from String to Long
 			Long realID = Long.parseLong(musID);
 			//find the musician 
@@ -95,6 +96,8 @@ public class AdditionsController {
 			musician.getInstruments().forEach(e->instID.add(e.getId()));
 			//add the musician to the model
 			model.addAttribute("existing_musician", musician);
+			//pass the ID from musician to update
+			model.addAttribute("musID",  musID);
 		}
 
 		Set<Instrument> woodwinds = instrumentService.findByInstFamilyFamily("woodwinds");
@@ -119,27 +122,42 @@ public class AdditionsController {
 	
 	@PostMapping(value="add/addMusician")
 	public String addMusicianPost(@Valid Musician musician, BindingResult result, @Valid Contact contact, BindingResult result2, @RequestParam(value="instID", required=false) HashSet<String> instIDs, @RequestParam(value="musID", required=false) String musID, Model model) {
+		Set<Instrument> instList = new HashSet<>();
+		/*
+		 * if list of played instruments is passed, create instrument list
+		 */
+		if(instIDs != null) {
+			for(String id : instIDs) {
+				Long realID = Long.parseLong(id);
+				Instrument inst = instrumentService.findById(realID).orElseThrow(() -> new RuntimeException("No such musician!"));
+				
+				instList.add(inst);
+				//System.out.println(id);
+			}
+		}
+		
 		/*
 		 * if existing musicians ID is passed
 		 * update musician
 		 */
 		if(musID != null) {
 			Long realID = Long.parseLong(musID);
-			musicianService.deleteById(realID);
+			Musician old_musician = musicianService.findById(realID).orElseThrow(()-> new RuntimeException("Wrong musician ID" + realID));
+			old_musician.setInstruments(instList);
+			old_musician.setContact(contact);
+			old_musician.setName(musician.getName());
+			old_musician.setSurname(musician.getSurname());
+			System.out.println(musID);
+			System.out.println(old_musician.getContact().getContactname());
+			musicianService.saveMusician(old_musician);
 			
+		}else {
+			/*
+			 * if musician doesn't exist, save musician with played instruments
+			 */
+			musician.setContact(contact);
+			musicianService.saveMusician(musician);
 		}
-		if(instIDs != null) {
-		for(String id : instIDs) {
-			Long realID = Long.parseLong(id);
-			Instrument inst = instrumentService.findById(realID).orElseThrow(() -> new RuntimeException("No such musician!"));
-			
-			musician.getInstruments().add(inst);
-			//System.out.println(id);
-		}
-			
-		}
-		musician.getContacts().add(contact);
-		musicianService.saveMusician(musician);
 		
 		return "redirect:/lists/musicianList";
 	}
@@ -155,7 +173,7 @@ public class AdditionsController {
 	
 	@PostMapping(value="add/addEngineer")
 	public String addEngineerPost(@Valid Engineer engineer, BindingResult result, @Valid Contact contact, BindingResult result2, Model model) {
-		engineer.getContacts().add(contact);
+		engineer.setContact(contact);
 		engineerService.saveEngineer(engineer);
 		return "redirect:/lists/engineerList";
 	}

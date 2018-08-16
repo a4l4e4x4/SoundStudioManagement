@@ -27,7 +27,7 @@ public class Musician {
 	private String surname;
 	
 	@Relationship(type="HAS_CONTACT", direction=Relationship.OUTGOING)
-	private List<Contact> contacts = new ArrayList<>();
+	private Contact contact = new Contact();
 	
 	@Relationship(type="PLAYS_AN", direction=Relationship.OUTGOING)
 	private Set<Instrument> instruments = new HashSet<>();
@@ -40,13 +40,13 @@ public class Musician {
 	
 	public Musician() {}
 
-	public Musician(Long id, String name, String surname, List<Contact> contacts, Set<Instrument> instruments,
+	public Musician(Long id, String name, String surname, Contact contact, Set<Instrument> instruments,
 			List<TrackObject> trackObjects, List<MusicianFee> musicianFee) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.surname = surname;
-		this.contacts = contacts;
+		this.contact = contact;
 		this.instruments = instruments;
 		this.trackObjects = trackObjects;
 		this.musicianFee = musicianFee;
@@ -76,12 +76,12 @@ public class Musician {
 		this.surname = surname;
 	}
 
-	public List<Contact> getContacts() {
-		return contacts;
+	public Contact getContact() {
+		return contact;
 	}
 
-	public void setContacts(List<Contact> contacts) {
-		this.contacts = contacts;
+	public void setContact(Contact contact) {
+		this.contact = contact;
 	}
 
 	public Set<Instrument> getInstruments() {
@@ -106,8 +106,8 @@ public class Musician {
 
 	public void setMusicianFee(List<MusicianFee> musicianFee) {
 		this.musicianFee = musicianFee;
-	};
-	
+	}
+
 	
 
 

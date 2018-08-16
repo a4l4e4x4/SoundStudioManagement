@@ -29,21 +29,20 @@ public class Client {
 	private String website;
 	
 	@Relationship(type="HAS_CONTACT", direction=Relationship.OUTGOING)
-	private List<Contact> contacts = new ArrayList<>();
+	private Contact contact = new Contact();
 	
 	@Relationship(type="HAS_A", direction=Relationship.OUTGOING)
 	private List<Project> projects = new ArrayList<>();
 	
 	public Client() {}
 
-	public Client(Long id, String name, String description, String website, List<Contact> contacts,
-			List<Project> projects) {
+	public Client(Long id, String name, String description, String website, Contact contact, List<Project> projects) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.website = website;
-		this.contacts = contacts;
+		this.contact = contact;
 		this.projects = projects;
 	}
 
@@ -79,12 +78,12 @@ public class Client {
 		this.website = website;
 	}
 
-	public List<Contact> getContacts() {
-		return contacts;
+	public Contact getContact() {
+		return contact;
 	}
 
-	public void setContacts(List<Contact> contacts) {
-		this.contacts = contacts;
+	public void setContact(Contact contact) {
+		this.contact = contact;
 	}
 
 	public List<Project> getProjects() {

@@ -34,45 +34,67 @@
 										
 										<tr>
 											<th>Musician Name</th>
-											<td><input type="text" th:field="${musician.name}" /></td>
+											<td>
+											<input th:if="${existing_musician != null}" type="text" id="name" name="name" th:value="${existing_musician.name}" />
+											<input th:unless="${existing_musician != null}" type="text" th:field="${musician.name}" />
+											</td>
 										</tr>
 										<tr>
 											<th>Musician Surname</th>
-											<td><input type="text" th:field="${musician.surname}" /></td>
+											<td><!-- <input type="text" th:field="${musician.surname}" /> -->
+											<input th:if="${existing_musician != null}" type="text" id="surname" name="surname" th:value="${existing_musician.surname}" />
+											<input th:unless="${existing_musician != null}" type="text" th:field="${musician.surname}" />
+											</td>
 										</tr>
 										<tr>
 											<th>Contact Name</th>
-											<td><input type="text" th:field="${contact.contactname}" /></td>
+											<!-- <td><input type="text" th:field="${contact.contactname}" /></td>  -->
+											<td>
+											<input th:if="${existing_musician != null}" type="text" id="contact" name="contactname" th:value="${existing_musician.contact.contactname}" />
+											<input th:unless="${existing_musician != null}" type="text" th:field="${contact.contactname}" />
+											</td>
 										</tr>
 										<tr>
-											<th>Contact Surame</th>
-											<td><input type="text"
-												th:field="${contact.contactsurname}" /></td>
+											<th>Contact Surname</th>
+											<td><input th:if="${existing_musician != null}" type="text" id="contact" name="contactsurname" th:value="${existing_musician.contact.contactsurname}" />
+											<input th:unless="${existing_musician != null}" type="text" th:field="${contact.contactsurname}" /></td>
 										</tr>
 
 										<tr>
 											<th>Contact Phone</th>
-											<td><input type="text" th:field="${contact.phone}" /></td>
+											<td>
+											<input th:if="${existing_musician != null}" type="text" id="contact" name="phone" th:value="${existing_musician.contact.phone}" />
+											<input th:unless="${existing_musician != null}" type="text" th:field="${contact.phone}" /></td>
 										</tr>
 										<tr>
 											<th>Contact Email</th>
-											<td><input type="text" th:field="${contact.email}" /></td>
+											<td>
+											<input th:if="${existing_musician != null}" type="text" id="contact" name="email" th:value="${existing_musician.contact.email}" />
+											<input th:unless="${existing_musician != null}" type="text" th:field="${contact.email}" /></td>
 										</tr>
 										<tr>
 											<th>Contact Address</th>
-											<td><input type="text" th:field="${contact.address}" /></td>
+											<td>
+											<input th:if="${existing_musician != null}" type="text" id="contact" name="address" th:value="${existing_musician.contact.address}" />
+											<input th:unless="${existing_musician != null}" type="text" th:field="${contact.address}" /></td>
 										</tr>
 										<tr>
 											<th>Contact Postcode</th>
-											<td><input type="text" th:field="${contact.postcode}" /></td>
+											<td>
+											<input th:if="${existing_musician != null}" type="text" id="contact" name="postcode" th:value="${existing_musician.contact.postcode}" />
+											<input th:unless="${existing_musician != null}" type="text" th:field="${contact.postcode}" /></td>
 										</tr>
 										<tr>
 											<th>Contact City</th>
-											<td><input type="text" th:field="${contact.city}" /></td>
+											<td>
+											<input th:if="${existing_musician != null}" type="text" id="contact" name="city" th:value="${existing_musician.contact.city}" />
+											<input th:unless="${existing_musician != null}" type="text" th:field="${contact.city}" /></td>
 										</tr>
 										<tr>
 											<th>Contact Country</th>
-											<td><input type="text" th:field="${contact.country}" /></td>
+											<td>
+											<input th:if="${existing_musician != null}" type="text" id="contact" name="country" th:value="${existing_musician.contact.country}" />
+											<input th:unless="${existing_musician != null}" type="text" th:field="${contact.country}" /></td>
 										</tr>
 										<tr></tr>
 										
@@ -84,7 +106,7 @@
 							</div>
 						</div>
 						
-						
+						<input th:if="${existing_musician != null}" type="hidden" th:name="musID" th:value="${musID}">
 											<input class="form-control" type="submit"
 												value="Submit" />
 										
@@ -104,8 +126,9 @@
 										<tr>
 											<th>Strings</th>
 											<th:block th:each="string : ${strings}">
-												<td><input type="checkbox" th:name="instID"
-													th:text="${string.instName}" th:value="${string.id}" /></td>
+											<!-- th:checked="${#set.contains(instID, string.id)}" -->
+												<td><input th:if="${instID != null}" type="checkbox" th:name="instID"
+													th:text="${string.instName}" th:checked="${#sets.contains(instID, string.id)}" th:value="${string.id}" /></td>
 											</th:block>
 										</tr>
 
@@ -113,21 +136,21 @@
 											<th>Woodwinds</th>
 											<th:block th:each="woodwind : ${woodwinds}">
 												<td><input type="checkbox" th:name="instID"
-													th:text="${woodwind.instName}" th:value="${woodwind.id}" /></td>
+													th:text="${woodwind.instName}" th:checked="${#sets.contains(instID, woodwind.id)}" th:value="${woodwind.id}" /></td>
 											</th:block>
 										</tr>
 										<tr>
 											<th>Brass</th>
 											<th:block th:each="bras : ${brass}">
 												<td><input type="checkbox" th:name="instID"
-													th:text="${bras.instName}" th:value="${bras.id}" /></td>
+													th:text="${bras.instName}" th:checked="${#sets.contains(instID, bras.id)}" th:value="${bras.id}" /></td>
 											</th:block>
 										</tr>
 										<tr>
 											<th>Keyboard</th>
 											<th:block th:each="keyboard : ${keyboards}">
 												<td><input type="checkbox" th:name="instID"
-													th:text="${keyboard.instName}" th:value="${keyboard.id}" /></td>
+													th:text="${keyboard.instName}" th:checked="${#sets.contains(instID, keyboard.id)}" th:value="${keyboard.id}" /></td>
 											</th:block>
 										</tr>
 										<tr>

@@ -346,7 +346,7 @@ public class HomeController {
     	mec.setEmail("alex.tolkmitt@gmail.com");
     	mec.setPhone("0484 919413");
     	
-    	me.getContacts().add(mec);
+    	me.setContact(mec);
     	clients.add(me);
     		
     	Client laVita = new Client();
@@ -362,7 +362,7 @@ public class HomeController {
     	laVitacont.setEmail("christian@lavitaemedia.be");
     	laVitacont.setPhone("+32 475 707 369");
     	
-    	laVita.getContacts().add(laVitacont);
+    	laVita.setContact(laVitacont);
     	clients.add(laVita);
     	
     	Client fred = new Client();
@@ -379,7 +379,7 @@ public class HomeController {
     	fredc.setEmail("fred@inguz.be");
     	fredc.setPhone("+32 487 455663");
     	
-    	fred.getContacts().add(fredc);
+    	fred.setContact(fredc);
     	clients.add(fred);
     	
     	Client isfce = new Client();
@@ -395,7 +395,7 @@ public class HomeController {
     	isfc.setPhone("02.647.25.69");
     	isfc.setEmail("didier@isfce.org");
     	
-    	isfce.getContacts().add(isfc);
+    	isfce.setContact(isfc);
     	clients.add(isfce);
     	
     	
@@ -418,7 +418,7 @@ public class HomeController {
     	b.setCity("Paris");
     	b.setCountry("France");
     	
-    	a.getContacts().add(b);
+    	a.setContact(b);
     	musicians.add(a);
     	
     	Musician c = new Musician();
@@ -430,7 +430,7 @@ public class HomeController {
     	d.setCity("Brussels");
     	d.setCountry("Belgium");
     	
-    	c.getContacts().add(d);
+    	c.setContact(d);
     	musicians.add(c);
     	
     	Musician e = new Musician();
@@ -442,7 +442,7 @@ public class HomeController {
     	f.setCity("Sao Paulo");
     	f.setCountry("Brazil");
     	
-    	e.getContacts().add(f);
+    	e.setContact(f);
     	musicians.add(e);
     	
     	Musician g = new Musician();
@@ -454,7 +454,7 @@ public class HomeController {
     	h.setCity("Paris");
     	h.setCountry("France");
     	
-    	g.getContacts().add(h);
+    	g.setContact(h);
     	musicians.add(g);
     	
     	Musician i = new Musician();
@@ -466,7 +466,7 @@ public class HomeController {
     	j.setCity("New York");
     	j.setCountry("USA");
     	
-    	i.getContacts().add(j);
+    	i.setContact(j);
     	musicians.add(i);
     	
     	Musician k = new Musician();
@@ -478,7 +478,7 @@ public class HomeController {
     	l.setCity("Brussels");
     	l.setCountry("Belgium");
     	
-    	k.getContacts().add(l);
+    	k.setContact(l);
     	musicians.add(k);
     	
     	
