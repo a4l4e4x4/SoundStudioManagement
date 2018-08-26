@@ -143,6 +143,7 @@ public class AdditionsController {
 		if(musID != null) {
 			Long realID = Long.parseLong(musID);
 			Musician old_musician = musicianService.findById(realID).orElseThrow(()-> new RuntimeException("Wrong musician ID" + realID));
+			old_musician.setInstruments(new HashSet<>());
 			old_musician.setInstruments(instList);
 			old_musician.setContact(contact);
 			old_musician.setName(musician.getName());

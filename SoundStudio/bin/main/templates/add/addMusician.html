@@ -157,7 +157,7 @@
 											<th>Percussion</th>
 											<th:block th:each="percussion : ${percussions}">
 												<td><input type="checkbox" th:name="instID"
-													th:text="${percussion.instName}"
+													th:text="${percussion.instName}" th:checked="${#sets.contains(instID, percussion.id)}"
 													th:value="${percussion.id}" /></td>
 											</th:block>
 										</tr>

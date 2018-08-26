@@ -44,6 +44,8 @@
 									<th>Postcode</th>
 									<th>Country</th>
 									<th>Plays Instruments</th>
+									<th>Edit Musician</th>
+									<th>Delete Musician</th>
 								</tr>
 							</thead>
 							<tfoot>
@@ -57,6 +59,8 @@
 									<th>Postcode</th>
 									<th>Country</th>
 									<th>Plays Instruments</th>
+									<th>Edit Musician</th>
+									<th>Delete Musician</th>
 								</tr>
 							</tfoot>
 							<tbody>
@@ -69,10 +73,10 @@
 										<td th:text="${musician.contact.phone}"></td>
 										<td th:text="${musician.contact.address}"></td>
 										<td th:text="${musician.contact.city}"></td>
-										<td th:text="${musician.contact.country}"></td>
 										<td th:text="${musician.contact.postcode}"></td>
-										<td class="col-md-4"><div class="dropdown">
-												<button class="btn dropdown-toggle" type="button"
+										<td th:text="${musician.contact.country}"></td>
+										<!-- <td class="col-md-4"><div class="dropdown"> -->
+												<td><button class="btn dropdown-toggle" type="button"
 													data-toggle="dropdown">
 													Instruments <span class="caret"></span>
 												</button>
@@ -81,7 +85,7 @@
 														<li><a th:text="${instrument.instName}"></a>
 													</th:block>
 												</ul>
-											</div></td>
+											</td>
 										<td>
 											<form
 												class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0"
