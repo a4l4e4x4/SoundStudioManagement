@@ -43,8 +43,9 @@ public class MusicianService {
 		
 	}
 
-	public Optional<Musician> findById(Long id) {
-		Optional<Musician> result = musicianRepo.findById(id, 4);
+	public Musician findById(Long id) {
+		Musician result = musicianRepo.findById(id, 4).orElseThrow(()->new RuntimeException("No such musician"));
+		
 		return result;
 	}
 

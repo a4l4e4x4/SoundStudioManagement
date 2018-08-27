@@ -161,6 +161,14 @@
 													th:value="${percussion.id}" /></td>
 											</th:block>
 										</tr>
+										<tr>
+											<th>Voices</th>
+											<th:block th:each="voice : ${voices}">
+												<td><input type="checkbox" th:name="instID"
+													th:text="${voice.instName}" th:checked="${#sets.contains(instID, voice.id)}"
+													th:value="${voice.id}" /></td>
+											</th:block>
+										</tr>
 									</tbody>
 								</table>
 							</div>

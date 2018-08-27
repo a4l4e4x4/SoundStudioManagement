@@ -91,7 +91,7 @@ public class AdditionsController {
 			//convert from String to Long
 			Long realID = Long.parseLong(musID);
 			//find the musician 
-			Musician musician = musicianService.findById(realID).orElseThrow(() -> new RuntimeException("No such musician!"));
+			Musician musician = musicianService.findById(realID);
 			//add the IDs of played instruments
 			musician.getInstruments().forEach(e->instID.add(e.getId()));
 			//add the musician to the model
@@ -105,6 +105,7 @@ public class AdditionsController {
 		Set<Instrument> brass = instrumentService.findByInstFamilyFamily("brass");
 		Set<Instrument> keyboards = instrumentService.findByInstFamilyFamily("keyboards");
 		Set<Instrument> percussions = instrumentService.findByInstFamilyFamily("percussion");
+		Set<Instrument> voices = instrumentService.findByInstFamilyFamily("voices");
 		
 		
 		
@@ -114,6 +115,7 @@ public class AdditionsController {
 		model.addAttribute("brass", brass);
 		model.addAttribute("keyboards", keyboards);
 		model.addAttribute("percussions", percussions);
+		model.addAttribute("voices", voices);
 		model.addAttribute("musician", new Musician());
 		model.addAttribute("contact", new Contact());
 		
@@ -142,7 +144,7 @@ public class AdditionsController {
 		 */
 		if(musID != null) {
 			Long realID = Long.parseLong(musID);
-			Musician old_musician = musicianService.findById(realID).orElseThrow(()-> new RuntimeException("Wrong musician ID" + realID));
+			Musician old_musician = musicianService.findById(realID);
 			old_musician.setInstruments(new HashSet<>());
 			old_musician.setInstruments(instList);
 			old_musician.setContact(contact);

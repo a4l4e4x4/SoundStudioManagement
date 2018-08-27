@@ -43,7 +43,7 @@ public class EditController {
 	@GetMapping(value="edits/editMusician")
 	public String editMusicianGet(String musId, Model model) {
 		Long realID = Long.parseLong(musId);
-		Musician musician = musicianService.findById(realID).orElseThrow(()->new RuntimeException("No such musician"));
+		Musician musician = musicianService.findById(realID);
 		
 		model.addAttribute("musician",  musician);
 		

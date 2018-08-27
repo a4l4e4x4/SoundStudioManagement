@@ -183,6 +183,9 @@ public class HomeController {
     	InstFamily keyboards = new InstFamily();
     	keyboards.setFamily("keyboards");
     	
+    	InstFamily voices = new InstFamily();
+    	voices.setFamily("voices");
+    	
     	
     	//Woodwinds
     	
@@ -319,6 +322,38 @@ public class HomeController {
     	drums.setInstName("drums");
     	drums.setInstFamily(percussion);
     	instruments.add(drums);
+    	
+    	//Voices
+    	
+    	Instrument soprano = new Instrument();
+    	soprano.setInstName("soprano");
+    	soprano.setInstFamily(voices);
+    	instruments.add(soprano);
+    	
+    	Instrument alto = new Instrument();
+    	alto.setInstName("alto");
+    	alto.setInstFamily(voices);
+    	instruments.add(alto);
+    	
+    	Instrument tenor = new Instrument();
+    	tenor.setInstName("tenor");
+    	tenor.setInstFamily(voices);
+    	instruments.add(tenor);
+    	
+    	Instrument baritone = new Instrument();
+    	baritone.setInstName("baritone");
+    	baritone.setInstFamily(voices);
+    	instruments.add(baritone);
+    	
+    	Instrument basso = new Instrument();
+    	basso.setInstName("basso");
+    	basso.setInstFamily(voices);
+    	instruments.add(basso);
+    	
+    	Instrument voice_over = new Instrument();
+    	voice_over.setInstName("voice_over");
+    	voice_over.setInstFamily(voices);
+    	instruments.add(voice_over);
     	
     	
     	
