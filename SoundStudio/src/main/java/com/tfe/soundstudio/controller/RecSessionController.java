@@ -36,6 +36,7 @@ import com.tfe.soundstudio.service.MusicianService;
 import com.tfe.soundstudio.service.PieceService;
 import com.tfe.soundstudio.service.ProjectService;
 import com.tfe.soundstudio.service.RecSessionService;
+import com.tfe.soundstudio.service.TrackService;
 
 /**
  * @author alex tolkmitt
@@ -53,12 +54,15 @@ public class RecSessionController {
 	private final InstrumentService instrumentService;
 	private final ProjectService projectService;
 	private final PieceService pieceService;
+	private final TrackService trackService;
 
 	
 	
+	
+
 	public RecSessionController(RecSessionService recSessionService, ClientService clientService,
 			EngineerService engineerService, MusicianService musicianService, InstrumentService instrumentService,
-			ProjectService projectService, PieceService pieceService) {
+			ProjectService projectService, PieceService pieceService, TrackService trackService) {
 		super();
 		this.recSessionService = recSessionService;
 		this.clientService = clientService;
@@ -67,6 +71,7 @@ public class RecSessionController {
 		this.instrumentService = instrumentService;
 		this.projectService = projectService;
 		this.pieceService = pieceService;
+		this.trackService = trackService;
 	}
 
 	@GetMapping(value="recsession")

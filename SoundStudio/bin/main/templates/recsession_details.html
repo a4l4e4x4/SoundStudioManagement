@@ -51,10 +51,44 @@
 								</tr>
 								
 								</tbody>
-								<!-- <tbody>
+								
+							</table>
+						</div>
+					</div>
+<form
+					class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0"
+					method="POST" action="/savetracks" enctype="multipart/form-data">
+
+					<input class="form-control" type="submit" value="Submit" />
+					
+					<div class="card-body">
+						<div class="table-responsive">
+							<table class="table table-bordered" id="dataTable" width="100%"
+								cellspacing="0">
+								<thead>
+									<tr>
+										<th>Track Number</th>
+										<th>Track Name</th>
+										<th>Object Position</th>
+										<th>Object Name</th>
+										<th>Object Address</th>
+
+									</tr>
+								</thead>
+								<tfoot>
+									<tr>
+										<th>Track Number</th>
+										<th>Track Name</th>
+										<th>Object Position</th>
+										<th>Object Name</th>
+										<th>Object Address</th>
+
+									</tr>
+								</tfoot>
+								<tbody>
 									<th:block th:each="track : ${newtracks}">
 										<tr>
-											
+											<!-- <td th:text="${track.number}"><input th:value="${track.number}"/></td>  -->
 											<td><input th:value="${track.number}" /></td>
 											<td><input th:value="${track.name}" /></td>
 										</tr>
@@ -69,11 +103,12 @@
 											</tr>
 										</th:block>
 									</th:block>
-								</tbody>  -->
+								</tbody>
 							</table>
 						</div>
 					</div>
-
+					<input class="form-control" type="submit" value="Submit" />
+				</form>
 
 				</div>
 			</div>

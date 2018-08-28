@@ -6,8 +6,10 @@ package com.tfe.soundstudio.model;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 
 /**
  * @author alex tolkmitt
@@ -19,26 +21,40 @@ public class ReadFile {
 	private SessionFile sessionFile = new SessionFile();
 	private List<Track> tracks;
 	private List<TrackObject> trackObjects;
+	private Set<TrackObjectFile> trackObjectFiles = null;
+	private Set<String> trObjFileLocation = new HashSet<>();
 	private Track newTrack;
 	private TrackObject newTrackObject;
 	private TrackObject newTrackObject2;
+	private TrackObjectFile trof2 = null;
+	private TrackObjectFile trof3 = null;
 	
 	
 	public ReadFile () {};
 
+	
+
 
 	public ReadFile(String sessionfile_address, SessionFile sessionFile, List<Track> tracks,
-			List<TrackObject> trackObjects, Track newTrack, TrackObject newTrackObject, TrackObject newTrackObject2) {
+			List<TrackObject> trackObjects, Set<TrackObjectFile> trackObjectFiles, Set<String> trObjFileLocation,
+			Track newTrack, TrackObject newTrackObject, TrackObject newTrackObject2, TrackObjectFile trof2,
+			TrackObjectFile trof3) {
 		super();
 		this.sessionfile_address = sessionfile_address;
 		this.sessionFile = sessionFile;
 		this.tracks = tracks;
 		this.trackObjects = trackObjects;
+		this.trackObjectFiles = trackObjectFiles;
+		this.trObjFileLocation = trObjFileLocation;
 		this.newTrack = newTrack;
 		this.newTrackObject = newTrackObject;
 		this.newTrackObject2 = newTrackObject2;
+		this.trof2 = trof2;
+		this.trof3 = trof3;
 	}
 
+
+	
 
 
 	public String getSessionfile_address() {
@@ -46,9 +62,13 @@ public class ReadFile {
 	}
 
 
+
+
 	public void setSessionfile_address(String sessionfile_address) {
 		this.sessionfile_address = sessionfile_address;
 	}
+
+
 
 
 	public SessionFile getSessionFile() {
@@ -56,9 +76,13 @@ public class ReadFile {
 	}
 
 
+
+
 	public void setSessionFile(SessionFile sessionFile) {
 		this.sessionFile = sessionFile;
 	}
+
+
 
 
 	public List<Track> getTracks() {
@@ -66,9 +90,13 @@ public class ReadFile {
 	}
 
 
+
+
 	public void setTracks(List<Track> tracks) {
 		this.tracks = tracks;
 	}
+
+
 
 
 	public List<TrackObject> getTrackObjects() {
@@ -76,9 +104,41 @@ public class ReadFile {
 	}
 
 
+
+
 	public void setTrackObjects(List<TrackObject> trackObjects) {
 		this.trackObjects = trackObjects;
 	}
+
+
+
+
+	public Set<TrackObjectFile> getTrackObjectFiles() {
+		return trackObjectFiles;
+	}
+
+
+
+
+	public void setTrackObjectFiles(Set<TrackObjectFile> trackObjectFiles) {
+		this.trackObjectFiles = trackObjectFiles;
+	}
+
+
+
+
+	public Set<String> getTrObjFileLocation() {
+		return trObjFileLocation;
+	}
+
+
+
+
+	public void setTrObjFileLocation(Set<String> trObjFileLocation) {
+		this.trObjFileLocation = trObjFileLocation;
+	}
+
+
 
 
 	public Track getNewTrack() {
@@ -86,9 +146,13 @@ public class ReadFile {
 	}
 
 
+
+
 	public void setNewTrack(Track newTrack) {
 		this.newTrack = newTrack;
 	}
+
+
 
 
 	public TrackObject getNewTrackObject() {
@@ -96,9 +160,13 @@ public class ReadFile {
 	}
 
 
+
+
 	public void setNewTrackObject(TrackObject newTrackObject) {
 		this.newTrackObject = newTrackObject;
 	}
+
+
 
 
 	public TrackObject getNewTrackObject2() {
@@ -106,9 +174,41 @@ public class ReadFile {
 	}
 
 
+
+
 	public void setNewTrackObject2(TrackObject newTrackObject2) {
 		this.newTrackObject2 = newTrackObject2;
 	}
+
+
+
+
+	public TrackObjectFile getTrof2() {
+		return trof2;
+	}
+
+
+
+
+	public void setTrof2(TrackObjectFile trof2) {
+		this.trof2 = trof2;
+	}
+
+
+
+
+	public TrackObjectFile getTrof3() {
+		return trof3;
+	}
+
+
+
+
+	public void setTrof3(TrackObjectFile trof3) {
+		this.trof3 = trof3;
+	}
+
+
 
 
 	/**
@@ -116,6 +216,7 @@ public class ReadFile {
 	 * @param fileName
 	 */
 	public void ScanIt(String fileName) {
+		trackObjectFiles = new HashSet<>();
 		try {
 			File file = new File(fileName);
 
@@ -219,10 +320,57 @@ public class ReadFile {
 						String objectAddress = lineSplit[2].substring(1, lineSplit[2].length() - 1);
 						newTrackObject.setWave(objectAddress);
 						//System.out.println(objectAddress);
+//						
+						//Handling TrackObjectFile 01
+						if (trackObjectFiles.isEmpty()) {
+							TrackObjectFile trof0 = new TrackObjectFile();
+							trof0.setFileLocation(objectAddress);
+							newTrackObject.setTrackObjectFile(trof0);
+							trackObjectFiles.add(trof0);
+							trObjFileLocation.add(objectAddress);
+						}else if (trObjFileLocation.contains(objectAddress)){
+							for (TrackObjectFile trof01 : trackObjectFiles) {
+								if (trof01.getFileLocation().equals(objectAddress)) {
+									newTrackObject.setTrackObjectFile(trof01);
+								} 
+							}
+						}else  if (!trObjFileLocation.contains(objectAddress)){
+									trof2 = new TrackObjectFile();
+									trof2.setFileLocation(objectAddress);
+									newTrackObject.setTrackObjectFile(trof2);
+									trackObjectFiles.add(trof2);
+									trObjFileLocation.add(objectAddress);									
+								}
+
+
 					} else {
+						//if ther is one more space:
 						String objectAddress = lineSplit[3].substring(1, lineSplit[3].length() - 1);
 						newTrackObject.setWave(objectAddress);
 						//System.out.println(objectAddress);
+						
+						//Handling TrackObjectFile 02
+						if (trackObjectFiles.isEmpty()) {
+							TrackObjectFile trof0 = new TrackObjectFile();
+							trof0.setFileLocation(objectAddress);
+							newTrackObject.setTrackObjectFile(trof0);
+							trackObjectFiles.add(trof0);
+							trObjFileLocation.add(objectAddress);
+						}else if (trObjFileLocation.contains(objectAddress)){
+							for (TrackObjectFile trof01 : trackObjectFiles) {
+								if (trof01.getFileLocation().equals(objectAddress)) {
+									newTrackObject.setTrackObjectFile(trof01);
+								} 
+							}
+						}else  if (!trObjFileLocation.contains(objectAddress)){
+									trof2 = new TrackObjectFile();
+									trof2.setFileLocation(objectAddress);
+									newTrackObject.setTrackObjectFile(trof2);
+									trackObjectFiles.add(trof2);
+									trObjFileLocation.add(objectAddress);									
+								}
+						
+						
 					}
 					//add first object from track to track object list
 					/*if (newTrack != null && newTrackObject != null) {
@@ -256,16 +404,68 @@ public class ReadFile {
 						String objectAddress2 = lineSplit2[2].substring(1, lineSplit2[2].length() - 1);
 						newTrackObject2.setWave(objectAddress2);
 						//System.out.println(objectAddress2);
+						
+						//Handles TrackObjectFile 03
+						if (trackObjectFiles.isEmpty()) {
+							TrackObjectFile trof0 = new TrackObjectFile();
+							trof0.setFileLocation(objectAddress2);
+							newTrackObject2.setTrackObjectFile(trof0);
+							trackObjectFiles.add(trof0);
+							trObjFileLocation.add(objectAddress2);
+						}else if (trObjFileLocation.contains(objectAddress2)){
+							for (TrackObjectFile trof01 : trackObjectFiles) {
+								if (trof01.getFileLocation().equals(objectAddress2)) {
+									newTrackObject2.setTrackObjectFile(trof01);
+									System.out.println("ça marche");
+								} 
+							}
+						}else if (!trObjFileLocation.contains(objectAddress2)){
+									trof3 = new TrackObjectFile();
+									trof3.setFileLocation(objectAddress2);
+									newTrackObject2.setTrackObjectFile(trof3);
+									trackObjectFiles.add(trof3);
+									trObjFileLocation.add(objectAddress2);
+									
+								}
+						
+						
 					} else {
 						String objectAddress2 = lineSplit2[3].substring(1, lineSplit2[3].length() - 1);
 						newTrackObject2.setWave(objectAddress2);
-						//System.out.println(objectAddress2);
+						System.out.println("passou no 4");
+						//Handles TrackObjectFile 04
+						if (trackObjectFiles.isEmpty()) {
+							TrackObjectFile trof0 = new TrackObjectFile();
+							trof0.setFileLocation(objectAddress2);
+							newTrackObject2.setTrackObjectFile(trof0);
+							trackObjectFiles.add(trof0);
+							trObjFileLocation.add(objectAddress2);
+						}else if (trObjFileLocation.contains(objectAddress2)){
+							for (TrackObjectFile trof01 : trackObjectFiles) {
+								if (trof01.getFileLocation().equals(objectAddress2)) {
+									newTrackObject2.setTrackObjectFile(trof01);
+									System.out.println("ça marche");
+								} 
+							}
+						}else if (!trObjFileLocation.contains(objectAddress2)){
+									trof3 = new TrackObjectFile();
+									trof3.setFileLocation(objectAddress2);
+									newTrackObject2.setTrackObjectFile(trof3);
+									trackObjectFiles.add(trof3);
+									trObjFileLocation.add(objectAddress2);
+									
+								}
+						
+						
 					}
 					//save subsequent track object to track object list
 					//newTrackObject.getTrackList().add(newTrack);
 					trackObjects.add(newTrackObject2);
 				}
 			}
+			
+			trackObjectFiles.forEach((c)->System.out.println("object" + c.getFileLocation()));
+			trObjFileLocation.forEach((c)->System.out.println("stringset" + c));
 			//close scan
 			sc.close();
 

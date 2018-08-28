@@ -28,20 +28,23 @@ public class TrackObject {
 	@Relationship (type = "IS_IN", direction=Relationship.OUTGOING)
 	private List<Track> trackList = new ArrayList<>();
 	
-	@Relationship (type= "RECORDED_BY", direction=Relationship.OUTGOING)
-	private List<Musician> musicians = new ArrayList<>();
+//	@Relationship (type= "RECORDED_BY", direction=Relationship.OUTGOING)
+//	private List<Musician> musicians = new ArrayList<>();
+	
+	@Relationship(type="HAS_FILE", direction=Relationship.OUTGOING)
+	private TrackObjectFile trackObjectFile;
 	
 	public TrackObject() {}
 
 	public TrackObject(Long id, String starttime, String name, String wave, List<Track> trackList,
-			List<Musician> musicians) {
+			TrackObjectFile trackObjectFile) {
 		super();
 		this.id = id;
 		this.starttime = starttime;
 		this.name = name;
 		this.wave = wave;
 		this.trackList = trackList;
-		this.musicians = musicians;
+		this.trackObjectFile = trackObjectFile;
 	}
 
 	public Long getId() {
@@ -84,13 +87,15 @@ public class TrackObject {
 		this.trackList = trackList;
 	}
 
-	public List<Musician> getMusicians() {
-		return musicians;
+	public TrackObjectFile getTrackObjectFile() {
+		return trackObjectFile;
 	}
 
-	public void setMusicians(List<Musician> musicians) {
-		this.musicians = musicians;
-	};
+	public void setTrackObjectFile(TrackObjectFile trackObjectFile) {
+		this.trackObjectFile = trackObjectFile;
+	}
+
+	
 
 
 }

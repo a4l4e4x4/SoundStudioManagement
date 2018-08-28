@@ -32,8 +32,11 @@ public class Musician {
 	@Relationship(type="PLAYS_AN", direction=Relationship.OUTGOING)
 	private Set<Instrument> instruments = new HashSet<>();
 	
+//	@Relationship(type="RECORDED_BY", direction=Relationship.INCOMING)
+//	private List<TrackObject> trackObjects = new ArrayList<>();
+	
 	@Relationship(type="RECORDED_BY", direction=Relationship.INCOMING)
-	private List<TrackObject> trackObjects = new ArrayList<>();
+	private List<TrackObjectFile> trackObjectFiles = new ArrayList<>();
 	
 	@Relationship(type="RECORDS", direction=Relationship.INCOMING)
 	private List<MusicianFee> musicianFee = new ArrayList<>();
@@ -41,14 +44,14 @@ public class Musician {
 	public Musician() {}
 
 	public Musician(Long id, String name, String surname, Contact contact, Set<Instrument> instruments,
-			List<TrackObject> trackObjects, List<MusicianFee> musicianFee) {
+			List<TrackObjectFile> trackObjectFiles, List<MusicianFee> musicianFee) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.surname = surname;
 		this.contact = contact;
 		this.instruments = instruments;
-		this.trackObjects = trackObjects;
+		this.trackObjectFiles = trackObjectFiles;
 		this.musicianFee = musicianFee;
 	}
 
@@ -92,12 +95,12 @@ public class Musician {
 		this.instruments = instruments;
 	}
 
-	public List<TrackObject> getTrackObjects() {
-		return trackObjects;
+	public List<TrackObjectFile> getTrackObjectFiles() {
+		return trackObjectFiles;
 	}
 
-	public void setTrackObjects(List<TrackObject> trackObjects) {
-		this.trackObjects = trackObjects;
+	public void setTrackObjectFiles(List<TrackObjectFile> trackObjectFiles) {
+		this.trackObjectFiles = trackObjectFiles;
 	}
 
 	public List<MusicianFee> getMusicianFee() {
@@ -106,7 +109,7 @@ public class Musician {
 
 	public void setMusicianFee(List<MusicianFee> musicianFee) {
 		this.musicianFee = musicianFee;
-	}
+	};
 
 	
 
