@@ -322,29 +322,41 @@ public class ReadFile {
 						//System.out.println(objectAddress);
 //						
 						//Handling TrackObjectFile 01
+						//if it's the first TrackObjectFile
 						if (trackObjectFiles.isEmpty()) {
 							TrackObjectFile trof0 = new TrackObjectFile();
 							trof0.setFileLocation(objectAddress);
 							newTrackObject.setTrackObjectFile(trof0);
+							//add to list of TrackObjectFiles
 							trackObjectFiles.add(trof0);
+							//add to Set of Locations (String) to control
 							trObjFileLocation.add(objectAddress);
+							//if a list exists and contains the address
 						}else if (trObjFileLocation.contains(objectAddress)){
+							//find the object that corresponds
 							for (TrackObjectFile trof01 : trackObjectFiles) {
 								if (trof01.getFileLocation().equals(objectAddress)) {
+									//link the TrackObjectFile to list TrackObject
 									newTrackObject.setTrackObjectFile(trof01);
 								} 
 							}
+							//if it's not on the list
 						}else  if (!trObjFileLocation.contains(objectAddress)){
+							//create new TrackObjectFile
 									trof2 = new TrackObjectFile();
 									trof2.setFileLocation(objectAddress);
+									//link to the TrackObject
 									newTrackObject.setTrackObjectFile(trof2);
+									//add to the TrackObjectFiles list
 									trackObjectFiles.add(trof2);
+									//add address to the list
 									trObjFileLocation.add(objectAddress);									
 								}
+						//end of TrackObjectFile handling
 
 
 					} else {
-						//if ther is one more space:
+						//if there is one more space:
 						String objectAddress = lineSplit[3].substring(1, lineSplit[3].length() - 1);
 						newTrackObject.setWave(objectAddress);
 						//System.out.println(objectAddress);
