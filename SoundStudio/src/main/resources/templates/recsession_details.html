@@ -19,96 +19,143 @@
 						<li class="breadcrumb-item"><a href="#">Sound Studio</a></li>
 						<li class="breadcrumb-item active">Recording Session Details</li>
 					</ol>
-					
-					<div class="card-body">
-						<div class="table-responsive">
-							<table class="table table-bordered" id="dataTable" width="100%"
-								cellspacing="0">
-								<thead>
-									<tr>
-										<th>Date</th>
-										<th>Duration</th>
-										<th>Project</th>
-										<th>Client</th>
-										<th>Engineer</th>
-
-									</tr>
-								</thead>
-								<tfoot>
-									<tr>
-										<th>Date</th>
-										<th>Duration</th>
-										<th>Project</th>
-										<th>Client</th>
-										<th>Engineer</th>
-
-									</tr>
-								</tfoot>
-								<tbody>
-								<tr>
-								<td th:text="${recsession.sessionDate}"></td>
-								<td th:text="${recsession.duration}"></td>
-								</tr>
-								
-								</tbody>
-								
-							</table>
-						</div>
+					<div class="card-header">
+						<i class="fas fa-table"></i> Tracks to Import
+<!-- 						<p> -->
+<!-- 							from session file: <span -->
+<!-- 								th:text="${newtracks[0].sessionFile.diskaddress}"></span> -->
+<!-- 						</p> -->
 					</div>
-<form
-					class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0"
-					method="POST" action="/savetracks" enctype="multipart/form-data">
+					<form
+						class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0"
+						method="POST" action="/recSessionSave"
+						enctype="multipart/form-data">
 
-					<input class="form-control" type="submit" value="Submit" />
-					
-					<div class="card-body">
-						<div class="table-responsive">
-							<table class="table table-bordered" id="dataTable" width="100%"
-								cellspacing="0">
-								<thead>
-									<tr>
-										<th>Track Number</th>
-										<th>Track Name</th>
-										<th>Object Position</th>
-										<th>Object Name</th>
-										<th>Object Address</th>
-
-									</tr>
-								</thead>
-								<tfoot>
-									<tr>
-										<th>Track Number</th>
-										<th>Track Name</th>
-										<th>Object Position</th>
-										<th>Object Name</th>
-										<th>Object Address</th>
-
-									</tr>
-								</tfoot>
-								<tbody>
-									<th:block th:each="track : ${newtracks}">
+						<div class="card-body">
+							<div class="table-responsive">
+								<table class="table table-bordered" id="Table">
+									<thead>
 										<tr>
-											<!-- <td th:text="${track.number}"><input th:value="${track.number}"/></td>  -->
-											<td><input th:value="${track.number}" /></td>
-											<td><input th:value="${track.name}" /></td>
+											<th>Piece</th>
+											<th>Project</th>
+											<th>Engineer</th>
+											<th>Date</th>
+											<th>Duration</th>
+
+										</tr>
+									</thead>
+									<tfoot>
+										<tr>
+											<th>Piece</th>
+											<th>Project</th>
+											<th>Engineer</th>
+											<th>Date</th>
+											<th>Duration</th>
+
+										</tr>
+									</tfoot>
+									<tbody>
+										<tr>
+											<td th:text="${piece.name}"></td>
+											<td th:text="${piece.project.name}"></td>
+											<td th:text="${engineer.name}"></td>
+											<td th:text="${recsession.sessionDate}"></td>
+											<td th:text="${recsession.duration}"></td>
+
+
+
 										</tr>
 
-										<th:block th:each="object : ${track.objectList}">
-											<tr>
-												<td></td>
-												<td></td>
-												<td><input th:value="${object.starttime}" /></td>
-												<td><input th:value="${object.name}" /></td>
-												<td><input th:value="${object.wave}" /></td>
-											</tr>
-										</th:block>
-									</th:block>
-								</tbody>
-							</table>
+									</tbody>
+
+								</table>
+							</div>
 						</div>
-					</div>
-					<input class="form-control" type="submit" value="Submit" />
-				</form>
+
+
+						<input class="form-control" type="submit" value="Submit" />
+						<div class="card-body">
+							<div class="table-responsive">
+								<table class="table table-bordered" id="table">
+									<thead>
+										<tr>
+											<th>Track Object File</th>
+											<th>Musician</th>
+										</tr>
+									</thead>
+									<tfoot>
+										<tr>
+											<th>Track Object File</th>
+											<th>Musician</th>
+										</tr>
+									</tfoot>
+									<tbody>
+										<th:block th:each="tof : ${trackObjectFiles}">
+											
+												<tr>
+													<td><input type="text" id="tofID" name="tofID" th:value="${tof.id}"/></td>
+													<td class="col-md-4"><div class="dropdown">
+												<select class="selectpicker form-control"
+													th:name="musicianID" th:title="musician">
+													<th:block class="form-control"
+														th:each="musician : ${musicians}">
+<!-- 														<option th:text="engineer" type="hidden"></option>  -->
+														<option th:text="${musician.name}"
+															th:value="${musician.id}"></option>
+													</th:block>
+												</select>
+											</div></td>
+												</tr>
+											
+										</th:block>
+									</tbody>
+								</table>
+							</div>
+						</div>
+
+
+						<div class="card-body">
+							<div class="table-responsive">
+								<table class="table table-bordered" id="dataTable">
+									<thead>
+										<tr>
+											<th>Track Number</th>
+											<th>Track Name</th>
+											<th>Object Position</th>
+											<th>Object Name</th>
+											<th>Object Address</th>
+
+										</tr>
+									</thead>
+									<tfoot>
+										<tr>
+											<th>Track Number</th>
+											<th>Track Name</th>
+											<th>Object Position</th>
+											<th>Object Name</th>
+											<th>Object Address</th>
+
+										</tr>
+									</tfoot>
+									<tbody>
+										<th:block th:each="track : ${newtracks}">
+											<th:block th:each="object : ${track.objectList}">
+												<tr>
+													<td th:text="${track.number}"><input
+														th:value="${track.number}" /></td>
+													<td th:text="${track.name}"></td>
+													<td th:text="${object.starttime}"></td>
+													<td th:text="${object.name}"></td>
+													<td th:text="${object.wave}"></td>
+												</tr>
+											</th:block>
+										</th:block>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<input class="form-control" type="submit" value="Submit" />
+					</form>
 
 				</div>
 			</div>

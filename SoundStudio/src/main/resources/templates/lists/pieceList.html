@@ -35,33 +35,24 @@
 									<tr>
 										<th>Name</th>
 										<th>Composer</th>
-										<th>Projects</th>
+										<th>Project</th>
 									</tr>
 								</thead>
 								<tfoot>
 									<tr>
 										<th>Name</th>
 										<th>Composer</th>
-										<th>Projects</th>
+										<th>Project</th>
 									</tr>
 								</tfoot>
 								<tbody>
 									<th:block th:each="piece : ${pieces}">
+									<tr>
 										 <td th:text="${piece.name}"></td>  
 										 
 										 <td th:text="${piece.composer}"></td>
 										
-										<td class="col-md-4"><div class="dropdown">
-												<button class="btn dropdown-toggle" type="button"
-													data-toggle="dropdown">
-													Projects <span class="caret"></span>
-												</button>
-											 <ul class="dropdown-menu">
-													<th:block th:each="project : ${piece.projects}">
-														<li><a th:text="${project.name}"></a>
-													</th:block>
-												</ul>  
-											</div></td>
+										<td th:text="${piece.project.name}"></td>
 										</tr>
 									</th:block>
 								</tbody>

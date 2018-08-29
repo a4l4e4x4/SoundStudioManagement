@@ -60,7 +60,9 @@
 									</tr>
 								</tfoot>
 								<tbody>
+								
 									<th:block th:each="engineer : ${engineers}">
+									<tr>
 										<td th:text="${engineer.name}"></td>
 										<td th:text="${engineer.surname}"></td>
 										<td th:text="${engineer.contact.email}"></td>
@@ -80,8 +82,9 @@
 													</th:block>
 												</ul>
 											</div></td>
-										
+										</tr>
 									</th:block>
+									
 								</tbody>
 							</table>
 						</div>

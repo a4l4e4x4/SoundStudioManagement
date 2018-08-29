@@ -223,7 +223,7 @@ public class AdditionsController {
 		
 		Long realID = Long.parseLong(projectID);
 		Project project = projectService.findById(realID).orElseThrow(()->new RuntimeException("No such project"));
-		piece.getProjects().add(project);
+		piece.setProject(project);
 		pieceService.savePiece(piece);
 		return "redirect:/lists/pieceList";
 	}

@@ -35,4 +35,10 @@ public class PieceService {
 		return result;
 	}
 
+	public Piece findById(Long id) {
+		Piece piece = pieceRepo.findById(id, 4).orElseThrow(()->new RuntimeException("No such Piece"));
+
+		return piece;
+	}
+
 }

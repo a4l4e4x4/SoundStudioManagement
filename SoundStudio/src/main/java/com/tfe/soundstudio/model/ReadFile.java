@@ -428,7 +428,7 @@ public class ReadFile {
 							for (TrackObjectFile trof01 : trackObjectFiles) {
 								if (trof01.getFileLocation().equals(objectAddress2)) {
 									newTrackObject2.setTrackObjectFile(trof01);
-									System.out.println("ça marche");
+									//System.out.println("ça marche");
 								} 
 							}
 						}else if (!trObjFileLocation.contains(objectAddress2)){
@@ -444,7 +444,7 @@ public class ReadFile {
 					} else {
 						String objectAddress2 = lineSplit2[3].substring(1, lineSplit2[3].length() - 1);
 						newTrackObject2.setWave(objectAddress2);
-						System.out.println("passou no 4");
+						//System.out.println("passou no 4");
 						//Handles TrackObjectFile 04
 						if (trackObjectFiles.isEmpty()) {
 							TrackObjectFile trof0 = new TrackObjectFile();
@@ -456,7 +456,7 @@ public class ReadFile {
 							for (TrackObjectFile trof01 : trackObjectFiles) {
 								if (trof01.getFileLocation().equals(objectAddress2)) {
 									newTrackObject2.setTrackObjectFile(trof01);
-									System.out.println("ça marche");
+									//System.out.println("ça marche");
 								} 
 							}
 						}else if (!trObjFileLocation.contains(objectAddress2)){
@@ -476,8 +476,8 @@ public class ReadFile {
 				}
 			}
 			
-			trackObjectFiles.forEach((c)->System.out.println("object" + c.getFileLocation()));
-			trObjFileLocation.forEach((c)->System.out.println("stringset" + c));
+			//trackObjectFiles.forEach((c)->System.out.println("object" + c.getFileLocation()));
+			//trObjFileLocation.forEach((c)->System.out.println("stringset" + c));
 			//close scan
 			sc.close();
 

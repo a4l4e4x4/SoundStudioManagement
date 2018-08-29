@@ -28,17 +28,17 @@ public class Piece {
 	private List<SessionFile> sessionFiles = new ArrayList<>();
 	
 	@Relationship(type="FROM_PROJECT", direction=Relationship.OUTGOING)
-	private List<Project> projects = new ArrayList<>();
+	private Project project = new Project();
 	
 	public Piece() {}
 
-	public Piece(Long id, String name, String composer, List<SessionFile> sessionFiles, List<Project> projects) {
+	public Piece(Long id, String name, String composer, List<SessionFile> sessionFiles, Project project) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.composer = composer;
 		this.sessionFiles = sessionFiles;
-		this.projects = projects;
+		this.project = project;
 	}
 
 	public Long getId() {
@@ -73,13 +73,15 @@ public class Piece {
 		this.sessionFiles = sessionFiles;
 	}
 
-	public List<Project> getProjects() {
-		return projects;
+	public Project getProject() {
+		return project;
 	}
 
-	public void setProjects(List<Project> projects) {
-		this.projects = projects;
+	public void setProject(Project project) {
+		this.project = project;
 	}
+
+	
 
 	
 }

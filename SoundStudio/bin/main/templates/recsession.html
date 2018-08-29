@@ -21,15 +21,63 @@
 					</ol>
 					<form
 						class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0"
-						th:method="POST" th:action="recsession" enctype="multipart/form-data" th:object="${recsession}">
+						th:method="POST" th:action="recsession"
+						enctype="multipart/form-data" th:object="${recsession}">
+
+						<!-- <td th:text="${track.number}"><input th:value="${track.number}"/></td>  -->
+						<!-- 							<p>duration <input type="number" name="duration" th:field="*{duration}"/> hours</p> -->
 						
-							<!-- <td th:text="${track.number}"><input th:value="${track.number}"/></td>  -->
-							<p>duration <input type="number" name="duration" th:field="*{duration}"/> hours</p>
-							<p><input class="form-control" type="file" name="file" /><br /></p>
-						<br/> <input class="form-control" type="submit" value="Submit" />
-							<!-- <td><input th:value="${track.name}" /></td>
+						<!-- <td><input th:value="${track.name}" /></td>
 											th:field="*{expenseDetail[0].product.id}"  -->
-						
+						<div class="card-body">
+							<div class="table-responsive">
+								<table class="table table-bordered" id="table">
+									<!-- <td th:text="${track.number}"><input th:value="${track.number}"/></td>
+							<p>Client Name <input type="text" name="name" th:field="${client.name}"/></p>  -->
+									<tbody>
+									<thead>
+										<tr>
+											<th>Duration(hours)</th>
+											<th>Piece</th>
+											<th>Engineer</th>
+											<th></th>
+										</tr>
+									</thead>
+									<tr>
+
+										<td><input type="number" name="duration"
+											th:field="${recsession.duration}"
+											placeholder="duration(hours)" /></td>
+										<!-- 											<td><input type="text" th:field="${piece.name}" placeholder="piece name"/></td> -->
+										<!-- 											<td><input type="text" th:field="${piece.composer}" placeholder="piece composer"/></td> -->
+										<td class="col-md-4"><div class="dropdown">
+												<select class="selectpicker form-control" th:name="pieceID"
+													th:title="piece">
+													<th:block class="form-control" th:each="piece : ${pieces}">
+														<option th:text="${piece.name}" th:value="${piece.id}"></option>
+													</th:block>
+												</select>
+											</div></td>
+										<td class="col-md-4"><div class="dropdown">
+												<select class="selectpicker form-control"
+													th:name="engineerID" th:title="engineer">
+													<th:block class="form-control"
+														th:each="engineer : ${engineers}">
+<!-- 														<option th:text="engineer" type="hidden"></option>  -->
+														<option th:text="${engineer.name}"
+															th:value="${engineer.id}"></option>
+													</th:block>
+												</select>
+											</div></td>
+										<td><input class="form-control" type="file" name="file" /></td>
+									</tr>
+									</tbody>
+								</table>
+								<p>
+						</p>
+						<br /> <input class="form-control" type="submit" value="Submit" />
+							</div>
+						</div>
 
 					</form>
 

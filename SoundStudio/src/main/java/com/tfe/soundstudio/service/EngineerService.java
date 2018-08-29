@@ -32,4 +32,15 @@ public class EngineerService {
 		Iterable<Engineer> result = engineerRepo.findAll();
 		return result;
 	}
+	
+	public Engineer findById(Long id) {
+		Engineer engineer = engineerRepo.findById(id).orElseThrow(()->new RuntimeException("No such engineer"));
+		return engineer;
+	}
+
+
+	public void saveAllEngineers(Iterable<Engineer> engToSave) {
+		engineerRepo.save(engToSave, 4);
+		
+	}
 }
