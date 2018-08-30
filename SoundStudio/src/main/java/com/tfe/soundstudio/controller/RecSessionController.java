@@ -193,7 +193,7 @@ public class RecSessionController {
 			Musician musician = new Musician();
 			List<Long> realMusIds = new ArrayList<>();
 			for (String musID : musicianID) {
-				System.out.println(musID);
+				//System.out.println(musID);
 				Long realMusId = Long.parseLong(musID);
 				realMusIds.add(realMusId);
 			}
@@ -203,7 +203,7 @@ public class RecSessionController {
 				Long realTofID = Long.parseLong(tofIDstr);
 				tof = trackObjectFileService.findById(realTofID);
 				musician = musicianService.findById(realMusIds.get(count));
-				System.out.println(musician.getName());
+				//System.out.println(musician.getName());
 				tof.getMusicians().add(musician);
 				trackObjectFileService.saveTrackObjectFile(tof);
 				count += 1;
