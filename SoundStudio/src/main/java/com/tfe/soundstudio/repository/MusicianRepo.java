@@ -13,4 +13,6 @@ import com.tfe.soundstudio.model.Musician;
  */
 public interface MusicianRepo extends Neo4jRepository<Musician, Long> {
 
+	Musician getByName(String name);
+
 }

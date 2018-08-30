@@ -55,5 +55,10 @@ public class MusicianService {
 
 	}
 
+	public Musician getByName(String name) {
+		Musician result = musicianRepo.getByName(name);
+		return result;
+	}
+
 
 }
