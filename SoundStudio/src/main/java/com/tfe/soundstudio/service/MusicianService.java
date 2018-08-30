@@ -3,12 +3,9 @@
  */
 package com.tfe.soundstudio.service;
 
-import java.util.Optional;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.tfe.soundstudio.model.Engineer;
 import com.tfe.soundstudio.model.Musician;
 import com.tfe.soundstudio.repository.MusicianRepo;
 
@@ -52,12 +49,21 @@ public class MusicianService {
 
 	public void deleteById(Long id) {
 		musicianRepo.deleteById(id);
+		
 
 	}
 
 	public Musician getByName(String name) {
 		Musician result = musicianRepo.getByName(name);
 		return result;
+	}
+
+	public Long deleteByName(String name) {
+
+		Long id = musicianRepo.deleteByName(name);
+		
+		return id;
+		
 	}
 
 

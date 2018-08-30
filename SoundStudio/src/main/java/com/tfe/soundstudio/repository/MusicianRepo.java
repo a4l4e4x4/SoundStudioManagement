@@ -4,6 +4,7 @@
 package com.tfe.soundstudio.repository;
 
 import org.springframework.data.neo4j.repository.Neo4jRepository;
+import org.springframework.data.repository.query.Param;
 
 import com.tfe.soundstudio.model.Musician;
 
@@ -13,6 +14,8 @@ import com.tfe.soundstudio.model.Musician;
  */
 public interface MusicianRepo extends Neo4jRepository<Musician, Long> {
 
-	Musician getByName(String name);
+	Musician getByName(@Param("name")String name);
+
+	Long deleteByName(@Param("name")String name);
 
 }

@@ -131,7 +131,7 @@ public class AdditionsController {
 		if(instIDs != null) {
 			for(String id : instIDs) {
 				Long realID = Long.parseLong(id);
-				Instrument inst = instrumentService.findById(realID).orElseThrow(() -> new RuntimeException("No such musician!"));
+				Instrument inst = instrumentService.findById(realID);
 				
 				instList.add(inst);
 				//System.out.println(id);

@@ -38,8 +38,8 @@ public class InstrumentService {
 	 */
 	
 	@Transactional(readOnly = true)
-	 public Optional<Instrument> findById(Long id) {
-		 Optional<Instrument> result = instrumentRepo.findById(id, 2);
+	 public Instrument findById(Long id) {
+		 Instrument result = instrumentRepo.findById(id, 2).orElseThrow(()->new RuntimeException("No such instrument"));
 		 return result;
 	 }
 	
@@ -78,6 +78,11 @@ public class InstrumentService {
 	 public void deleteAllInstruments () {
 		 instrumentRepo.deleteAll();
 	 }
+	 @Transactional
+	 public void deleteById(Long id) {
+			instrumentRepo.deleteById(id);
+			
+		}
 	 
 	 
 	 //for InstFamily
@@ -121,5 +126,12 @@ public class InstrumentService {
 		
 		return instruments;
 	}
+
+	public Long deleteByInstName(String name) {
+		Long id = instrumentRepo.deleteByInstName(name);
+		return id;
+	}
+
+	
 
 }
