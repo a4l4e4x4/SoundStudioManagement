@@ -158,7 +158,7 @@ public class RecSessionController {
 			}
 		}
 		if (engineerID != null) {
-			System.out.println(engineerID);
+			//System.out.println(engineerID);
 			Long realEnginnerID = Long.parseLong(engineerID);
 			Engineer engineer = engineerService.findById(realEnginnerID);
 			EngineerFee engineerFee = new EngineerFee();
@@ -186,6 +186,8 @@ public class RecSessionController {
 	public String recSessionSave(@RequestParam(value = "tofID", required = false) Set<String> tofID,
 			@RequestParam(value = "musicianID", required = false) List<String> musicianID, Model model) {
 
+		if(tofID == null) {System.out.println("no tof");}
+		if(musicianID == null) {System.out.println("no mus");}
 		
 		
 		if (tofID != null && musicianID != null) {
@@ -193,7 +195,7 @@ public class RecSessionController {
 			Musician musician = new Musician();
 			List<Long> realMusIds = new ArrayList<>();
 			for (String musID : musicianID) {
-				//System.out.println(musID);
+				System.out.println(musID);
 				Long realMusId = Long.parseLong(musID);
 				realMusIds.add(realMusId);
 			}
@@ -201,7 +203,7 @@ public class RecSessionController {
 			for (String tofIDstr : tofID) {
 				
 				Long realTofID = Long.parseLong(tofIDstr);
-				//System.out.println(tofIDstr);
+				System.out.println(tofIDstr);
 				tof = trackObjectFileService.findById(realTofID);
 				//System.out.println(tof.getFileLocation());
 				musician = musicianService.findById(realMusIds.get(count));
