@@ -201,7 +201,9 @@ public class RecSessionController {
 			for (String tofIDstr : tofID) {
 				
 				Long realTofID = Long.parseLong(tofIDstr);
+				//System.out.println(tofIDstr);
 				tof = trackObjectFileService.findById(realTofID);
+				//System.out.println(tof.getFileLocation());
 				musician = musicianService.findById(realMusIds.get(count));
 				//System.out.println(musician.getName());
 				tof.getMusicians().add(musician);

@@ -93,7 +93,7 @@
 										<th:block th:each="tof : ${trackObjectFiles}">
 											
 												<tr>
-													<td><input type="text" id="tofID" name="tofID" th:value="${tof.id}"/></td>
+													<td><input type="text" id="tofID" name="tofID" th:text="${tof.fileLocation}" th:value="${tof.id}"/></td>
 													<td class="col-md-4"><div class="dropdown">
 												<select class="selectpicker form-control"
 													th:name="musicianID" th:title="musician">
