@@ -300,13 +300,13 @@ public class ReadFile {
 					 * split line and save each element
 					 */
 					String line3 = sc.nextLine();
-					// String next = file.next("[\\S ]+");
+					// Split line on TAB
 					String[] lineSplit = line3.split("\\t");
 					String objectPosition = lineSplit[0];
-
+					//First part of split is object position
 					newTrackObject.setStarttime(objectPosition);
 					//System.out.println(objectPosition);
-
+					//second part of split is object name
 					String objectName = lineSplit[1];
 					newTrackObject.setName(objectName);
 					//System.out.println(objectName);
@@ -315,6 +315,7 @@ public class ReadFile {
 					 * sometimes there is a LF (line feed) in line
 					 * if so, remove it to read the object address
 					 * remove also quotes ("") from object address
+					 * then, third part is object address
 					 */
 					if (!(lineSplit[2].isEmpty())) {
 						String objectAddress = lineSplit[2].substring(1, lineSplit[2].length() - 1);
