@@ -43,4 +43,10 @@ public class EngineerService {
 		engineerRepo.save(engToSave, 4);
 		
 	}
+
+
+	public void deleteById(Long id) {
+		engineerRepo.deleteById(id);
+		
+	}
 }

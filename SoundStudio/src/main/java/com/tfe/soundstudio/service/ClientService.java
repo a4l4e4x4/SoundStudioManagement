@@ -49,6 +49,11 @@ public class ClientService {
 	
 		return result;
 	}
+
+	public void deleteById(Long id) {
+		clientRepo.deleteById(id);
+		
+	}
 	
 	
 

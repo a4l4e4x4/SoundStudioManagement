@@ -24,11 +24,11 @@
 						<li class="breadcrumb-item active">Engineers List</li>
 					</ol>
 
-				<form
-					class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0"
-					method="POST" action="/addMusician" enctype="multipart/form-data">
+<!-- 				<form -->
+<!-- 					class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0" -->
+<!-- 					method="POST" action="/addMusician" enctype="multipart/form-data"> -->
 
-					<input class="form-control" type="submit" value="Submit" />
+<!-- 					<input class="form-control" type="submit" value="Submit" /> -->
 
 					<div class="card-body">
 						<div class="table-responsive">
@@ -44,6 +44,7 @@
 										<th>Postcode</th>
 										<th>Country</th>
 										<th>Sessions</th>
+										<th>Delete</th>
 									</tr>
 								</thead>
 								<tfoot>
@@ -57,6 +58,7 @@
 										<th>Postcode</th>
 										<th>Country</th>
 										<th>Sessions</th>
+										<th>Delete</th>
 									</tr>
 								</tfoot>
 								<tbody>
@@ -71,17 +73,23 @@
 										<td th:text="${engineer.contact.city}"></td>
 										<td th:text="${engineer.contact.country}"></td>
 										<td th:text="${engineer.contact.postcode}"></td>
-										<td class="col-md-4"><div class="dropdown">
-												<button class="btn dropdown-toggle" type="button"
+										<td><button class="btn dropdown-toggle" type="button"
 													data-toggle="dropdown">
 													Sessions <span class="caret"></span>
 												</button>
 												<ul class="dropdown-menu">
-													<th:block th:each="session : ${engineer.engineerFee}">
-														<li><a th:text="${session.recsession.sessionDate}"></a>
+													<th:block th:each="thissession : ${engineer.engineerFee}">
+														<li><a th:text="${thissession.recsession.sessionDate}"></a>
 													</th:block>
 												</ul>
-											</div></td>
+											</td>
+											<td><form method="POST" th:action="@{/deleteEngineer}"
+												enctype="multipart/form-data" th:name="engID">
+												<button class="form-control" type="submit" th:text="Delete"
+													th:name="engID" th:value="${engineer.id}"
+													th:action="@{/deleteEngineer}">Delete</button>
+											</form></td>
+											
 										</tr>
 									</th:block>
 									
@@ -90,7 +98,7 @@
 						</div>
 					</div>
 					<input class="form-control" type="submit" value="Submit" />
-				</form>
+<!-- 				</form> -->
 			</div>
 			
 			

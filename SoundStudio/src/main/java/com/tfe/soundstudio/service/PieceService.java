@@ -41,4 +41,9 @@ public class PieceService {
 		return piece;
 	}
 
+	public void deleteById(Long id) {
+		pieceRepo.deleteById(id);
+		
+	}
+
 }

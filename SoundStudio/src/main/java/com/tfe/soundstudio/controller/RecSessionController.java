@@ -58,10 +58,8 @@ public class RecSessionController {
 	private final ClientService clientService;
 	private final EngineerService engineerService;
 	private final MusicianService musicianService;
-	private final InstrumentService instrumentService;
 	private final ProjectService projectService;
 	private final PieceService pieceService;
-	private final TrackService trackService;
 	private final TrackObjectFileService trackObjectFileService;
 
 	public RecSessionController(RecSessionService recSessionService, ClientService clientService,
@@ -73,10 +71,8 @@ public class RecSessionController {
 		this.clientService = clientService;
 		this.engineerService = engineerService;
 		this.musicianService = musicianService;
-		this.instrumentService = instrumentService;
 		this.projectService = projectService;
 		this.pieceService = pieceService;
-		this.trackService = trackService;
 		this.trackObjectFileService = trackObjectFileService;
 	}
 
@@ -152,6 +148,7 @@ public class RecSessionController {
 				model.addAttribute("musicians", musicians);
 				model.addAttribute("trackObjectFiles", trackObjectFiles);
 				model.addAttribute("newtracks", tracks);
+				model.addAttribute("sessionfile", sf);
 
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -186,9 +183,10 @@ public class RecSessionController {
 	public String recSessionSave(@RequestParam(value = "tofID", required = false) Set<String> tofID,
 			@RequestParam(value = "musicianID", required = false) List<String> musicianID, Model model) {
 
+		
 		if(tofID == null) {System.out.println("no tof");}
 		if(musicianID == null) {System.out.println("no mus");}
-		
+		HashSet<TrackObjectFile> trackObjectFiles = new HashSet<>();
 		
 		if (tofID != null && musicianID != null) {
 			TrackObjectFile tof = new TrackObjectFile();
@@ -210,11 +208,14 @@ public class RecSessionController {
 				//System.out.println(musician.getName());
 				tof.getMusicians().add(musician);
 				trackObjectFileService.saveTrackObjectFile(tof);
+				trackObjectFiles.add(tof);
 				count += 1;
 			}
 		}
+		model.addAttribute("tofs", trackObjectFiles);
+		
 
-		return "home";
+		return "recsession_final";
 	}
 
 }

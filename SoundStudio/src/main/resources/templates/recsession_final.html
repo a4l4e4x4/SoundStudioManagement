@@ -17,19 +17,16 @@
 					<!-- Breadcrumbs-->
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item"><a href="#">Sound Studio</a></li>
-						<li class="breadcrumb-item active">Recording Session Details</li>
+						<li class="breadcrumb-item active">Track Object Details</li>
 					</ol>
 					<div class="card-header">
-						<i class="fas fa-table"></i> Tracks to Import
+						<i class="fas fa-table"></i> Tracks Objects
 <!-- 						<p> -->
 <!-- 							from session file: <span -->
 <!-- 								th:text="${newtracks[0].sessionFile.diskaddress}"></span> -->
 <!-- 						</p> -->
 					</div>
-					<form
-						class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0"
-						method="POST" action="/recSessionSave"
-						enctype="multipart/form-data">
+					
 
 						<div class="card-body">
 							<div class="table-responsive">
@@ -55,16 +52,16 @@
 										</tr>
 									</tfoot>
 									<tbody>
-										<tr>
-											<td th:text="${piece.name}"></td>
-											<td th:text="${piece.project.name}"></td>
-											<td th:text="${engineer.name}"></td>
-											<td th:text="${recsession.sessionDate}"></td>
-											<td th:text="${recsession.duration}"></td>
+<!-- 										<tr> -->
+<!-- 											<td th:text="${sessionfile.pieces[0].name}"></td> -->
+<!-- 											<td th:text="${sessionfile.pieces[0].project.name}"></td> -->
+<!-- 											<td th:text="${sessionfile.recsessions[0].engineerFees[0].engineer.name}"></td> -->
+<!-- 											<td th:text="${sessionfile.recsessions[0].sessionDate}"></td> -->
+<!-- 											<td th:text="${sessionfile.recsessions[0].duration}"></td> -->
 
 
 
-										</tr>
+<!-- 										</tr> -->
 
 									</tbody>
 
@@ -90,7 +87,7 @@
 										</tr>
 									</tfoot>
 									<tbody>
-										<th:block th:each="tof : ${trackObjectFiles}">
+										<th:block th:each="tof : ${tofs}">
 											
 												<tr>
 													<td><input type="hidden" th:text="${tof.fileLocation}" name="tofID"
@@ -99,7 +96,7 @@
 												<select class="selectpicker form-control"
 													th:name="musicianID" th:title="musician">
 													<th:block class="form-control"
-														th:each="musician : ${musicians}">
+														th:each="musician : ${tof.musicians}">
 <!-- 														<option th:text="engineer" type="hidden"></option>  -->
 														<option th:text="${musician.name}" th:name="musicianID"
 															th:value="${musician.id}"></option>
@@ -115,49 +112,48 @@
 						</div>
 
 
-						<div class="card-body">
-							<div class="table-responsive">
-								<table class="table table-bordered" id="dataTable">
-									<thead>
-										<tr>
-											<th>Track Number</th>
-											<th>Track Name</th>
-											<th>Object Position</th>
-											<th>Object Name</th>
-											<th>Object Address</th>
+<!-- 						<div class="card-body"> -->
+<!-- 							<div class="table-responsive"> -->
+<!-- 								<table class="table table-bordered" id="dataTable"> -->
+<!-- 									<thead> -->
+<!-- 										<tr> -->
+<!-- 											<th>Track Number</th> -->
+<!-- 											<th>Track Name</th> -->
+<!-- 											<th>Object Position</th> -->
+<!-- 											<th>Object Name</th> -->
+<!-- 											<th>Object Address</th> -->
 
-										</tr>
-									</thead>
-									<tfoot>
-										<tr>
-											<th>Track Number</th>
-											<th>Track Name</th>
-											<th>Object Position</th>
-											<th>Object Name</th>
-											<th>Object Address</th>
+<!-- 										</tr> -->
+<!-- 									</thead> -->
+<!-- 									<tfoot> -->
+<!-- 										<tr> -->
+<!-- 											<th>Track Number</th> -->
+<!-- 											<th>Track Name</th> -->
+<!-- 											<th>Object Position</th> -->
+<!-- 											<th>Object Name</th> -->
+<!-- 											<th>Object Address</th> -->
 
-										</tr>
-									</tfoot>
-									<tbody>
-										<th:block th:each="track : ${newtracks}">
-											<th:block th:each="object : ${track.objectList}">
-												<tr>
-													<td th:text="${track.number}"><input
-														th:value="${track.number}" /></td>
-													<td th:text="${track.name}"></td>
-													<td th:text="${object.starttime}"></td>
-													<td th:text="${object.name}"></td>
-													<td th:text="${object.wave}"></td>
-												</tr>
-											</th:block>
-										</th:block>
-									</tbody>
-								</table>
-							</div>
-						</div>
-						
-						<input class="form-control" type="submit" value="Submit" />
-					</form>
+<!-- 										</tr> -->
+<!-- 									</tfoot> -->
+<!-- 									<tbody> -->
+<!-- 										<th:block th:each="track : ${newtracks}"> -->
+<!-- 											<th:block th:each="object : ${track.objectList}"> -->
+<!-- 												<tr> -->
+<!-- 													<td th:text="${track.number}"><input -->
+<!-- 														th:value="${track.number}" /></td> -->
+<!-- 													<td th:text="${track.name}"></td> -->
+<!-- 													<td th:text="${object.starttime}"></td> -->
+<!-- 													<td th:text="${object.name}"></td> -->
+<!-- 													<td th:text="${object.wave}"></td> -->
+<!-- 												</tr> -->
+<!-- 											</th:block> -->
+<!-- 										</th:block> -->
+<!-- 									</tbody> -->
+<!-- 								</table> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 						<input class="form-control" type="submit" value="Submit" /> -->
+					
 
 				</div>
 			</div>

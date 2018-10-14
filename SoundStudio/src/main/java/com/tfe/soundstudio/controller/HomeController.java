@@ -851,6 +851,18 @@ public class HomeController {
 
 		k.setContact(l);
 		musicians.add(k);
+		
+		Musician m = new Musician();
+		m.setName("José Pedro");
+		m.setSurname("Medeiros");
+		Contact n = new Contact();
+		n.setContactname("José Pedro");
+		n.setContactsurname("Medeiros");
+		n.setCity("Frankfurt");
+		n.setCountry("Germany");
+
+		m.setContact(n);
+		musicians.add(m);
 
 		Iterable<Musician> musToSave = musicians;
 		musicianService.saveAllMusicians(musToSave);
@@ -891,7 +903,8 @@ public class HomeController {
 		
 		Iterable<Engineer> engToSave = engineers;
 		engineerService.saveAllEngineers(engToSave);
-
+		
+		
 		return "home";
 	}
 

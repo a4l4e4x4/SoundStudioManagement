@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.tfe.soundstudio.model.Client;
 import com.tfe.soundstudio.model.Engineer;
 import com.tfe.soundstudio.model.RecSession;
+import com.tfe.soundstudio.model.SessionFile;
 import com.tfe.soundstudio.repository.ClientRepo;
 import com.tfe.soundstudio.repository.EngineerRepo;
 import com.tfe.soundstudio.repository.InstrumentRepo;
@@ -57,6 +58,11 @@ public class RecSessionService {
 	@Transactional
 	public void createRecSession(RecSession recSession) {
 		recSessionRepo.save(recSession, 50);
+	}
+	
+	public SessionFile getSessionFileById(Long id) {
+		SessionFile result = sessionFileRepo.findById(id, 5).orElseThrow(()->new RuntimeException("No such sessionfile"));
+		return result;
 	}
 	
 	
