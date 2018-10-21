@@ -48,4 +48,9 @@ public class ProjectService {
 		
 	}
 
+	public void saveAllProjects(Iterable<Project> projToSave) {
+		projectRepo.saveAll(projToSave);
+		
+	}
+
 }

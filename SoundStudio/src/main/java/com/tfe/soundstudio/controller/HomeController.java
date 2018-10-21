@@ -18,6 +18,8 @@ import com.tfe.soundstudio.model.Engineer;
 import com.tfe.soundstudio.model.InstFamily;
 import com.tfe.soundstudio.model.Instrument;
 import com.tfe.soundstudio.model.Musician;
+import com.tfe.soundstudio.model.Piece;
+import com.tfe.soundstudio.model.Project;
 import com.tfe.soundstudio.model.ReadFile;
 import com.tfe.soundstudio.model.Track;
 import com.tfe.soundstudio.model.TrackObject;
@@ -25,6 +27,8 @@ import com.tfe.soundstudio.service.ClientService;
 import com.tfe.soundstudio.service.EngineerService;
 import com.tfe.soundstudio.service.InstrumentService;
 import com.tfe.soundstudio.service.MusicianService;
+import com.tfe.soundstudio.service.PieceService;
+import com.tfe.soundstudio.service.ProjectService;
 import com.tfe.soundstudio.service.TrackService;
 
 /**
@@ -39,17 +43,22 @@ public class HomeController {
 	private final ClientService clientService;
 	private final MusicianService musicianService;
 	private final EngineerService engineerService;
-
+	private final ProjectService projectService;
+	private final PieceService pieceService;
+	
 	
 
 	public HomeController(InstrumentService instService, TrackService trackService, ClientService clientService,
-			MusicianService musicianService, EngineerService engineerService) {
+			MusicianService musicianService, EngineerService engineerService, ProjectService projectService,
+			PieceService pieceService) {
 		super();
 		this.instService = instService;
 		this.trackService = trackService;
 		this.clientService = clientService;
 		this.musicianService = musicianService;
 		this.engineerService = engineerService;
+		this.projectService = projectService;
+		this.pieceService = pieceService;
 	}
 
 	@RequestMapping(value = { "/", "/home" }, method = RequestMethod.GET)
@@ -788,6 +797,11 @@ public class HomeController {
 		b.setContactsurname("Carneiro");
 		b.setCity("Paris");
 		b.setCountry("France");
+		a.getInstruments().add(drums);
+		a.getInstruments().add(snare);
+		a.getInstruments().add(cymbals);
+		a.getInstruments().add(timpani);
+		
 
 		a.setContact(b);
 		musicians.add(a);
@@ -800,6 +814,10 @@ public class HomeController {
 		d.setContactsurname("Tolkmitt");
 		d.setCity("Brussels");
 		d.setCountry("Belgium");
+		c.getInstruments().add(ac_guitar);
+		c.getInstruments().add(el_guitar);
+		c.getInstruments().add(piano);
+		c.getInstruments().add(flute);
 
 		c.setContact(d);
 		musicians.add(c);
@@ -812,6 +830,10 @@ public class HomeController {
 		f.setContactsurname("Camargo");
 		f.setCity("Sao Paulo");
 		f.setCountry("Brazil");
+		e.getInstruments().add(cello);
+		e.getInstruments().add(double_bass);
+		e.getInstruments().add(piano);
+		
 
 		e.setContact(f);
 		musicians.add(e);
@@ -824,6 +846,10 @@ public class HomeController {
 		h.setContactsurname("de Queiroz");
 		h.setCity("Paris");
 		h.setCountry("France");
+		g.getInstruments().add(flute);
+		g.getInstruments().add(clarinet);
+		g.getInstruments().add(oboe);
+		g.getInstruments().add(piccolo);
 
 		g.setContact(h);
 		musicians.add(g);
@@ -836,6 +862,7 @@ public class HomeController {
 		j.setContactsurname("Schmidt");
 		j.setCity("New York");
 		j.setCountry("USA");
+		i.getInstruments().add(piano);
 
 		i.setContact(j);
 		musicians.add(i);
@@ -848,6 +875,8 @@ public class HomeController {
 		l.setContactsurname("Van Oudenhove");
 		l.setCity("Brussels");
 		l.setCountry("Belgium");
+		k.getInstruments().add(el_guitar);
+		k.getInstruments().add(ac_guitar);
 
 		k.setContact(l);
 		musicians.add(k);
@@ -860,6 +889,8 @@ public class HomeController {
 		n.setContactsurname("Medeiros");
 		n.setCity("Frankfurt");
 		n.setCountry("Germany");
+		m.getInstruments().add(drums);
+		m.getInstruments().add(snare);
 
 		m.setContact(n);
 		musicians.add(m);
@@ -903,6 +934,41 @@ public class HomeController {
 		
 		Iterable<Engineer> engToSave = engineers;
 		engineerService.saveAllEngineers(engToSave);
+		
+		//Projects
+		
+		List <Project> projects = new ArrayList<>();
+		Project aProj = new Project();
+		aProj.setClient(laVita);
+		aProj.setName("First Project");
+		projects.add(aProj);
+		
+		Project bProj = new Project();
+		bProj.setClient(isfce);
+		bProj.setName("Second Project");
+		projects.add(bProj);
+		
+		Iterable<Project> projToSave = projects;
+		projectService.saveAllProjects(projToSave);
+		
+		//Pieces
+		
+		List<Piece> pieces = new ArrayList<>();
+		
+		Piece p1 = new Piece();
+		p1.setComposer("Beethoven");
+		p1.setName("ninth");
+		p1.setProject(aProj);
+		pieces.add(p1);
+		
+		Piece p2 = new Piece();
+		p2.setComposer("Bach");
+		p2.setName("toccata");
+		p2.setProject(bProj);
+		pieces.add(p2);
+		
+		Iterable<Piece> piecesToSave = pieces;
+		pieceService.saveAllPieces(piecesToSave);
 		
 		
 		return "home";

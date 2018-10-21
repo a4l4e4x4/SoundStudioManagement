@@ -50,4 +50,10 @@ public class PieceService {
 		
 	}
 
+	public void saveAllPieces(Iterable<Piece> piecesToSave) {
+
+		pieceRepo.saveAll(piecesToSave);
+		
+	}
+
 }
