@@ -38,13 +38,15 @@ public class SessionFile {
 	
 	public SessionFile() {}
 
-	public SessionFile(Long id, String name, String diskaddress, List<Track> tracks, List<Piece> pieces) {
+	public SessionFile(Long id, String name, String diskaddress, List<Track> tracks, List<Piece> pieces,
+			List<RecSession> recsessions) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.diskaddress = diskaddress;
 		this.tracks = tracks;
 		this.pieces = pieces;
+		this.recsessions = recsessions;
 	}
 
 	public Long getId() {
@@ -85,7 +87,16 @@ public class SessionFile {
 
 	public void setPieces(List<Piece> pieces) {
 		this.pieces = pieces;
-	};
+	}
 
+	public List<RecSession> getRecsessions() {
+		return recsessions;
+	}
+
+	public void setRecsessions(List<RecSession> recsessions) {
+		this.recsessions = recsessions;
+	}
+
+	
 	
 }

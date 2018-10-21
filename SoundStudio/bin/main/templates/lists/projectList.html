@@ -15,18 +15,18 @@
 					<i class="fas fa-table"></i> Projects List
 					<p></p>
 				</div>
-				
+
 				<!-- Breadcrumbs-->
-					<ol class="breadcrumb">
-						<li class="breadcrumb-item"><a href="#">Sound Studio</a></li>
-						<li class="breadcrumb-item active">Projects List</li>
-					</ol>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="#">Sound Studio</a></li>
+					<li class="breadcrumb-item active">Projects List</li>
+				</ol>
 
-				<form
-					class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0"
-					method="POST" action="/addProject" enctype="multipart/form-data">
+<!-- 				<form -->
+<!-- 					class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0" -->
+<!-- 					method="POST" action="/addProject" enctype="multipart/form-data"> -->
 
-					<input class="form-control" type="submit" value="Submit" />
+<!-- 					<input class="form-control" type="submit" value="Submit" /> -->
 
 					<div class="card-body">
 						<div class="table-responsive">
@@ -47,29 +47,31 @@
 								</tfoot>
 								<tbody>
 									<th:block th:each="project : ${projects}">
-										 <td th:text="${project.name}"></td>  
-										 
-										 <td th:text="${project.client.name}"></td>
-										
-										<td class="col-md-4"><div class="dropdown">
-												<button class="btn dropdown-toggle" type="button"
+										<tr>
+											<td th:text="${project.name}"></td>
+
+											<td th:text="${project.client.name}"></td>
+
+
+											<td><button class="btn dropdown-toggle" type="button"
 													data-toggle="dropdown">
 													Pieces <span class="caret"></span>
 												</button>
-												<!-- <ul class="dropdown-menu">
+												<ul class="dropdown-menu">
 													<th:block th:each="piece : ${project.pieces}">
 														<li><a th:text="${piece.name}"></a>
 													</th:block>
-												</ul>  -->
-											</div></td>
+												</ul>
+											</td>
 										</tr>
 									</th:block>
+
 								</tbody>
 							</table>
 						</div>
 					</div>
-					<input class="form-control" type="submit" value="Submit" />
-				</form>
+<!-- 					<input class="form-control" type="submit" value="Submit" /> -->
+<!-- 				</form> -->
 			</div>
 		</div>
 	</div>

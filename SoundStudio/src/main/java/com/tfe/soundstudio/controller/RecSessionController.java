@@ -27,6 +27,7 @@ import com.tfe.soundstudio.model.Client;
 import com.tfe.soundstudio.model.Engineer;
 import com.tfe.soundstudio.model.EngineerFee;
 import com.tfe.soundstudio.model.Musician;
+import com.tfe.soundstudio.model.MusicianFee;
 import com.tfe.soundstudio.model.Piece;
 import com.tfe.soundstudio.model.Project;
 import com.tfe.soundstudio.model.ReadFile;
@@ -175,17 +176,20 @@ public class RecSessionController {
 		model.addAttribute("musicianID", musicianID);
 		model.addAttribute("recsession", recsession);
 		recSessionService.createRecSession(recsession);
+		
 
 		return "recsession_details";
 	}
 
 	@PostMapping(value = "recSessionSave")
 	public String recSessionSave(@RequestParam(value = "tofID", required = false) Set<String> tofID,
-			@RequestParam(value = "musicianID", required = false) List<String> musicianID, Model model) {
+			@RequestParam(value = "musicianID", required = false) List<String> musicianID, @RequestParam(value= "recsessionID", required=false) String recsessionID, Model model) {
 
 		
 		if(tofID == null) {System.out.println("no tof");}
 		if(musicianID == null) {System.out.println("no mus");}
+		Long realRecID = Long.parseLong(recsessionID);
+		RecSession recSec = recSessionService.findById(realRecID);
 		HashSet<TrackObjectFile> trackObjectFiles = new HashSet<>();
 		
 		if (tofID != null && musicianID != null) {
@@ -205,6 +209,14 @@ public class RecSessionController {
 				tof = trackObjectFileService.findById(realTofID);
 				//System.out.println(tof.getFileLocation());
 				musician = musicianService.findById(realMusIds.get(count));
+				MusicianFee musFee = new MusicianFee();
+				musFee.setMusician(musician);
+				musFee.setFee(200.0);
+				musFee.setRecsession(recSec);
+				
+				recSec.getMusiciansFees().add(musFee);
+				musician.getMusicianFee().add(musFee);
+				recSessionService.saveRecSession(recSec);
 				//System.out.println(musician.getName());
 				tof.getMusicians().add(musician);
 				trackObjectFileService.saveTrackObjectFile(tof);

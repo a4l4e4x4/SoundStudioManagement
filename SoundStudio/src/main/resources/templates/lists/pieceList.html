@@ -22,20 +22,23 @@
 						<li class="breadcrumb-item active">Pieces List</li>
 					</ol>
 
-				<form
-					class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0"
-					method="POST" action="/addProject" enctype="multipart/form-data">
+<!-- 				<form -->
+<!-- 					class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0" -->
+<!-- 					method="POST" action="/addProject" enctype="multipart/form-data"> -->
 
-					<input class="form-control" type="submit" value="Submit" />
+<!-- 					<input class="form-control" type="submit" value="Submit" /> -->
 
 					<div class="card-body">
-						<div class="table-responsive">
+					<div>
+<!-- 						<div class="table-responsive"> -->
 							<table class="table table-bordered" id="dataTable">
 								<thead>
 									<tr>
 										<th>Name</th>
 										<th>Composer</th>
 										<th>Project</th>
+										<th>Session Files</th>
+										<th>Musicians</th>
 									</tr>
 								</thead>
 								<tfoot>
@@ -43,24 +46,61 @@
 										<th>Name</th>
 										<th>Composer</th>
 										<th>Project</th>
+										<th>Session Files</th>
+										<th>Musicians</th>
 									</tr>
 								</tfoot>
 								<tbody>
 									<th:block th:each="piece : ${pieces}">
+									
+									
 									<tr>
 										 <td th:text="${piece.name}"></td>  
 										 
 										 <td th:text="${piece.composer}"></td>
 										
 										<td th:text="${piece.project.name}"></td>
+										
+										<th:block th:each="sessionfile : ${piece.sessionFiles}">
+										<td><button class="btn dropdown-toggle" type="button"
+													data-toggle="dropdown">
+													Session Files <span class="caret"></span>
+												</button>
+												<ul class="dropdown-menu">
+												
+<!-- 													<th:block th:each="sessionfile : ${piece.sessionFiles}"> -->
+														<li><a th:text="${sessionfile.diskaddress}"></a>
+<!-- 													</th:block> -->
+												</ul>
+											</td>
+											<th:block th:each="recs : ${sessionfile.recsessions}">
+											<td><button class="btn dropdown-toggle" type="button"
+													data-toggle="dropdown">
+													Musicians <span class="caret"></span>
+												</button>
+												<ul class="dropdown-menu">
+													
+<!-- 													<li><a th:text="${sessionfile.recsessions[0].duration}"></a> -->
+													<th:block th:each="musFees : ${recs.musiciansFees}">
+														<li><a th:text="${musFees.musician.name} + ${musFees.musician.surname}"></a>
+												</th:block>
+												
+													
+												</ul>
+												
+											</td>
+											</th:block>
+											</th:block>
 										</tr>
+											
+										
 									</th:block>
 								</tbody>
 							</table>
 						</div>
 					</div>
 					<input class="form-control" type="submit" value="Submit" />
-				</form>
+<!-- 				</form> -->
 			</div>
 		</div>
 	</div>

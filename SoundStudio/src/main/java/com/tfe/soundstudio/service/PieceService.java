@@ -28,19 +28,23 @@ public class PieceService {
 		pieceRepo.save(piece);
 	}
 
+	@Transactional
 	public Iterable<Piece> findAll() {
 
-		Iterable<Piece> result = pieceRepo.findAll();
+		Iterable<Piece> result = pieceRepo.findAll(5);
+		
 		
 		return result;
 	}
 
+	@Transactional
 	public Piece findById(Long id) {
 		Piece piece = pieceRepo.findById(id, 4).orElseThrow(()->new RuntimeException("No such Piece"));
 
 		return piece;
 	}
 
+	@Transactional
 	public void deleteById(Long id) {
 		pieceRepo.deleteById(id);
 		

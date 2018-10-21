@@ -222,9 +222,11 @@ public class AdditionsController {
 	public String addPiecePost(@Valid Piece piece, BindingResult result, @RequestParam("projectID") String projectID, Model model) {
 		
 		Long realID = Long.parseLong(projectID);
-		Project project = projectService.findById(realID).orElseThrow(()->new RuntimeException("No such project"));
+		Project project = projectService.findById(realID);
 		piece.setProject(project);
+		
 		pieceService.savePiece(piece);
+		project.getPieces().add(piece);
 		return "redirect:/lists/pieceList";
 	}
 	

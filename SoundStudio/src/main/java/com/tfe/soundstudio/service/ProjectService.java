@@ -3,8 +3,6 @@
  */
 package com.tfe.soundstudio.service;
 
-import java.util.Optional;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,21 +25,23 @@ public class ProjectService {
 	
 	@Transactional
 	public void saveProject(Project project) {
-		projectRepo.save(project, 10);
+		projectRepo.save(project, 5);
 	}
 
 	@Transactional
 	public Iterable<Project> findAll() {
-		Iterable<Project> result = projectRepo.findAll();
+		Iterable<Project> result = projectRepo.findAll(4);
 		return result;
 	}
 
-	public Optional<Project> findById(Long id) {
-		Optional<Project> project = projectRepo.findById(id);
+	@Transactional
+	public Project findById(Long id) {
+		Project project = projectRepo.findById(id).orElseThrow(()->new RuntimeException("No such project"));
 				
 		return project;
 	}
 
+	@Transactional
 	public void deleteById(Long id) {
 
 		projectRepo.deleteById(id);

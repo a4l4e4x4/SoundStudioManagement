@@ -64,6 +64,16 @@ public class RecSessionService {
 		SessionFile result = sessionFileRepo.findById(id, 5).orElseThrow(()->new RuntimeException("No such sessionfile"));
 		return result;
 	}
+
+	public RecSession findById(Long id) {
+		RecSession result = recSessionRepo.findById(id).orElseThrow(()->new RuntimeException("No such recsession"));
+		return result;
+	}
+
+	public void saveRecSession(RecSession recSession) {
+		recSessionRepo.save(recSession);
+		
+	}
 	
 	
 }
