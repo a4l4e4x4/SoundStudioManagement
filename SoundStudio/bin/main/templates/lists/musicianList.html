@@ -44,6 +44,7 @@
 									<th>Postcode</th>
 									<th>Country</th>
 									<th>Plays Instruments</th>
+									<th>Track Objects</th>
 									<th>Edit Musician</th>
 									<th>Delete Musician</th>
 								</tr>
@@ -59,6 +60,7 @@
 									<th>Postcode</th>
 									<th>Country</th>
 									<th>Plays Instruments</th>
+									<th>Track Objects</th>
 									<th>Edit Musician</th>
 									<th>Delete Musician</th>
 								</tr>
@@ -83,6 +85,16 @@
 												<ul class="dropdown-menu">
 													<th:block th:each="instrument : ${musician.instruments}">
 														<li><a th:text="${instrument.instName}"></a>
+													</th:block>
+												</ul>
+											</td>
+											<td><button class="btn dropdown-toggle" type="button"
+													data-toggle="dropdown">
+													TrackObjects <span class="caret"></span>
+												</button>
+												<ul class="dropdown-menu">
+													<th:block th:each="trackobj : ${musician.trackObjectFiles}">
+														<li><a th:text="${trackobj.fileLocation}"></a>
 													</th:block>
 												</ul>
 											</td>

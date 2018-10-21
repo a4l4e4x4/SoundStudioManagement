@@ -25,7 +25,8 @@ public class MusicianService {
 	
 	@Transactional(readOnly=true)
 	public Iterable<Musician> findAll(){
-		Iterable<Musician> result = musicianRepo.findAll();
+		//Iterable<Musician> result = musicianRepo.findAll();
+		Iterable<Musician> result = musicianRepo.findAll(4);
 		
 		return result;
 	}
