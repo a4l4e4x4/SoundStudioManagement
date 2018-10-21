@@ -791,7 +791,7 @@ public class HomeController {
 
 		Musician a = new Musician();
 		a.setName("Edmundo");
-		a.setSurname("Carneiro");
+		a.setSurname(" Carneiro");
 		Contact b = new Contact();
 		b.setContactname("Edmundo");
 		b.setContactsurname("Carneiro");
@@ -808,7 +808,7 @@ public class HomeController {
 
 		Musician c = new Musician();
 		c.setName("Alex");
-		c.setSurname("Tolkmitt");
+		c.setSurname(" Tolkmitt");
 		Contact d = new Contact();
 		d.setContactname("Alex");
 		d.setContactsurname("Tolkmitt");
@@ -824,7 +824,7 @@ public class HomeController {
 
 		Musician e = new Musician();
 		e.setName("Clovis");
-		e.setSurname("Camargo");
+		e.setSurname(" Camargo");
 		Contact f = new Contact();
 		f.setContactname("Clovis");
 		f.setContactsurname("Camargo");
@@ -840,7 +840,7 @@ public class HomeController {
 
 		Musician g = new Musician();
 		g.setName("Cacau");
-		g.setSurname("de Queiroz");
+		g.setSurname(" de Queiroz");
 		Contact h = new Contact();
 		h.setContactname("Cláudio");
 		h.setContactsurname("de Queiroz");
@@ -856,7 +856,7 @@ public class HomeController {
 
 		Musician i = new Musician();
 		i.setName("Klaus");
-		i.setSurname("Schmidt");
+		i.setSurname(" Schmidt");
 		Contact j = new Contact();
 		j.setContactname("Klaus");
 		j.setContactsurname("Schmidt");
@@ -869,7 +869,7 @@ public class HomeController {
 
 		Musician k = new Musician();
 		k.setName("Didier");
-		k.setSurname("Van Oudenhove");
+		k.setSurname(" Van Oudenhove");
 		Contact l = new Contact();
 		l.setContactname("Didier");
 		l.setContactsurname("Van Oudenhove");
@@ -883,7 +883,7 @@ public class HomeController {
 		
 		Musician m = new Musician();
 		m.setName("José Pedro");
-		m.setSurname("Medeiros");
+		m.setSurname(" Medeiros");
 		Contact n = new Contact();
 		n.setContactname("José Pedro");
 		n.setContactsurname("Medeiros");
@@ -959,12 +959,14 @@ public class HomeController {
 		p1.setComposer("Beethoven");
 		p1.setName("ninth");
 		p1.setProject(aProj);
+		aProj.getPieces().add(p1);
 		pieces.add(p1);
 		
 		Piece p2 = new Piece();
 		p2.setComposer("Bach");
 		p2.setName("toccata");
 		p2.setProject(bProj);
+		bProj.getPieces().add(p2);
 		pieces.add(p2);
 		
 		Iterable<Piece> piecesToSave = pieces;
