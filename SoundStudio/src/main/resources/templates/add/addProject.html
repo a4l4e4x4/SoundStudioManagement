@@ -27,38 +27,49 @@
 
 						<div class="card-body">
 							<div class="table-responsive">
-								<table class="table table-bordered" id="dataTable">
+								<table class="table table-bordered" >
 									<!-- <td th:text="${track.number}"><input th:value="${track.number}"/></td>
 							<p>Client Name <input type="text" name="name" th:field="${client.name}"/></p>  -->
+									<thead>
+										<tr>
+											<th>Project Name</th>
+											<th>Client</th>
+										</tr>
+									</thead>
+									<tfoot>
+									<tr>
+									<th>Project Name</th>
+											<th>Client</th>
+										</tr>
+										</tfoot>
+
 									<tbody>
 										<tr>
 											<th></th>
 											<th></th>
 										</tr>
 										<tr>
-											<td>Project Name</td>
-											<td><input type="text" th:field="${project.name}"/></td>
+
+											<td><input type="text" th:field="${project.name}" /></td>
 											<td class="col-md-4"><div class="dropdown">
-												<!-- <button class="btn dropdown-toggle" type="button"
+													<!-- <button class="btn dropdown-toggle" type="button"
 													data-toggle="dropdown">
 													Clients <span class="caret"></span>
 												</button>  -->
-												<select class="selectpicker form-control" th:name="clientID" title="Clients">
-													<th:block th:each="client : ${clients}">
-														<option th:text="${client.name}" th:value="${client.id}"></option>
-													</th:block>
-												</select>
-											</div></td>
-										</tr>
-
-										<tr>
-											<td><input class="form-control" type="submit"
-												value="Submit" /></td>
-										</tr>
+													<select class="selectpicker form-control"
+														th:name="clientID" title="Clients">
+														<th:block th:each="client : ${clients}">
+															<option th:text="${client.name}" th:value="${client.id}"></option>
+														</th:block>
+													</select>
+												</div></td>
+										
 										<!-- <td><input th:value="${track.name}" /></td>
 											th:field="*{expenseDetail[0].product.id}"  -->
 									</tbody>
 								</table>
+								<input class="form-control" type="submit"
+												value="Submit" />
 							</div>
 						</div>
 
