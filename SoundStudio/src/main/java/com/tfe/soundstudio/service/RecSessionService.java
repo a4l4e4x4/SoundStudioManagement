@@ -57,7 +57,7 @@ public class RecSessionService {
 	
 	@Transactional
 	public void createRecSession(RecSession recSession) {
-		recSessionRepo.save(recSession, 50);
+		recSessionRepo.save(recSession, 5);
 	}
 	
 	public SessionFile getSessionFileById(Long id) {

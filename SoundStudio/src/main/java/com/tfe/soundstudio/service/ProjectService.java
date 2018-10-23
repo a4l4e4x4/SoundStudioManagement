@@ -25,7 +25,7 @@ public class ProjectService {
 	
 	@Transactional
 	public void saveProject(Project project) {
-		projectRepo.save(project, 5);
+		projectRepo.save(project, 2);
 	}
 
 	@Transactional

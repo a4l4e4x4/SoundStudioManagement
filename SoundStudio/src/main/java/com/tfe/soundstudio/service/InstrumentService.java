@@ -71,7 +71,7 @@ public class InstrumentService {
 	 @Transactional
 	 public void saveInstruments(Iterable<Instrument> instruments) {
 		 //instrumentRepo.saveAll(instruments);
-		 instrumentRepo.save(instruments, 4);
+		 instrumentRepo.save(instruments, 2);
 	 }
 	 
 	 @Transactional

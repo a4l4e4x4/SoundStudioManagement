@@ -33,12 +33,12 @@ public class MusicianService {
 	
 	@Transactional
 	public void saveMusician(Musician musician) {
-		musicianRepo.save(musician, 5);
+		musicianRepo.save(musician, 3);
 		
 	}
 
 	public void saveAllMusicians(Iterable<Musician> musicians) {
-		musicianRepo.save(musicians,  5);
+		musicianRepo.save(musicians,  2);
 		
 	}
 

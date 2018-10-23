@@ -28,12 +28,12 @@ public class ClientService {
 	@Transactional
 	public void saveClient(Client client) {
 		
-		clientRepo.save(client, 5);
+		clientRepo.save(client, 2);
 	}
 
 	@Transactional
 	public void saveAllClients(Iterable<Client> clients) {
-		clientRepo.save(clients, 10);
+		clientRepo.save(clients, 3);
 	}
 	
 	@Transactional

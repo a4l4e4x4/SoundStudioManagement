@@ -36,6 +36,6 @@ public class TrackObjectFileService {
 	}
 	
 	public void saveTrackObjectFile(TrackObjectFile tof) {
-		trackObjectFileRepo.save(tof, 4);
+		trackObjectFileRepo.save(tof, 2);
 	}
 }

@@ -55,7 +55,7 @@ public class TrackService {
 	@Transactional
 	public void saveTracks(Iterable<Track> tracks) {
 		//trackRepo.saveAll(tracks);
-		trackRepo.save(tracks, 20);
+		trackRepo.save(tracks, 5);
 		//trackRepo.save(tracks, 200);
 
 	}

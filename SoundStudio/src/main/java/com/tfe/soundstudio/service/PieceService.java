@@ -52,7 +52,7 @@ public class PieceService {
 
 	public void saveAllPieces(Iterable<Piece> piecesToSave) {
 
-		pieceRepo.save(piecesToSave, 3);
+		pieceRepo.save(piecesToSave, 2);
 		
 	}
 
